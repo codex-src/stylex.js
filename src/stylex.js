@@ -751,8 +751,6 @@ function zIndex(iter) {
 
 class Iterator {
 	state = {
-		// `started` guards the first iteration so we can use
-		// a `while` instead of a `do while`.
 		classString: "",
 		classes: [],
 		started: false,

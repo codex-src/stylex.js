@@ -902,8 +902,6 @@ function () {
     _classCallCheck(this, Iterator);
 
     _defineProperty(this, "state", {
-      // `started` guards the first iteration so we can use
-      // a `while` instead of a `do while`.
       classString: "",
       classes: [],
       started: false,

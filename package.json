@@ -1,0 +1,23 @@
+{
+  "name": "stylex.js",
+  "version": "0.1.0",
+  "main": "build/stylex.js",
+  "repository": "https://github.com/codex-src/stylex.js",
+  "author": "Zaydek Michels-Gualtieri <zaydekdotcom+codex-zaydek@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "invariant": "^2.2.4"
+  },
+  "scripts": {
+    "test": "yarn jest",
+    "build": "yarn rollup -c rollup.config.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/preset-env": "^7.7.6",
+    "jest": "^24.9.0",
+    "rollup": "^1.27.12",
+    "rollup-plugin-babel": "^4.3.3"
+  }
+}

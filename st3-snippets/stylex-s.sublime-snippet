@@ -1,0 +1,6 @@
+<snippet>
+	<content><![CDATA[
+stylex(${1:"${2:}"})
+]]></content>
+	<tabTrigger>s</tabTrigger>
+</snippet>

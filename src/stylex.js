@@ -779,7 +779,7 @@ class Iterator {
 		// Reuse the cache:
 		if (this.state.keyToken.length === 2) {
 			return this.state.keyToken
-	 	}
+		}
 		const arr = this.className().split(":")
 		if (arr.length !== 2) {
 			this.state.keyToken = [arr[0], ""]

@@ -163,13 +163,11 @@ var styleParsers = {
       color: "hsl(var(--".concat(iter.token(), "))")
     };
   },
-  // FIXME: Warn if there’s no token?
   "b": function b(iter) {
     return {
       background: "hsl(var(--".concat(iter.token(), "))")
     };
   },
-  // FIXME: Warn if there’s no token?
   "br": borderRadius,
   "br-l": borderRadius,
   "br-r": borderRadius,
@@ -322,51 +320,53 @@ function padding(iter) {
 
 function position(iter) {
   var position = iter.key();
-  var positionL = iter.nextClassName("-l");
-  var positionR = iter.nextClassName("-r");
-  var positionX = iter.nextClassName("-x"); // Order matters.
+  var opts = {
+    positionL: iter.nextClassName("-l"),
+    positionR: iter.nextClassName("-r"),
+    positionX: iter.nextClassName("-x"),
+    // Order matters.
+    positionT: iter.nextClassName("-t"),
+    positionB: iter.nextClassName("-b"),
+    positionY: iter.nextClassName("-y") // Order matters.
 
-  var positionT = iter.nextClassName("-t");
-  var positionB = iter.nextClassName("-b");
-  var positionY = iter.nextClassName("-y"); // Order matters.
-
+  };
   var style = {
     position: position
   };
 
-  if (positionX) {
+  if (opts.positionX) {
     style = _objectSpread2({}, style, {
       left: 0,
       right: 0
     });
   }
 
-  if (positionY) {
+  if (opts.positionY) {
     style = _objectSpread2({}, style, {
       top: 0,
       bottom: 0
     });
   }
 
-  if (positionL) {
+  if (opts.positionL) {
     style = _objectSpread2({}, style, {
       left: 0
     });
   }
 
-  if (positionR) {
+  if (opts.positionR) {
     style = _objectSpread2({}, style, {
       right: 0
     });
   }
 
-  if (positionT) {
+  if (opts.positionT) {
     style = _objectSpread2({}, style, {
       top: 0
     });
   }
 
-  if (positionB) {
+  if (opts.positionB) {
     style = _objectSpread2({}, style, {
       bottom: 0
     });
@@ -378,33 +378,35 @@ function position(iter) {
 
 
 function flex(iter) {
-  var flexRow = iter.nextClassName("-r");
-  var flexColumn = iter.nextClassName("-c");
-  var flexStretch = iter.nextClassName(":stretch");
-  var flexStart = iter.nextClassName(":start");
-  var flexCenter = iter.nextClassName(":center");
-  var flexEnd = iter.nextClassName(":end");
-  var flexBetween = iter.nextClassName(":between");
-  var flexAround = iter.nextClassName(":around");
-  var flexEvenly = iter.nextClassName(":evenly");
-  var flexXStretch = iter.nextClassName("-x:stretch");
-  var flexXStart = iter.nextClassName("-x:start");
-  var flexXCenter = iter.nextClassName("-x:center");
-  var flexXEnd = iter.nextClassName("-x:end");
-  var flexXBetween = iter.nextClassName("-x:between");
-  var flexXAround = iter.nextClassName("-x:around");
-  var flexXEvenly = iter.nextClassName("-x:evenly");
-  var flexYStretch = iter.nextClassName("-y:stretch");
-  var flexYStart = iter.nextClassName("-y:start");
-  var flexYCenter = iter.nextClassName("-y:center");
-  var flexYEnd = iter.nextClassName("-y:end");
-  var flexYBetween = iter.nextClassName("-y:between");
-  var flexYAround = iter.nextClassName("-y:around");
-  var flexYEvenly = iter.nextClassName("-y:evenly");
-  invariant(flexRow || flexColumn, "stylex: `".concat(iter.className(), "` expects `-r` or `-c`."));
+  var opts = {
+    flexRow: iter.nextClassName("-r"),
+    flexColumn: iter.nextClassName("-c"),
+    flexStretch: iter.nextClassName(":stretch"),
+    flexStart: iter.nextClassName(":start"),
+    flexCenter: iter.nextClassName(":center"),
+    flexEnd: iter.nextClassName(":end"),
+    flexBetween: iter.nextClassName(":between"),
+    flexAround: iter.nextClassName(":around"),
+    flexEvenly: iter.nextClassName(":evenly"),
+    flexXStretch: iter.nextClassName("-x:stretch"),
+    flexXStart: iter.nextClassName("-x:start"),
+    flexXCenter: iter.nextClassName("-x:center"),
+    flexXEnd: iter.nextClassName("-x:end"),
+    flexXBetween: iter.nextClassName("-x:between"),
+    flexXAround: iter.nextClassName("-x:around"),
+    flexXEvenly: iter.nextClassName("-x:evenly"),
+    flexYStretch: iter.nextClassName("-y:stretch"),
+    flexYStart: iter.nextClassName("-y:start"),
+    flexYCenter: iter.nextClassName("-y:center"),
+    flexYEnd: iter.nextClassName("-y:end"),
+    flexYBetween: iter.nextClassName("-y:between"),
+    flexYAround: iter.nextClassName("-y:around"),
+    flexYEvenly: iter.nextClassName("-y:evenly")
+  };
+  invariant(opts.flexRow || opts.flexColumn, "stylex: `".concat(iter.className(), "` expects `-r` or `-c`."));
   var style = {
     display: "flex",
-    flexDirection: flexRow && "row" || flexColumn && "column"
+    flexDirection: opts.flexRow && "row" || opts.flexColumn && "column"
   }; // .flex.-r.\:stretch, .flex.-c.\:stretch { ... }
   // .flex.-r.\:start,   .flex.-c.\:start   { ... }
   // .flex.-r.\:center,  .flex.-c.\:center  { ... }
@@ -413,49 +415,49 @@ function flex(iter) {
   // .flex.-r.\:around,  .flex.-c.\:around  { ... }
   // .flex.-r.\:evenly,  .flex.-c.\:evenly  { ... }
 
-  if (flexStretch) {
+  if (opts.flexStretch) {
     style = _objectSpread2({}, style, {
       justifyContent: "stretch",
       alignItems: "stretch"
     });
   }
 
-  if (flexStart) {
+  if (opts.flexStart) {
     style = _objectSpread2({}, style, {
       justifyContent: "flex-start",
       alignItems: "flex-start"
     });
   }
 
-  if (flexCenter) {
+  if (opts.flexCenter) {
     style = _objectSpread2({}, style, {
       justifyContent: "center",
       alignItems: "center"
     });
   }
 
-  if (flexEnd) {
+  if (opts.flexEnd) {
     style = _objectSpread2({}, style, {
       justifyContent: "flex-end",
       alignItems: "flex-end"
     });
   }
 
-  if (flexBetween) {
+  if (opts.flexBetween) {
     style = _objectSpread2({}, style, {
       justifyContent: "space-between",
       alignItems: "space-between"
     });
   }
 
-  if (flexAround) {
+  if (opts.flexAround) {
     style = _objectSpread2({}, style, {
       justifyContent: "space-around",
       alignItems: "space-around"
     });
   }
 
-  if (flexEvenly) {
+  if (opts.flexEvenly) {
     style = _objectSpread2({}, style, {
       justifyContent: "space-evenly",
       alignItems: "space-evenly"
@@ -469,43 +471,43 @@ function flex(iter) {
   // .flex.-r.-x\:evenly  { justify-content: ... }
 
 
-  if (flexRow && flexXStretch) {
+  if (opts.flexRow && opts.flexXStretch) {
     style = _objectSpread2({}, style, {
       justifyContent: "stretch"
     });
   }
 
-  if (flexRow && flexXStart) {
+  if (opts.flexRow && opts.flexXStart) {
     style = _objectSpread2({}, style, {
       justifyContent: "flex-start"
     });
   }
 
-  if (flexRow && flexXCenter) {
+  if (opts.flexRow && opts.flexXCenter) {
     style = _objectSpread2({}, style, {
       justifyContent: "center"
     });
   }
 
-  if (flexRow && flexXEnd) {
+  if (opts.flexRow && opts.flexXEnd) {
     style = _objectSpread2({}, style, {
       justifyContent: "flex-end"
     });
   }
 
-  if (flexRow && flexXBetween) {
+  if (opts.flexRow && opts.flexXBetween) {
     style = _objectSpread2({}, style, {
       justifyContent: "space-between"
     });
   }
 
-  if (flexRow && flexXAround) {
+  if (opts.flexRow && opts.flexXAround) {
     style = _objectSpread2({}, style, {
       justifyContent: "space-around"
     });
   }
 
-  if (flexRow && flexXEvenly) {
+  if (opts.flexRow && opts.flexXEvenly) {
     style = _objectSpread2({}, style, {
       justifyContent: "space-evenly"
     });
@@ -518,43 +520,43 @@ function flex(iter) {
   // .flex.-r.-y\:evenly  { align-items: ... }
 
 
-  if (flexRow && flexYStretch) {
+  if (opts.flexRow && opts.flexYStretch) {
     style = _objectSpread2({}, style, {
       alignItems: "stretch"
     });
   }
 
-  if (flexRow && flexYStart) {
+  if (opts.flexRow && opts.flexYStart) {
     style = _objectSpread2({}, style, {
       alignItems: "flex-start"
     });
   }
 
-  if (flexRow && flexYCenter) {
+  if (opts.flexRow && opts.flexYCenter) {
     style = _objectSpread2({}, style, {
       alignItems: "center"
     });
   }
 
-  if (flexRow && flexYEnd) {
+  if (opts.flexRow && opts.flexYEnd) {
     style = _objectSpread2({}, style, {
       alignItems: "flex-end"
     });
   }
 
-  if (flexRow && flexYBetween) {
+  if (opts.flexRow && opts.flexYBetween) {
     style = _objectSpread2({}, style, {
       alignItems: "space-between"
     });
   }
 
-  if (flexRow && flexYAround) {
+  if (opts.flexRow && opts.flexYAround) {
     style = _objectSpread2({}, style, {
       alignItems: "space-around"
     });
   }
 
-  if (flexRow && flexYEvenly) {
+  if (opts.flexRow && opts.flexYEvenly) {
     style = _objectSpread2({}, style, {
       alignItems: "space-evenly"
     });
@@ -567,43 +569,43 @@ function flex(iter) {
   // .flex.-c.-x\:evenly  { align-items: ... }
 
 
-  if (flexColumn && flexXStretch) {
+  if (opts.flexColumn && opts.flexXStretch) {
     style = _objectSpread2({}, style, {
       alignItems: "stretch"
     });
   }
 
-  if (flexColumn && flexXStart) {
+  if (opts.flexColumn && opts.flexXStart) {
     style = _objectSpread2({}, style, {
       alignItems: "flex-start"
     });
   }
 
-  if (flexColumn && flexXCenter) {
+  if (opts.flexColumn && opts.flexXCenter) {
     style = _objectSpread2({}, style, {
       alignItems: "center"
     });
   }
 
-  if (flexColumn && flexXEnd) {
+  if (opts.flexColumn && opts.flexXEnd) {
     style = _objectSpread2({}, style, {
       alignItems: "flex-end"
     });
   }
 
-  if (flexColumn && flexXBetween) {
+  if (opts.flexColumn && opts.flexXBetween) {
     style = _objectSpread2({}, style, {
       alignItems: "space-between"
     });
   }
 
-  if (flexColumn && flexXAround) {
+  if (opts.flexColumn && opts.flexXAround) {
     style = _objectSpread2({}, style, {
       alignItems: "space-around"
     });
   }
 
-  if (flexColumn && flexXEvenly) {
+  if (opts.flexColumn && opts.flexXEvenly) {
     style = _objectSpread2({}, style, {
       alignItems: "space-evenly"
     });
@@ -616,43 +618,43 @@ function flex(iter) {
   // .flex.-c.-y\:evenly  { justify-content: ... }
 
 
-  if (flexColumn && flexYStretch) {
+  if (opts.flexColumn && opts.flexYStretch) {
     style = _objectSpread2({}, style, {
       justifyContent: "stretch"
     });
   }
 
-  if (flexColumn && flexYStart) {
+  if (opts.flexColumn && opts.flexYStart) {
     style = _objectSpread2({}, style, {
       justifyContent: "flex-start"
     });
   }
 
-  if (flexColumn && flexYCenter) {
+  if (opts.flexColumn && opts.flexYCenter) {
     style = _objectSpread2({}, style, {
       justifyContent: "center"
     });
   }
 
-  if (flexColumn && flexYEnd) {
+  if (opts.flexColumn && opts.flexYEnd) {
     style = _objectSpread2({}, style, {
       justifyContent: "flex-end"
     });
   }
 
-  if (flexColumn && flexYBetween) {
+  if (opts.flexColumn && opts.flexYBetween) {
     style = _objectSpread2({}, style, {
       justifyContent: "space-between"
     });
   }
 
-  if (flexColumn && flexYAround) {
+  if (opts.flexColumn && opts.flexYAround) {
     style = _objectSpread2({}, style, {
       justifyContent: "space-around"
     });
   }
 
-  if (flexColumn && flexYEvenly) {
+  if (opts.flexColumn && opts.flexYEvenly) {
     style = _objectSpread2({}, style, {
       justifyContent: "space-evenly"
     });
@@ -728,7 +730,7 @@ function letterSpacing(iter) {
 
   var value = Number(iter.token().slice(0, -1));
   return {
-    letterSpacing: value * 0.01 + "em"
+    letterSpacing: "".concat(value * 0.01, "em")
   };
 } // FIXME: `^(1\d{2}(\.\d+)?|200)$`?
 
@@ -796,49 +798,51 @@ function borderRadius(iter) {
 
 
 function overflow(iter) {
-  var overflowScroll = iter.nextClassName(":scroll");
-  var overflowXScroll = iter.nextClassName("-x:scroll");
-  var overflowYScroll = iter.nextClassName("-y:scroll");
-  var overflowHidden = iter.nextClassName(":hidden");
-  var overflowXHidden = iter.nextClassName("-x:hidden");
-  var overflowYHidden = iter.nextClassName("-y:hidden");
-  invariant(overflowScroll || overflowHidden || overflowXScroll || overflowYScroll || overflowXHidden || overflowYHidden, "stylex: `".concat(iter.className(), "` expects `(-(x|y))?:scroll` or `(-(x|y))?:hidden`."));
+  var opts = {
+    overflowScroll: iter.nextClassName(":scroll"),
+    overflowXScroll: iter.nextClassName("-x:scroll"),
+    overflowYScroll: iter.nextClassName("-y:scroll"),
+    overflowHidden: iter.nextClassName(":hidden"),
+    overflowXHidden: iter.nextClassName("-x:hidden"),
+    overflowYHidden: iter.nextClassName("-y:hidden")
+  };
+  invariant(opts.overflowScroll || opts.overflowHidden || opts.overflowXScroll || opts.overflowYScroll || opts.overflowXHidden || opts.overflowYHidden, "stylex: `".concat(iter.className(), "` expects `(-(x|y))?:scroll` or `(-(x|y))?:hidden`."));
   var style = {};
 
-  if (overflowScroll) {
+  if (opts.overflowScroll) {
     style = {
       WebkitOverflowScrolling: "touch",
       overflow: "scroll"
     };
   }
 
-  if (overflowXScroll) {
+  if (opts.overflowXScroll) {
     style = {
       WebkitOverflowScrolling: "touch",
       overflowX: "scroll"
     };
   }
 
-  if (overflowYScroll) {
+  if (opts.overflowYScroll) {
     style = {
       WebkitOverflowScrolling: "touch",
       overflowY: "scroll"
     };
   }
 
-  if (overflowHidden) {
+  if (opts.overflowHidden) {
     style = {
       overflow: "hidden"
     };
   }
 
-  if (overflowXHidden) {
+  if (opts.overflowXHidden) {
     style = {
       overflowX: "hidden"
     };
   }
 
-  if (overflowYHidden) {
+  if (opts.overflowYHidden) {
     style = {
       overflowY: "hidden"
     };
@@ -854,13 +858,15 @@ function overflow(iter) {
 
 function textOverflow(iter) {
   /*eslint-disable no-useless-escape*/
-  var textOverflowX = iter.nextClassName("-x");
-  var textOverflowY = iter.nextClassNameRegex(/^-y\:\d+$/);
-  invariant(textOverflowX || textOverflowY, "stylex: `".concat(iter.className(), "` expects `-x` or `-y:\\d+`."));
+  var opts = {
+    textOverflowX: iter.nextClassName("-x"),
+    textOverflowY: iter.nextClassNameRegex(/^-y\:\d+$/)
+  };
+  invariant(opts.textOverflowX || opts.textOverflowY, "stylex: `".concat(iter.className(), "` expects `-x` or `-y:\\d+`."));
   var yValue = Number(iter.token());
   var style = {};
 
-  if (textOverflowX) {
+  if (opts.textOverflowX) {
     style = {
       whiteSpace: "nowrap",
       overflowX: "hidden",
@@ -868,7 +874,7 @@ function textOverflow(iter) {
     };
   }
 
-  if (textOverflowY) {
+  if (opts.textOverflowY) {
     style = {
       display: "-webkit-box",
       WebkitBoxOrient: "vertical",

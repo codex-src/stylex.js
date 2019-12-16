@@ -39,8 +39,8 @@ const styleParsers = {
 	"fs":                fontSize,
 	"ls":                letterSpacing,
 	"lh":                lineHeight,
-	"c":                 iter => ({ color: `hsl(var(--${iter.token()}))` }),      // FIXME: Warn if there’s no token?
-	"b":                 iter => ({ background: `hsl(var(--${iter.token()}))` }), // FIXME: Warn if there’s no token?
+	"c":                 iter => ({ color: `hsl(var(--${iter.token()}))` }),
+	"b":                 iter => ({ background: `hsl(var(--${iter.token()}))` }),
 	"br":                borderRadius,
 	"br-l":              borderRadius,
 	"br-r":              borderRadius,
@@ -54,53 +54,53 @@ const styleParsers = {
 	"pointer":           () => ({ cursor: "pointer" }),
 	"no-pointer":        () => ({ cursor: "auto" }),
 	"translate-z":       () => ({ transform: "translateZ(0px)" }),
-	"no-translate-z":    () => ({ transform: "none" })
+	"no-translate-z":    () => ({ transform: "none" }),
 }
 
 function margin(iter) {
 	invariant(
 		iter.classNameMatches(/^m(-(x|y|l|r|t|b))?:-?\d+(\.\d+)?$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		`Please refer to https://git.io/JeQtB for documentation.`
+		"Please refer to https://git.io/JeQtB for documentation."
 	)
 	const value = Number(iter.token())
 	let style = {}
 	switch (iter.key()) {
 	case "m":
 		style = {
-			margin: value
+			margin: value,
 		}
 		break
 	case "m-l":
 		style = {
-			marginLeft: value
+			marginLeft: value,
 		}
 		break
 	case "m-r":
 		style = {
-			marginRight: value
+			marginRight: value,
 		}
 		break
 	case "m-x":
 		style = {
 			marginLeft: value,
-			marginRight: value
+			marginRight: value,
 		}
 		break
 	case "m-t":
 		style = {
-			marginTop: value
+			marginTop: value,
 		}
 		break
 	case "m-b":
 		style = {
-			marginBottom: value
+			marginBottom: value,
 		}
 		break
 	case "m-y":
 		style = {
 			marginTop: value,
-			marginBottom: value
+			marginBottom: value,
 		}
 		break
 	default:
@@ -114,46 +114,46 @@ function padding(iter) {
 	invariant(
 		iter.classNameMatches(/^p(-(x|y|l|r|t|b))?:\d+(\.\d+)?$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		`Please refer to https://git.io/JeQtB for documentation.`
+		"Please refer to https://git.io/JeQtB for documentation."
 	)
 	const value = Number(iter.token())
 	let style = {}
 	switch (iter.key()) {
 	case "p":
 		style = {
-			padding: value
+			padding: value,
 		}
 		break
 	case "p-l":
 		style = {
-			paddingLeft: value
+			paddingLeft: value,
 		}
 		break
 	case "p-r":
 		style = {
-			paddingRight: value
+			paddingRight: value,
 		}
 		break
 	case "p-x":
 		style = {
 			paddingLeft: value,
-			paddingRight: value
+			paddingRight: value,
 		}
 		break
 	case "p-t":
 		style = {
-			paddingTop: value
+			paddingTop: value,
 		}
 		break
 	case "p-b":
 		style = {
-			paddingBottom: value
+			paddingBottom: value,
 		}
 		break
 	case "p-y":
 		style = {
 			paddingTop: value,
-			paddingBottom: value
+			paddingBottom: value,
 		}
 		break
 	default:
@@ -166,52 +166,54 @@ function padding(iter) {
 // NOTE: Use `if`s instead of a `switch`; multiple
 // subclasses are allowed.
 function position(iter) {
-	const position  = iter.key()
-	const positionL = iter.nextClassName("-l")
-	const positionR = iter.nextClassName("-r")
-	const positionX = iter.nextClassName("-x") // Order matters.
-	const positionT = iter.nextClassName("-t")
-	const positionB = iter.nextClassName("-b")
-	const positionY = iter.nextClassName("-y") // Order matters.
-	let style = {
-		position
+	const position = iter.key()
+	const opts = {
+		positionL: iter.nextClassName("-l"),
+		positionR: iter.nextClassName("-r"),
+		positionX: iter.nextClassName("-x"), // Order matters.
+		positionT: iter.nextClassName("-t"),
+		positionB: iter.nextClassName("-b"),
+		positionY: iter.nextClassName("-y"), // Order matters.
 	}
-	if (positionX) {
+	let style = {
+		position,
+	}
+	if (opts.positionX) {
 		style = {
 			...style,
 			left: 0,
-			right: 0
+			right: 0,
 		}
 	}
-	if (positionY) {
+	if (opts.positionY) {
 		style = {
 			...style,
 			top: 0,
-			bottom: 0
+			bottom: 0,
 		}
 	}
-	if (positionL) {
+	if (opts.positionL) {
 		style = {
 			...style,
-			left: 0
+			left: 0,
 		}
 	}
-	if (positionR) {
+	if (opts.positionR) {
 		style = {
 			...style,
-			right: 0
+			right: 0,
 		}
 	}
-	if (positionT) {
+	if (opts.positionT) {
 		style = {
 			...style,
-			top: 0
+			top: 0,
 		}
 	}
-	if (positionB) {
+	if (opts.positionB) {
 		style = {
 			...style,
-			bottom: 0
+			bottom: 0,
 		}
 	}
 	return style
@@ -220,39 +222,41 @@ function position(iter) {
 // NOTE: Use `if`s instead of a `switch`; multiple
 // subclasses are allowed.
 function flex(iter) {
-	const flexRow      = iter.nextClassName("-r"        )
-	const flexColumn   = iter.nextClassName("-c"        )
-	const flexStretch  = iter.nextClassName(":stretch"  )
-	const flexStart    = iter.nextClassName(":start"    )
-	const flexCenter   = iter.nextClassName(":center"   )
-	const flexEnd      = iter.nextClassName(":end"      )
-	const flexBetween  = iter.nextClassName(":between"  )
-	const flexAround   = iter.nextClassName(":around"   )
-	const flexEvenly   = iter.nextClassName(":evenly"   )
-	const flexXStretch = iter.nextClassName("-x:stretch")
-	const flexXStart   = iter.nextClassName("-x:start"  )
-	const flexXCenter  = iter.nextClassName("-x:center" )
-	const flexXEnd     = iter.nextClassName("-x:end"    )
-	const flexXBetween = iter.nextClassName("-x:between")
-	const flexXAround  = iter.nextClassName("-x:around" )
-	const flexXEvenly  = iter.nextClassName("-x:evenly" )
-	const flexYStretch = iter.nextClassName("-y:stretch")
-	const flexYStart   = iter.nextClassName("-y:start"  )
-	const flexYCenter  = iter.nextClassName("-y:center" )
-	const flexYEnd     = iter.nextClassName("-y:end"    )
-	const flexYBetween = iter.nextClassName("-y:between")
-	const flexYAround  = iter.nextClassName("-y:around" )
-	const flexYEvenly  = iter.nextClassName("-y:evenly" )
+	const opts = {
+		flexRow:      iter.nextClassName("-r"),
+		flexColumn:   iter.nextClassName("-c"),
+		flexStretch:  iter.nextClassName(":stretch"),
+		flexStart:    iter.nextClassName(":start"),
+		flexCenter:   iter.nextClassName(":center"),
+		flexEnd:      iter.nextClassName(":end"),
+		flexBetween:  iter.nextClassName(":between"),
+		flexAround:   iter.nextClassName(":around"),
+		flexEvenly:   iter.nextClassName(":evenly"),
+		flexXStretch: iter.nextClassName("-x:stretch"),
+		flexXStart:   iter.nextClassName("-x:start"),
+		flexXCenter:  iter.nextClassName("-x:center"),
+		flexXEnd:     iter.nextClassName("-x:end"),
+		flexXBetween: iter.nextClassName("-x:between"),
+		flexXAround:  iter.nextClassName("-x:around"),
+		flexXEvenly:  iter.nextClassName("-x:evenly"),
+		flexYStretch: iter.nextClassName("-y:stretch"),
+		flexYStart:   iter.nextClassName("-y:start"),
+		flexYCenter:  iter.nextClassName("-y:center"),
+		flexYEnd:     iter.nextClassName("-y:end"),
+		flexYBetween: iter.nextClassName("-y:between"),
+		flexYAround:  iter.nextClassName("-y:around"),
+		flexYEvenly:  iter.nextClassName("-y:evenly"),
+	}
 	invariant(
-		flexRow || flexColumn,
+		opts.flexRow || opts.flexColumn,
 		`stylex: \`${iter.className()}\` expects \`-r\` or \`-c\`.`
 	)
 	let style = {
 		display: "flex",
 		flexDirection: (
-			(flexRow && "row") ||
-			(flexColumn && "column")
-		)
+			(opts.flexRow && "row") ||
+			(opts.flexColumn && "column")
+		),
 	}
 	// .flex.-r.\:stretch, .flex.-c.\:stretch { ... }
 	// .flex.-r.\:start,   .flex.-c.\:start   { ... }
@@ -261,53 +265,53 @@ function flex(iter) {
 	// .flex.-r.\:between, .flex.-c.\:between { ... }
 	// .flex.-r.\:around,  .flex.-c.\:around  { ... }
 	// .flex.-r.\:evenly,  .flex.-c.\:evenly  { ... }
-	if (flexStretch) {
+	if (opts.flexStretch) {
 		style = {
 			...style,
 			justifyContent: "stretch",
-			alignItems: "stretch"
+			alignItems: "stretch",
 		}
 	}
-	if (flexStart) {
+	if (opts.flexStart) {
 		style = {
 			...style,
 			justifyContent: "flex-start",
-			alignItems: "flex-start"
+			alignItems: "flex-start",
 		}
 	}
-	if (flexCenter) {
+	if (opts.flexCenter) {
 		style = {
 			...style,
 			justifyContent: "center",
-			alignItems: "center"
+			alignItems: "center",
 		}
 	}
-	if (flexEnd) {
+	if (opts.flexEnd) {
 		style = {
 			...style,
 			justifyContent: "flex-end",
-			alignItems: "flex-end"
+			alignItems: "flex-end",
 		}
 	}
-	if (flexBetween) {
+	if (opts.flexBetween) {
 		style = {
 			...style,
 			justifyContent: "space-between",
-			alignItems: "space-between"
+			alignItems: "space-between",
 		}
 	}
-	if (flexAround) {
+	if (opts.flexAround) {
 		style = {
 			...style,
 			justifyContent: "space-around",
-			alignItems: "space-around"
+			alignItems: "space-around",
 		}
 	}
-	if (flexEvenly) {
+	if (opts.flexEvenly) {
 		style = {
 			...style,
 			justifyContent: "space-evenly",
-			alignItems: "space-evenly"
+			alignItems: "space-evenly",
 		}
 	}
 	// .flex.-r.-x\:stretch { justify-content: ... }
@@ -317,46 +321,46 @@ function flex(iter) {
 	// .flex.-r.-x\:between { justify-content: ... }
 	// .flex.-r.-x\:around  { justify-content: ... }
 	// .flex.-r.-x\:evenly  { justify-content: ... }
-	if (flexRow && flexXStretch) {
+	if (opts.flexRow && opts.flexXStretch) {
 		style = {
 			...style,
-			justifyContent: "stretch"
+			justifyContent: "stretch",
 		}
 	}
-	if (flexRow && flexXStart) {
+	if (opts.flexRow && opts.flexXStart) {
 		style = {
 			...style,
-			justifyContent: "flex-start"
+			justifyContent: "flex-start",
 		}
 	}
-	if (flexRow && flexXCenter) {
+	if (opts.flexRow && opts.flexXCenter) {
 		style = {
 			...style,
-			justifyContent: "center"
+			justifyContent: "center",
 		}
 	}
-	if (flexRow && flexXEnd) {
+	if (opts.flexRow && opts.flexXEnd) {
 		style = {
 			...style,
-			justifyContent: "flex-end"
+			justifyContent: "flex-end",
 		}
 	}
-	if (flexRow && flexXBetween) {
+	if (opts.flexRow && opts.flexXBetween) {
 		style = {
 			...style,
-			justifyContent: "space-between"
+			justifyContent: "space-between",
 		}
 	}
-	if (flexRow && flexXAround) {
+	if (opts.flexRow && opts.flexXAround) {
 		style = {
 			...style,
-			justifyContent: "space-around"
+			justifyContent: "space-around",
 		}
 	}
-	if (flexRow && flexXEvenly) {
+	if (opts.flexRow && opts.flexXEvenly) {
 		style = {
 			...style,
-			justifyContent: "space-evenly"
+			justifyContent: "space-evenly",
 		}
 	}
 	// .flex.-r.-y\:stretch { align-items: ... }
@@ -366,46 +370,46 @@ function flex(iter) {
 	// .flex.-r.-y\:between { align-items: ... }
 	// .flex.-r.-y\:around  { align-items: ... }
 	// .flex.-r.-y\:evenly  { align-items: ... }
-	if (flexRow && flexYStretch) {
+	if (opts.flexRow && opts.flexYStretch) {
 		style = {
 			...style,
-			alignItems: "stretch"
+			alignItems: "stretch",
 		}
 	}
-	if (flexRow && flexYStart) {
+	if (opts.flexRow && opts.flexYStart) {
 		style = {
 			...style,
-			alignItems: "flex-start"
+			alignItems: "flex-start",
 		}
 	}
-	if (flexRow && flexYCenter) {
+	if (opts.flexRow && opts.flexYCenter) {
 		style = {
 			...style,
-			alignItems: "center"
+			alignItems: "center",
 		}
 	}
-	if (flexRow && flexYEnd) {
+	if (opts.flexRow && opts.flexYEnd) {
 		style = {
 			...style,
-			alignItems: "flex-end"
+			alignItems: "flex-end",
 		}
 	}
-	if (flexRow && flexYBetween) {
+	if (opts.flexRow && opts.flexYBetween) {
 		style = {
 			...style,
-			alignItems: "space-between"
+			alignItems: "space-between",
 		}
 	}
-	if (flexRow && flexYAround) {
+	if (opts.flexRow && opts.flexYAround) {
 		style = {
 			...style,
-			alignItems: "space-around"
+			alignItems: "space-around",
 		}
 	}
-	if (flexRow && flexYEvenly) {
+	if (opts.flexRow && opts.flexYEvenly) {
 		style = {
 			...style,
-			alignItems: "space-evenly"
+			alignItems: "space-evenly",
 		}
 	}
 	// .flex.-c.-x\:stretch { align-items: ... }
@@ -415,46 +419,46 @@ function flex(iter) {
 	// .flex.-c.-x\:between { align-items: ... }
 	// .flex.-c.-x\:around  { align-items: ... }
 	// .flex.-c.-x\:evenly  { align-items: ... }
-	if (flexColumn && flexXStretch) {
+	if (opts.flexColumn && opts.flexXStretch) {
 		style = {
 			...style,
-			alignItems: "stretch"
+			alignItems: "stretch",
 		}
 	}
-	if (flexColumn && flexXStart) {
+	if (opts.flexColumn && opts.flexXStart) {
 		style = {
 			...style,
-			alignItems: "flex-start"
+			alignItems: "flex-start",
 		}
 	}
-	if (flexColumn && flexXCenter) {
+	if (opts.flexColumn && opts.flexXCenter) {
 		style = {
 			...style,
-			alignItems: "center"
+			alignItems: "center",
 		}
 	}
-	if (flexColumn && flexXEnd) {
+	if (opts.flexColumn && opts.flexXEnd) {
 		style = {
 			...style,
-			alignItems: "flex-end"
+			alignItems: "flex-end",
 		}
 	}
-	if (flexColumn && flexXBetween) {
+	if (opts.flexColumn && opts.flexXBetween) {
 		style = {
 			...style,
-			alignItems: "space-between"
+			alignItems: "space-between",
 		}
 	}
-	if (flexColumn && flexXAround) {
+	if (opts.flexColumn && opts.flexXAround) {
 		style = {
 			...style,
-			alignItems: "space-around"
+			alignItems: "space-around",
 		}
 	}
-	if (flexColumn && flexXEvenly) {
+	if (opts.flexColumn && opts.flexXEvenly) {
 		style = {
 			...style,
-			alignItems: "space-evenly"
+			alignItems: "space-evenly",
 		}
 	}
 	// .flex.-c.-y\:stretch { justify-content: ... }
@@ -464,46 +468,46 @@ function flex(iter) {
 	// .flex.-c.-y\:between { justify-content: ... }
 	// .flex.-c.-y\:around  { justify-content: ... }
 	// .flex.-c.-y\:evenly  { justify-content: ... }
-	if (flexColumn && flexYStretch) {
+	if (opts.flexColumn && opts.flexYStretch) {
 		style = {
 			...style,
-			justifyContent: "stretch"
+			justifyContent: "stretch",
 		}
 	}
-	if (flexColumn && flexYStart) {
+	if (opts.flexColumn && opts.flexYStart) {
 		style = {
 			...style,
-			justifyContent: "flex-start"
+			justifyContent: "flex-start",
 		}
 	}
-	if (flexColumn && flexYCenter) {
+	if (opts.flexColumn && opts.flexYCenter) {
 		style = {
 			...style,
-			justifyContent: "center"
+			justifyContent: "center",
 		}
 	}
-	if (flexColumn && flexYEnd) {
+	if (opts.flexColumn && opts.flexYEnd) {
 		style = {
 			...style,
-			justifyContent: "flex-end"
+			justifyContent: "flex-end",
 		}
 	}
-	if (flexColumn && flexYBetween) {
+	if (opts.flexColumn && opts.flexYBetween) {
 		style = {
 			...style,
-			justifyContent: "space-between"
+			justifyContent: "space-between",
 		}
 	}
-	if (flexColumn && flexYAround) {
+	if (opts.flexColumn && opts.flexYAround) {
 		style = {
 			...style,
-			justifyContent: "space-around"
+			justifyContent: "space-around",
 		}
 	}
-	if (flexColumn && flexYEvenly) {
+	if (opts.flexColumn && opts.flexYEvenly) {
 		style = {
 			...style,
-			justifyContent: "space-evenly"
+			justifyContent: "space-evenly",
 		}
 	}
 	return style
@@ -513,7 +517,7 @@ function widthHeight(iter) {
 	invariant(
 		iter.classNameMatches(/^(wh|w|h):(\d+(\.\d+)?|auto|max)?$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		`Please refer to https://git.io/JeQtB for documentation.`
+		"Please refer to https://git.io/JeQtB for documentation."
 	)
 	let value = 0
 	if (iter.token() !== "auto" && iter.token() !== "max") {
@@ -528,17 +532,17 @@ function widthHeight(iter) {
 	case "wh":
 		style = {
 			width: value,
-			height: value
+			height: value,
 		}
 		break
 	case "w":
 		style = {
-			width: value
+			width: value,
 		}
 		break
 	case "h":
 		style = {
-			height: value
+			height: value,
 		}
 		break
 	default:
@@ -552,7 +556,7 @@ function strokeWidth(iter) {
 	invariant(
 		iter.classNameMatches(/^sw:([1-8]\d{2}(\.\d+)?|900)$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		`Please refer to https://git.io/JeQtB for documentation.`
+		"Please refer to https://git.io/JeQtB for documentation."
 	)
 	const value = Number(iter.token())
 	return { strokeWidth: value * 0.005 }
@@ -562,7 +566,7 @@ function fontWeight(iter) {
 	invariant(
 		iter.classNameMatches(/^fw:([1-8]\d{2}(\.\d+)?|900)$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		`Please refer to https://git.io/JeQtB for documentation.`
+		"Please refer to https://git.io/JeQtB for documentation."
 	)
 	const value = Number(iter.token())
 	return { fontWeight: value }
@@ -572,7 +576,7 @@ function fontSize(iter) {
 	invariant(
 		iter.classNameMatches(/^fs:\d+(\.\d+)?$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		`Please refer to https://git.io/JeQtB for documentation.`
+		"Please refer to https://git.io/JeQtB for documentation."
 	)
 	const value = Number(iter.token())
 	return { fontSize: value }
@@ -582,11 +586,11 @@ function letterSpacing(iter) {
 	invariant(
 		iter.classNameMatches(/^ls:-?\d+(\.\d+)?%$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		`Please refer to https://git.io/JeQtB for documentation.`
+		"Please refer to https://git.io/JeQtB for documentation."
 	)
 	// Convert percent to decimal:
 	const value = Number(iter.token().slice(0, -1))
-	return { letterSpacing: value * 0.01 + "em" }
+	return { letterSpacing: `${value * 0.01}em` }
 }
 
 // FIXME: `^(1\d{2}(\.\d+)?|200)$`?
@@ -594,7 +598,7 @@ function lineHeight(iter) {
 	invariant(
 		iter.classNameMatches(/^lh:\d+(\.\d+)?%$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		`Please refer to https://git.io/JeQtB for documentation.`
+		"Please refer to https://git.io/JeQtB for documentation."
 	)
 	// Convert percent to decimal:
 	const value = Number(iter.token().slice(0, -1))
@@ -605,7 +609,7 @@ function borderRadius(iter) {
 	invariant(
 		iter.classNameMatches(/^br(-(l|r|t|b))?:(\d+(\.\d+)?|max)?$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		`Please refer to https://git.io/JeQtB for documentation.`
+		"Please refer to https://git.io/JeQtB for documentation."
 	)
 	let value = 0
 	if (iter.token() !== "max") {
@@ -617,31 +621,31 @@ function borderRadius(iter) {
 	switch (iter.key()) {
 	case "br":
 		style = {
-			borderRadius: value
+			borderRadius: value,
 		}
 		break
 	case "br-l":
 		style = {
 			borderTopLeftRadius: value,
-			borderBottomLeftRadius: value
+			borderBottomLeftRadius: value,
 		}
 		break
 	case "br-r":
 		style = {
 			borderTopRightRadius: value,
-			borderBottomRightRadius: value
+			borderBottomRightRadius: value,
 		}
 		break
 	case "br-t":
 		style = {
 			borderTopLeftRadius: value,
-			borderTopRightRadius: value
+			borderTopRightRadius: value,
 		}
 		break
 	case "br-b":
 		style = {
 			borderBottomLeftRadius: value,
-			borderBottomRightRadius: value
+			borderBottomRightRadius: value,
 		}
 		break
 	default:
@@ -654,48 +658,50 @@ function borderRadius(iter) {
 // NOTE: Use `if`s instead of a `switch`; multiple
 // subclasses are allowed.
 function overflow(iter) {
-	const overflowScroll  = iter.nextClassName(":scroll"  )
-	const overflowXScroll = iter.nextClassName("-x:scroll")
-	const overflowYScroll = iter.nextClassName("-y:scroll")
-	const overflowHidden  = iter.nextClassName(":hidden"  )
-	const overflowXHidden = iter.nextClassName("-x:hidden")
-	const overflowYHidden = iter.nextClassName("-y:hidden")
+	const opts = {
+		overflowScroll:  iter.nextClassName(":scroll"),
+		overflowXScroll: iter.nextClassName("-x:scroll"),
+		overflowYScroll: iter.nextClassName("-y:scroll"),
+		overflowHidden:  iter.nextClassName(":hidden"),
+		overflowXHidden: iter.nextClassName("-x:hidden"),
+		overflowYHidden: iter.nextClassName("-y:hidden"),
+	}
 	invariant(
-		overflowScroll || overflowHidden || overflowXScroll || overflowYScroll || overflowXHidden || overflowYHidden,
+		opts.overflowScroll || opts.overflowHidden || opts.overflowXScroll || opts.overflowYScroll || opts.overflowXHidden || opts.overflowYHidden,
 		`stylex: \`${iter.className()}\` expects \`(-(x|y))?:scroll\` or \`(-(x|y))?:hidden\`.`
 	)
 	let style = {}
-	if (overflowScroll) {
+	if (opts.overflowScroll) {
 		style = {
 			WebkitOverflowScrolling: "touch",
-			overflow: "scroll"
+			overflow: "scroll",
 		}
 	}
-	if (overflowXScroll) {
+	if (opts.overflowXScroll) {
 		style = {
 			WebkitOverflowScrolling: "touch",
-			overflowX: "scroll"
+			overflowX: "scroll",
 		}
 	}
-	if (overflowYScroll) {
+	if (opts.overflowYScroll) {
 		style = {
 			WebkitOverflowScrolling: "touch",
-			overflowY: "scroll"
+			overflowY: "scroll",
 		}
 	}
-	if (overflowHidden) {
+	if (opts.overflowHidden) {
 		style = {
-			overflow: "hidden"
+			overflow: "hidden",
 		}
 	}
-	if (overflowXHidden) {
+	if (opts.overflowXHidden) {
 		style = {
-			overflowX: "hidden"
+			overflowX: "hidden",
 		}
 	}
-	if (overflowYHidden) {
+	if (opts.overflowYHidden) {
 		style = {
-			overflowY: "hidden"
+			overflowY: "hidden",
 		}
 	}
 	return style
@@ -708,27 +714,29 @@ function overflow(iter) {
 // subclasses are allowed.
 function textOverflow(iter) {
 	/*eslint-disable no-useless-escape*/
-	const textOverflowX = iter.nextClassName("-x")
-	const textOverflowY = iter.nextClassNameRegex(/^-y\:\d+$/)
+	const opts = {
+		textOverflowX: iter.nextClassName("-x"),
+		textOverflowY: iter.nextClassNameRegex(/^-y\:\d+$/),
+	}
 	invariant(
-		textOverflowX || textOverflowY,
+		opts.textOverflowX || opts.textOverflowY,
 		`stylex: \`${iter.className()}\` expects \`-x\` or \`-y:\\d+\`.`
 	)
 	const yValue = Number(iter.token())
 	let style = {}
-	if (textOverflowX) {
+	if (opts.textOverflowX) {
 		style = {
 			whiteSpace: "nowrap",
 			overflowX: "hidden",
-			textOverflow: "ellipsis"
+			textOverflow: "ellipsis",
 		}
 	}
-	if (textOverflowY) {
+	if (opts.textOverflowY) {
 		style = {
 			display: "-webkit-box",
 			WebkitBoxOrient: "vertical",
 			WebkitLineClamp: yValue,
-			overflowY: "hidden"
+			overflowY: "hidden",
 		}
 	}
 	return style
@@ -738,7 +746,7 @@ function zIndex(iter) {
 	invariant(
 		iter.classNameMatches(/^z:(-?\d+|min|max)?$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		`Please refer to https://git.io/JeQtB for documentation.`
+		"Please refer to https://git.io/JeQtB for documentation."
 	)
 	let value = 0
 	if (iter.token() !== "min" && iter.token() !== "max") {
@@ -755,7 +763,7 @@ class Iterator {
 		classes: [],
 		started: false,
 		index: 0,
-		keyToken: [] // Cache of the current key-token.
+		keyToken: [], // Cache of the current key-token.
 	}
 	constructor(classString) {
 		this.state.classString = classString
@@ -852,11 +860,11 @@ function stylex(classString) {
 		invariant(
 			parseStyle,
 			`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-			`Please refer to https://git.io/JeQtB for documentation.`
+			"Please refer to https://git.io/JeQtB for documentation."
 		)
 		styles = {
 			...styles,
-			...parseStyle(iter)
+			...parseStyle(iter),
 		}
 	}
 	return styles

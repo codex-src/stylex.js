@@ -109,7 +109,7 @@ var styleParsers = {
       display: "inline"
     };
   },
-  "flex": flex,
+  flex: flex,
   "no-flex-shrink": function noFlexShrink() {
     return {
       flexShrink: 0
@@ -173,7 +173,7 @@ var styleParsers = {
   "br-r": borderRadius,
   "br-t": borderRadius,
   "br-b": borderRadius,
-  "overflow": overflow,
+  overflow: overflow,
   "text-overflow": textOverflow,
   "z": zIndex,
   "pointer-events": function pointerEvents() {

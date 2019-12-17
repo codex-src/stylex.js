@@ -715,7 +715,8 @@ function fontWeight(iter) {
   return {
     fontWeight: value
   };
-}
+} // TODO: Convert `px` to `rem`;
+
 
 function fontSize(iter) {
   invariant(iter.classNameMatches(/^fs:\d+(\.\d+)?$/), "stylex: Cannot parse class `".concat(iter.className(), "` from class string `").concat(iter.classString(), "`. ") + "Please refer to https://git.io/JeQtB for documentation.");

@@ -572,6 +572,7 @@ function fontWeight(iter) {
 	return { fontWeight: value }
 }
 
+// TODO: Convert `px` to `rem`;
 function fontSize(iter) {
 	invariant(
 		iter.classNameMatches(/^fs:\d+(\.\d+)?$/),

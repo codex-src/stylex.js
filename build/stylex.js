@@ -389,6 +389,7 @@ function position(iter) {
 
 
 function flex(iter) {
+  var flex = iter.key();
   var opts = {
     flexRow: iter.nextClassName("-r"),
     flexColumn: iter.nextClassName("-c"),
@@ -416,7 +417,7 @@ function flex(iter) {
   };
   invariant(opts.flexRow || opts.flexColumn, "stylex: `".concat(iter.className(), "` expects `-r` or `-c`."));
   var style = {
-    display: iter.key(),
+    display: flex,
     flexDirection: opts.flexRow && "row" || opts.flexColumn && "column"
   }; // .flex.-r.\:stretch, .flex.-c.\:stretch { ... }
   // .flex.-r.\:start,   .flex.-c.\:start   { ... }

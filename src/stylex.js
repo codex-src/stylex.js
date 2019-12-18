@@ -225,6 +225,7 @@ function position(iter) {
 // NOTE: Use `if`s instead of a `switch`; multiple
 // subclasses are allowed.
 function flex(iter) {
+	const flex = iter.key()
 	const opts = {
 		flexRow:      iter.nextClassName("-r"),
 		flexColumn:   iter.nextClassName("-c"),
@@ -255,7 +256,7 @@ function flex(iter) {
 		`stylex: \`${iter.className()}\` expects \`-r\` or \`-c\`.`,
 	)
 	let style = {
-		display: iter.key(),
+		display: flex,
 		flexDirection: (
 			(opts.flexRow && "row") ||
 			(opts.flexColumn && "column")

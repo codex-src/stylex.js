@@ -23,6 +23,9 @@ const styleParsers = {
 	"inline-block":      () => ({ display: "inline-block" }),
 	"inline":            () => ({ display: "inline" }),
 	flex,
+	"inline-flex":       flex,
+	"grid":              () => ({ display: "grid" }),
+	"inline-grid":       () => ({ display: "inline-grid" }),
 	"no-flex-shrink":    () => ({ flexShrink: 0 }),
 	"wh":                widthHeight,
 	"w":                 widthHeight,
@@ -61,7 +64,7 @@ function margin(iter) {
 	invariant(
 		iter.classNameMatches(/^m(-(x|y|l|r|t|b))?:-?\d+(\.\d+)?$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		"Please refer to https://git.io/JeQtB for documentation."
+		"Please refer to https://git.io/JeQtB for documentation.",
 	)
 	const value = Number(iter.token())
 	let style = {}
@@ -114,7 +117,7 @@ function padding(iter) {
 	invariant(
 		iter.classNameMatches(/^p(-(x|y|l|r|t|b))?:\d+(\.\d+)?$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		"Please refer to https://git.io/JeQtB for documentation."
+		"Please refer to https://git.io/JeQtB for documentation.",
 	)
 	const value = Number(iter.token())
 	let style = {}
@@ -249,7 +252,7 @@ function flex(iter) {
 	}
 	invariant(
 		opts.flexRow || opts.flexColumn,
-		`stylex: \`${iter.className()}\` expects \`-r\` or \`-c\`.`
+		`stylex: \`${iter.className()}\` expects \`-r\` or \`-c\`.`,
 	)
 	let style = {
 		display: "flex",
@@ -517,7 +520,7 @@ function widthHeight(iter) {
 	invariant(
 		iter.classNameMatches(/^(wh|w|h):(\d+(\.\d+)?|auto|max)?$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		"Please refer to https://git.io/JeQtB for documentation."
+		"Please refer to https://git.io/JeQtB for documentation.",
 	)
 	let value = 0
 	if (iter.token() !== "auto" && iter.token() !== "max") {
@@ -556,7 +559,7 @@ function strokeWidth(iter) {
 	invariant(
 		iter.classNameMatches(/^sw:([1-8]\d{2}(\.\d+)?|900)$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		"Please refer to https://git.io/JeQtB for documentation."
+		"Please refer to https://git.io/JeQtB for documentation.",
 	)
 	const value = Number(iter.token())
 	return { strokeWidth: value * 0.005 }
@@ -566,7 +569,7 @@ function fontWeight(iter) {
 	invariant(
 		iter.classNameMatches(/^fw:([1-8]\d{2}(\.\d+)?|900)$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		"Please refer to https://git.io/JeQtB for documentation."
+		"Please refer to https://git.io/JeQtB for documentation.",
 	)
 	const value = Number(iter.token())
 	return { fontWeight: value }
@@ -577,7 +580,7 @@ function fontSize(iter) {
 	invariant(
 		iter.classNameMatches(/^fs:\d+(\.\d+)?$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		"Please refer to https://git.io/JeQtB for documentation."
+		"Please refer to https://git.io/JeQtB for documentation.",
 	)
 	const value = Number(iter.token())
 	return { fontSize: value }
@@ -587,7 +590,7 @@ function letterSpacing(iter) {
 	invariant(
 		iter.classNameMatches(/^ls:-?\d+(\.\d+)?%$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		"Please refer to https://git.io/JeQtB for documentation."
+		"Please refer to https://git.io/JeQtB for documentation.",
 	)
 	// Convert percent to decimal:
 	const value = Number(iter.token().slice(0, -1))
@@ -599,7 +602,7 @@ function lineHeight(iter) {
 	invariant(
 		iter.classNameMatches(/^lh:\d+(\.\d+)?%$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		"Please refer to https://git.io/JeQtB for documentation."
+		"Please refer to https://git.io/JeQtB for documentation.",
 	)
 	// Convert percent to decimal:
 	const value = Number(iter.token().slice(0, -1))
@@ -610,7 +613,7 @@ function borderRadius(iter) {
 	invariant(
 		iter.classNameMatches(/^br(-(l|r|t|b))?:(\d+(\.\d+)?|max)?$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		"Please refer to https://git.io/JeQtB for documentation."
+		"Please refer to https://git.io/JeQtB for documentation.",
 	)
 	let value = 0
 	if (iter.token() !== "max") {
@@ -669,7 +672,7 @@ function overflow(iter) {
 	}
 	invariant(
 		opts.overflowScroll || opts.overflowHidden || opts.overflowXScroll || opts.overflowYScroll || opts.overflowXHidden || opts.overflowYHidden,
-		`stylex: \`${iter.className()}\` expects \`(-(x|y))?:scroll\` or \`(-(x|y))?:hidden\`.`
+		`stylex: \`${iter.className()}\` expects \`(-(x|y))?:scroll\` or \`(-(x|y))?:hidden\`.`,
 	)
 	let style = {}
 	if (opts.overflowScroll) {
@@ -721,7 +724,7 @@ function textOverflow(iter) {
 	}
 	invariant(
 		opts.textOverflowX || opts.textOverflowY,
-		`stylex: \`${iter.className()}\` expects \`-x\` or \`-y:\\d+\`.`
+		`stylex: \`${iter.className()}\` expects \`-x\` or \`-y:\\d+\`.`,
 	)
 	const yValue = Number(iter.token())
 	let style = {}
@@ -747,7 +750,7 @@ function zIndex(iter) {
 	invariant(
 		iter.classNameMatches(/^z:(-?\d+|min|max)?$/),
 		`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-		"Please refer to https://git.io/JeQtB for documentation."
+		"Please refer to https://git.io/JeQtB for documentation.",
 	)
 	let value = 0
 	if (iter.token() !== "min" && iter.token() !== "max") {
@@ -861,7 +864,7 @@ function stylex(classString) {
 		invariant(
 			parseStyle,
 			`stylex: Cannot parse class \`${iter.className()}\` from class string \`${iter.classString()}\`. ` +
-			"Please refer to https://git.io/JeQtB for documentation."
+			"Please refer to https://git.io/JeQtB for documentation.",
 		)
 		styles = {
 			...styles,

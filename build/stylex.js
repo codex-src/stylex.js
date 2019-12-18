@@ -110,6 +110,17 @@ var styleParsers = {
     };
   },
   flex: flex,
+  "inline-flex": flex,
+  "grid": function grid() {
+    return {
+      display: "grid"
+    };
+  },
+  "inline-grid": function inlineGrid() {
+    return {
+      display: "inline-grid"
+    };
+  },
   "no-flex-shrink": function noFlexShrink() {
     return {
       flexShrink: 0

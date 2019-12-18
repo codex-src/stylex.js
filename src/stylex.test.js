@@ -24,6 +24,9 @@ test("stress test", () => {
 		inline-block
 		inline
 		flex -r -c :stretch :start :center :end :between :around :evenly -x:stretch -x:start -x:center -x:end -x:between -x:around -x:evenly -y:stretch -y:start -y:center -y:end -y:between -y:around -y:evenly
+		inline-flex -r -c :stretch :start :center :end :between :around :evenly -x:stretch -x:start -x:center -x:end -x:between -x:around -x:evenly -y:stretch -y:start -y:center -y:end -y:between -y:around -y:evenly
+		grid
+		inline-grid
 		no-flex-shrink
 		wh:0
 		w:0

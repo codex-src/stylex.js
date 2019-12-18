@@ -416,7 +416,7 @@ function flex(iter) {
   };
   invariant(opts.flexRow || opts.flexColumn, "stylex: `".concat(iter.className(), "` expects `-r` or `-c`."));
   var style = {
-    display: "flex",
+    display: iter.key(),
     flexDirection: opts.flexRow && "row" || opts.flexColumn && "column"
   }; // .flex.-r.\:stretch, .flex.-c.\:stretch { ... }
   // .flex.-r.\:start,   .flex.-c.\:start   { ... }

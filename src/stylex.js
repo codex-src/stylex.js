@@ -255,7 +255,7 @@ function flex(iter) {
 		`stylex: \`${iter.className()}\` expects \`-r\` or \`-c\`.`,
 	)
 	let style = {
-		display: "flex",
+		display: iter.key(),
 		flexDirection: (
 			(opts.flexRow && "row") ||
 			(opts.flexColumn && "column")

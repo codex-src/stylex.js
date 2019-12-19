@@ -61,4 +61,4 @@ const App = props => (
 )
 ```
 
-### If you feel something is missing or could be improved, don’t hesitate to file an issue or submit a pull request. We are community friendly. ☺️
+#### If you feel something is missing or could be improved, don’t hesitate to file an issue or submit a pull request. We are community friendly. ☺️

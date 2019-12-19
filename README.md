@@ -1,4 +1,4 @@
-# stylex, atomic CSS-in-JS ✨
+# stylex ✨
 
 stylex is a CSS-in-JS library that is:
 

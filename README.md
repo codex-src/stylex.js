@@ -15,7 +15,7 @@ In practice, stylex uses inline styles as supposed to classes, but this simply h
 
 ## Atomic
 
-An _atom_ conceptually describe the smallest indivisible unit by which something can be measured. The way most atomic CSS libraries works is by following this principle with CSS classes that share a 1:1 to mapping with CSS’s capabilities.
+An _atom_ conceptually describe the smallest indivisible unit by which something can be measured. The way most atomic CSS libraries work is by following this principle with CSS classes that share a 1:1 to mapping with CSS’s capabilities.
 
 For example:
 
@@ -30,7 +30,7 @@ _(Technically, if you wanted to write the above in CSS, you would need to use `.
 
 Where `p-x` is shorthand for `padding-x-axis`. Technically `padding-x-axis` isn’t a CSS property, but why not? stylex emphasizes atomic patterns that map closely to CSS’s capabilities without being overly restrictive. All shorthands are documented in the [reference guide](#reference-guide)).
 
-Note that stylex doesn’t map a shorthand to every CSS property. Instead, stylex focuses on understanding and solving for the 90% use-case, that is, about 50+ properties. But before your eyes glaze over, there’s only about 15 _kinds of classes_ to remember, and the rest is added syntax to describe an axis, size, etc.
+Note that stylex doesn’t map a shorthand to every CSS property. Instead, stylex focuses on solving for the 90% use case, that is, about 50+ properties. But before your eyes glaze over, there’s only about 15 _kinds of classes_ to remember, and the rest is added syntax to describe the axis, size, etc.
 
 The pattern used for shorthands reliably follows the following pattern: the first letter of a property name (if a property name is `kebab-case`, then the first letter of every word is used). This is known as the `key`, like `p-x` in the previous example. The `token` is the property’s value, like `16` in the previous example. If a token exists, the key and token are delimited with a colon.
 

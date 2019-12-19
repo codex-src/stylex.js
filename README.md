@@ -1,4 +1,4 @@
-# stylex.js 🎨
+# stylex ✨
 
 stylex is a CSS library built that is:
 

@@ -1,0 +1,11 @@
+{
+  "scope": "source.js",
+  "completions": [
+    { "trigger": "s",  "contents": "stylex.parse(${1:\"$2\"})" },
+    { "trigger": "sx", "contents": "style={stylex.parse(${1:\"$2\"})}" },
+    { "trigger": "sd", "contents": "<${1:div} ${2:style=\\{${3:stylex.parse(${4:\"$5\"})}\\}}>\n\t${6:\\{${7:props.children}\\}}\n</${1}>" },
+    { "trigger": "sc", "contents": "const ${1:Component} = ${2:props} => (\n\t<${3:div} ${4:style=\\{${5:stylex.parse(${6:\"$7\"})}\\}}>\n\t\t${8:\\{${9:props.children}\\}}\n\t</${3}>\n)\n" },
+    { "trigger": "sf", "contents": "function ${1:Component}(${2:props}) {\n\treturn ${3:(\n\t\t<${4:div} ${5:style=\\{${6:stylex.parse(${7:\"$8\"})}\\}}>\n\t\t\t${9:\\{${10:props.children}\\}}\n\t\t</${4}>\n\t)}\n}\n" },
+    { "trigger": "si", "contents": "import stylex from \"stylex\"" }
+  ]
+}

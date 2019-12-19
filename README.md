@@ -26,7 +26,7 @@ For example:
 ...
 ```
 
-Technically, if you wanted to write the above in CSS, you would need to use `.p-x\:16 ...`.
+_Technically, if you wanted to write the above in CSS, you would need to use `.p-x\:16 ...`._
 
 Where `p-x` is shorthand for `padding-x-axis`. Technically `padding-x-axis` isn’t a CSS property, but why not? stylex emphasizes atomic patterns that map closely to CSS’s capabilities without being overly restrictive. All shorthands are documented in the [reference guide](#reference-guide)).
 

@@ -78,7 +78,7 @@ inline-flex (-(r|c)) -opts    (self-descriptive)
 grid                          (self-descriptive)
 inline-grid                   (self-descriptive)
 no-flex-shrink                flex-shrink: 0
-wh:(0–∞|auto|max)             width-height                      *max: 100%
+wh:(0...∞|auto|max)             width-height                      *max: 100%
 w:(0–∞|auto|max)              width                             *max: 100%
 h:(0–∞|auto|max)              height                            *max: 100%
 no-min-w                      width: 0
@@ -91,7 +91,7 @@ square                        stroke-linecap: square            *meant to be use
 sw:(0–∞)                      stroke-width                      *meant to be used with feathericons/react-feather
 fw:(100–900)                  font-weight
 fs:(0–∞)                      font-size
-ls:(0–∞%)                     letter-spacing
+ls:(0...∞%)                     letter-spacing
 lh:(0–∞%)                     line-height
 c:<css-var>                   color: hsl(var(--<css-var>))      *meant to be used with codex-src/material.css
 b:<css-var>                   background: hsl(var(--<css-var>)) *meant to be used with codex-src/material.css

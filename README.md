@@ -1,4 +1,4 @@
-# stylex ✨
+# stylex, atomic CSS-in-JS ✨
 
 stylex is a CSS-in-JS library that is:
 
@@ -107,7 +107,7 @@ square                        stroke-linecap: square            *meant to be use
 sw:(0–∞)                      stroke-width                      *meant to be used with feathericons/react-feather
 fw:(100–900)                  font-weight
 fs:(0–∞)                      font-size
-ls:(0...∞%)                   letter-spacing
+ls:(0–∞%)                     letter-spacing
 lh:(0–∞%)                     line-height
 c:<css-var>                   color: hsl(var(--<css-var>))      *meant to be used with codex-src/material.css
 b:<css-var>                   background: hsl(var(--<css-var>)) *meant to be used with codex-src/material.css

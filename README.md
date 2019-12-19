@@ -40,3 +40,23 @@ Me personally speaking, [Zaydek](https://github.com/codex-zaydek), I’d taught 
 ## Extensible
 
 One of the defining features of stylex, when coupled with a frontend library like React, is its ability to extend component styling. This is big. When working with the class-based predecessor, we quickly discovered that the greatest limiting factor was the inability to refactor existing components without needing to copy too many class names.
+
+```jsx
+const Box = stylex.Styleable(props => (
+	<div style={stylex.parse("wh:160 b:gray-200 br:8")} {...props} />
+))
+
+const RedBox = stylex.Styleable(props => (
+	<Box style={stylex.parse("b:red")} {...props} />
+))
+
+const App = props => (
+	<div style={stylex.parse("flex -r :center h:max")}>
+		<Box />
+		<div style={stylex.parse("w:16")} />
+		<RedBox />
+		<div style={stylex.parse("w:16")} />
+		<RedBox style={stylex.parse("br:max")} />
+	</div>
+)
+```

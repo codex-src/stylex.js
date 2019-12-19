@@ -64,47 +64,47 @@ const App = props => (
 ## Reference guide
 
 ```
-m(-l|r|x|t|b|y)?:(-∞–∞)   margin
-p(-l|r|x|t|b|y)?:(0–∞)    padding
-relative                  (self-descriptive)
-absolute                  (self-descriptive)
-fixed                     (self-descriptive)
-sticky                    (self-descriptive)
-block                     (self-descriptive)
-inline-block              (self-descriptive)
-inline                    (self-descriptive)
-flex                      (self-descriptive)
-inline-flex               (self-descriptive)
-grid                      (self-descriptive)
-inline-grid               (self-descriptive)
-no-flex-shrink            flex-shrink: 0
-wh:(0–∞)                  width-height
-w:(0–∞)                   width
-h:(0–∞)                   height
-no-min-w                  width: 0
-center                    (self-descriptive)                *text-align
-middle                    (self-descriptive)                *vertical-algin
-pre                       (self-descriptive)                *white-space
-pre-wrap                  (self-descriptive)                *white-space
-tnum                      font-feature-settings: 'tnum'
-square                    stroke-linecap: square            *meant to be used with feathericons/react-feather
-sw:(0–∞)                  stroke-width                      *meant to be used with feathericons/react-feather
-fw:(100–900)              font-weight
-fs:(0–∞)                  font-size
-ls:(0–∞%)                 letter-spacing
-lh:(0–∞%)                 line-height
-c:<css-var>               color: hsl(var(--<css-var>))      *meant to be used with codex-src/material.css
-b:<css-var>               background: hsl(var(--<css-var>)) *meant to be used with codex-src/material.css
-br(-(l|r|t|b|max))?:(0–∞) border-radius
-overflow                  ...
-text-overflow             text-overflow
-z:(-∞–∞|min|max)          z-index
-pointer-events            pointer-events: auto
-no-pointer-events         pointer-events: none
-pointer                   cursor: pointer
-no-pointer                cursor: auto
-translate-z               transform: translateZ(0px)
-no-translate-z            transform: none
+m(-(l|r|x|t|b|y))?:(-∞–∞)     margin
+p(-(l|r|x|t|b|y))?:(0–∞)      padding
+relative -opts                (self-descriptive)
+absolute -opts                (self-descriptive)
+fixed -opts                   (self-descriptive)
+sticky -opts                  (self-descriptive)
+block                         (self-descriptive)
+inline-block                  (self-descriptive)
+inline                        (self-descriptive)
+flex (-(r|c)) -opts           (self-descriptive)
+inline-flex (-(r|c)) -opts    (self-descriptive)
+grid                          (self-descriptive)
+inline-grid                   (self-descriptive)
+no-flex-shrink                flex-shrink: 0
+wh:(0–∞|auto|max)             width-height                      *max: 100%
+w:(0–∞|auto|max)              width                             *max: 100%
+h:(0–∞|auto|max)              height                            *max: 100%
+no-min-w                      width: 0
+center                        text-align: center
+middle                        vertical-algin: middle
+pre                           white-space: pre
+pre-wrap                      white-space: pre-wrap
+tnum                          font-feature-settings: 'tnum'
+square                        stroke-linecap: square            *meant to be used with feathericons/react-feather
+sw:(0–∞)                      stroke-width                      *meant to be used with feathericons/react-feather
+fw:(100–900)                  font-weight
+fs:(0–∞)                      font-size
+ls:(0–∞%)                     letter-spacing
+lh:(0–∞%)                     line-height
+c:<css-var>                   color: hsl(var(--<css-var>))      *meant to be used with codex-src/material.css
+b:<css-var>                   background: hsl(var(--<css-var>)) *meant to be used with codex-src/material.css
+br(-(l|r|t|b|max))?:(0–∞)     border-radius                     *max: 50%
+overflow -opts                (self-descriptive)
+text-overflow (-(x|y)?) -opts (...)
+z:(-∞–∞|min|max)              z-index                           *min: -9999, max: 9999
+pointer-events                pointer-events: auto
+no-pointer-events             pointer-events: none
+pointer                       cursor: pointer
+no-pointer                    cursor: auto
+translate-z                   transform: translateZ(0px)
+no-translate-z                transform: none
 ```
 
 

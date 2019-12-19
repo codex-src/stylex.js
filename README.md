@@ -1,6 +1,6 @@
 # stylex ✨
 
-stylex is a CSS library built that is:
+stylex is a CSS-in-JS library that is:
 
 - [Atomic](#atomic)
 - [Teaches CSS in the process](#teaches-css)
@@ -8,7 +8,7 @@ stylex is a CSS library built that is:
 
 stylex is used almost exclusively at [Codex](https://github.com/codex-src) to build out the frontend.
 
-stylex is under active development and should not yet be considered stable. Despite that, we’ve found stylex to be extremely useful in both thinking about design in general and building highly maintainble code bases.
+stylex is under active development and should not yet be considered stable. Despite that, we’ve found stylex to be extremely useful in both thinking about design in general and authoring highly maintainble code bases.
 
 In practice, stylex uses inline styles as supposed to classes, but this simply has to do with building a functional prototype that works, rather than optimizing for browser performance, etc. In the future, this could very well change, but for now, the priority is building a powerful tool for both rapid development and shipping to production.
 

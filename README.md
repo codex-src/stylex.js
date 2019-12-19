@@ -1,3 +1,5 @@
+# stylex.js 🎨
+
 stylex is a CSS library built that is:
 
 - [Atomic](#atomic)
@@ -39,7 +41,21 @@ Me personally speaking, [Zaydek](https://github.com/codex-zaydek), I’d taught 
 
 ## Extensible
 
-One of the defining features of stylex, when coupled with a frontend library like React, is its ability to extend component styling. This is big. When working with the class-based predecessor, we quickly discovered that the greatest limiting factor was the inability to refactor existing components without needing to copy too many class names.
+One of the defining features of stylex, when coupled with a frontend library like React, is its ability to extend component styling. This is big. When working with the class-based predecessor, we quickly discovered that the greatest limiting factor was the inability to refactor existing components without needing to copy many class names.
+
+It turns out the solution is quite subtle. In React, a component can extend another component with `{...props}`, meaning _inherit the parent component’s `props`_. This works great except for when the parent component _also_ defines style props, thereby overwriting the original component’s `props`. To solve for this without the need for higher-order components, you can write:
+
+```
+const Component = ({ style, ...props }) => (
+  <p style={{ stylex.parse("..."), ...style }} {...props}>
+    {props.children}
+  </p>
+)
+```
+
+And we did, until it became untenable. So we wrote two simple HOCs to self-document the following question: _should a component allow or prevent its styles from being extended?_
+
+In answering this, we created `stylex.Styleable` and `stylex.Unstyleable` (that’s styleable _with an e_ — don’t worry, you’ll be gently warned if you misspelled them). These two higher-order components allow or prevent a component from being restyled, leading to easier to reason about code and self-documenting components. These are of course opt-in, but are preferred for brevity.
 
 ```jsx
 const Box = stylex.Styleable(props => (

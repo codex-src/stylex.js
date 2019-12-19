@@ -50,13 +50,15 @@ It turns out the solution is quite subtle. In React, a component can extend anot
 
 To solve for this without the need for higher-order components, you can write:
 
-```
+```jsx
 const Component = ({ style, ...props }) => (
   <p style={{ stylex.parse("..."), ...style }} {...props}>
     {props.children}
   </p>
 )
 ```
+
+This in effect destructures `styles` from `props`, disallowing `{...props}` from overwrting the underlying component’s `style`, which is an unintended consequence of using `{...props}`. This is important for extending the existing styles defined on a component.
 
 And we did, until it became untenable. So we wrote two simple HOCs to self-document the following question: _should a component allow or prevent its styles from being extended?_
 

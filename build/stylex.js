@@ -3,6 +3,7 @@
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var invariant = _interopDefault(require('invariant'));
+var React = _interopDefault(require('react'));
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -74,6 +75,143 @@ function _objectSpread2(target) {
 
   return target;
 }
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+// styles.
+//
+// The following are roughly equivalent:
+//
+// const Component = ({ style, ...props }) => (
+//   <div style={{ ...stylex("x y z"), ...style }} {...props}>
+//     {props.children}
+//   </div>
+// )
+//
+// const Component = Styleable(props => (
+//   <div style={stylex("x y z")} {...props}>
+//     {props.children}
+//   </div>
+// ))
+//
+// *Note that the use of `{...props}` is up to the
+// discretion of the component author.
+//
+// Generally, lower-level components should use `Stylable`,
+// thus making them more reusable.
+//
+
+var Styleable = function Styleable(render) {
+  return function (_ref) {
+    var style = _ref.style,
+        props = _objectWithoutProperties(_ref, ["style"]);
+
+    invariant(typeof render === "function", "stylex: `Styleable` is meant to be used with a component. " + "Did you mean `const Component = Styleable(props => ( ... ))`?"); // Render the original component; `element` is an object
+    // with `props`, `props.style`, `props.children`, etc.
+
+    var element = render(props);
+    var newRender = React.cloneElement(element, _objectSpread2({
+      style: _objectSpread2({}, element.props.style, {}, style)
+    }, props), props.children // Not needed but easier to read.
+    );
+    return newRender;
+  };
+}; // FIXME: Consider using `throw new Error("...")` instead of
+// better developer experience.
+
+var Stylable = function Stylable(render) {
+  return function (props) {
+    invariant(false, "stylex: `Stylable` is not exported. " + "Did you mean `Styleable`?");
+    return render(props);
+  };
+}; // `Unstyleable` is a HOC that prevents a rendered
+// component’s styles from being extended or overwritten.
+//
+// The following are roughly equivalent:
+//
+// const Component = ({ style, ...props }) => (
+//   <div style={stylex("x y z")} {...props}>
+//     {props.children}
+//   </div>
+// )
+//
+// const Component = Unstyleable(props => (
+//   <div style={stylex("x y z")} {...props}>
+//     {props.children}
+//   </div>
+// ))
+//
+// *Note that the use of `{...props}` is up to the
+// discretion of the component author.
+//
+// Generally, higher-level components should use
+// `Unstyleable`, thus making them more predictable.
+//
+
+var Unstyleable = function Unstyleable(render) {
+  return function (_ref2) {
+    var style = _ref2.style,
+        props = _objectWithoutProperties(_ref2, ["style"]);
+
+    invariant(typeof render === "function", "stylex: `Unstyleable` is meant to be used with a component. " + "Did you mean `const Component = Unstyleable(props => ( ... ))`?");
+    var element = render(props);
+    var newRender = React.cloneElement(element, _objectSpread2({
+      style: element.props.style
+    }, props), props.children // Not needed but easier to read.
+    );
+    return newRender;
+  };
+}; // FIXME: Consider using `throw new Error("...")` instead of
+// better developer experience.
+
+var Unstylable = function Unstylable(render) {
+  return function (props) {
+    invariant(false, "stylex: `Unstylable` is not exported. " + "Did you mean `Unstyleable`?");
+    return render(props);
+  };
+};
+
+var components = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  Styleable: Styleable,
+  Stylable: Stylable,
+  Unstyleable: Unstyleable,
+  Unstylable: Unstylable
+});
 
 var styleParsers = {
   "m": margin,
@@ -1044,7 +1182,7 @@ function () {
   return Iterator;
 }();
 
-function stylex(classString) {
+function parse(classString) {
   var styles = {};
   var iter = new Iterator(classString);
 
@@ -1058,4 +1196,8 @@ function stylex(classString) {
   return styles;
 }
 
-module.exports = stylex;
+var exports$1 = _objectSpread2({}, components, {
+  parse: parse
+});
+
+module.exports = exports$1;

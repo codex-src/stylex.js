@@ -1,7 +1,7 @@
-import stylex from "./stylex"
+import stylex from "../index-stylex"
 
 test("flex -r :center", () => {
-	expect(stylex(`
+	expect(stylex.parse(`
 		flex -r :center
 	`)).toStrictEqual({
 		display: "flex",
@@ -12,7 +12,7 @@ test("flex -r :center", () => {
 })
 
 test("inline-flex -r :center", () => {
-	expect(stylex(`
+	expect(stylex.parse(`
 		inline-flex -r :center
 	`)).toStrictEqual({
 		display: "inline-flex",

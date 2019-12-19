@@ -1,7 +1,7 @@
-import stylex from "./stylex"
+import stylex from "../index-stylex"
 
 test("stress test", () => {
-	expect(stylex(`
+	expect(stylex.parse(`
 		m:0
 		m-l:0
 		m-r:0

@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-<${1:div} style={stylex(${2:"${3:}"})}>
-	${4:{props.children\}}
-</${1}>
-]]></content>
-	<tabTrigger>sxd</tabTrigger>
-</snippet>

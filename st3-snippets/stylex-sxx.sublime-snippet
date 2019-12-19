@@ -1,6 +1,0 @@
-<snippet>
-	<content><![CDATA[
-style={{ ...stylex(${1:"${2:}"}), ...style }} ${3:{...props\}}
-]]></content>
-	<tabTrigger>sxx</tabTrigger>
-</snippet>

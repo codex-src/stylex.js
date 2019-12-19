@@ -856,7 +856,7 @@ class Iterator {
 	}
 }
 
-function stylex(classString) {
+function parse(classString) {
 	let styles = {}
 	const iter = new Iterator(classString)
 	while (iter.next()) {
@@ -875,4 +875,4 @@ function stylex(classString) {
 	return styles
 }
 
-export default stylex
+export default parse

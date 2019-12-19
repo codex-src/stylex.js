@@ -26,7 +26,7 @@ For example:
 ...
 ```
 
-Where `p-x` is shorthand for `padding-x-axis`. Technically `padding-x-axis` isn’t a CSS property, but why not? stylex emphasizes atomic patterns that map closely to CSS’s capabilities without being overly restrictive.
+Where `p-x` is shorthand for `padding-x-axis`. Technically `padding-x-axis` isn’t a CSS property, but why not? stylex emphasizes atomic patterns that map closely to CSS’s capabilities without being overly restrictive. All shorthands are documented in the [reference guide](#reference-guide)).
 
 Note that stylex doesn’t map a shorthand to every CSS property. Instead, stylex focuses on understanding and solving for the 90% use-case, that is, about 50+ properties. But before your eyes glaze over, there’s only about 15 _kinds of classes_ to remember, and the rest is added syntax to describe an axis, size, etc.
 
@@ -80,25 +80,27 @@ const C2 = Styleable(props => (
 
 These components now describe their underlying styling behavior with less moving parts. Note that the use of `{...props}` is up to the discretion of the component author and no longer affects how styles are interpolated. Generally, lower-level components should use `Stylable`, thus making them more reusable. And higher-level components should use `Unstyleable`, thus making them more predictable. One good argument for when to make a higher-level component styleable is when it’s expected to interpolate `margin`.
 
-// ```jsx
-// const Box = stylex.Styleable(props => (
-//   <div style={stylex.parse("wh:160 b:gray-200 br:8")} {...props} />
-// ))
-// 
-// const RedBox = stylex.Styleable(props => (
-//   <Box style={stylex.parse("b:red")} {...props} />
-// ))
-// 
-// const App = props => (
-//   <div style={stylex.parse("flex -r :center h:max")}>
-//     <Box />
-//     <div style={stylex.parse("w:16")} />
-//     <RedBox />
-//     <div style={stylex.parse("w:16")} />
-//     <RedBox style={stylex.parse("br:max")} />
-//   </div>
-// )
-// ```
+## MVP examples
+
+```jsx
+const Box = stylex.Styleable(props => (
+  <div style={stylex.parse("wh:160 b:gray-200 br:8")} {...props} />
+))
+
+const RedBox = stylex.Styleable(props => (
+  <Box style={stylex.parse("b:red")} {...props} />
+))
+
+const App = props => (
+  <div style={stylex.parse("flex -r :center h:max")}>
+    <Box />
+    <div style={stylex.parse("w:16")} />
+    <RedBox />
+    <div style={stylex.parse("w:16")} />
+    <RedBox style={stylex.parse("br:max")} />
+  </div>
+)
+```
 
 ## Reference guide
 

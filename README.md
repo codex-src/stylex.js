@@ -5,6 +5,7 @@ stylex is a CSS-in-JS library that is:
 - [Atomic](#atomic)
 - [Teaches CSS in the process](#teaches-css)
 - [Extensible](#extensible)
+- [MVP examples](#mvp-examples)
 
 stylex is used almost exclusively at [Codex](https://github.com/codex-src) to build out the frontend.
 
@@ -43,7 +44,9 @@ Me personally speaking, [Zaydek](https://github.com/codex-zaydek), I’d taught 
 
 One of the defining features of stylex, when coupled with a frontend library like React, is its ability to extend component styling. This is big. When working with the class-based predecessor, we quickly discovered that the greatest limiting factor was the inability to refactor existing components without needing to copy many class names.
 
-It turns out the solution is quite subtle. In React, a component can extend another component with `{...props}`, meaning _inherit the parent component’s `props`_. This works great except for when the parent component _also_ defines style props, thereby overwriting the original component’s `props`. To solve for this without the need for higher-order components, you can write:
+It turns out the solution is quite subtle. In React, a component can extend another component with `{...props}`, meaning _inherit the parent component’s `props`_. This works great except for when the parent component _also_ defines style props, thereby overwriting the original component’s `props`.
+
+To solve for this without the need for higher-order components, you can write:
 
 ```
 const Component = ({ style, ...props }) => (
@@ -55,27 +58,47 @@ const Component = ({ style, ...props }) => (
 
 And we did, until it became untenable. So we wrote two simple HOCs to self-document the following question: _should a component allow or prevent its styles from being extended?_
 
-In answering this, we created `stylex.Styleable` and `stylex.Unstyleable` (that’s styleable _with an e_ — don’t worry, you’ll be gently warned if you misspelled them). These two higher-order components allow or prevent a component from being restyled, leading to easier to reason about code and self-documenting components. These are of course opt-in, but are preferred for brevity.
+In answering this, we created `stylex.Styleable` and `stylex.Unstyleable` (that’s styleable _with an e_ — don’t worry, you’ll be gently warned if you misspelled them). These two higher-order components allow or prevent a component from being restyled, leading to easier to reason about code and self-documenting components.
+
+These are of course opt-in, but are preferred for brevity:
 
 ```jsx
-const Box = stylex.Styleable(props => (
-  <div style={stylex.parse("wh:160 b:gray-200 br:8")} {...props} />
-))
-
-const RedBox = stylex.Styleable(props => (
-  <Box style={stylex.parse("b:red")} {...props} />
-))
-
-const App = props => (
-  <div style={stylex.parse("flex -r :center h:max")}>
-    <Box />
-    <div style={stylex.parse("w:16")} />
-    <RedBox />
-    <div style={stylex.parse("w:16")} />
-    <RedBox style={stylex.parse("br:max")} />
+const C1 = Unstyleable(props => (
+  <div style={stylex("...")} {...props}>
+    {props.children}
   </div>
-)
+))
+
+...
+
+const C2 = Styleable(props => (
+  <div style={stylex("...")} {...props}>
+    {props.children}
+  </div>
+))
 ```
+
+These components now describe their underlying styling behavior with less moving parts. Note that the use of `{...props}` is up to the discretion of the component author and no longer affects how styles are interpolated. Generally, lower-level components should use `Stylable`, thus making them more reusable. And higher-level components should use `Unstyleable`, thus making them more predictable. One good argument for when to make a higher-level component styleable is when it’s expected to interpolate `margin`.
+
+// ```jsx
+// const Box = stylex.Styleable(props => (
+//   <div style={stylex.parse("wh:160 b:gray-200 br:8")} {...props} />
+// ))
+// 
+// const RedBox = stylex.Styleable(props => (
+//   <Box style={stylex.parse("b:red")} {...props} />
+// ))
+// 
+// const App = props => (
+//   <div style={stylex.parse("flex -r :center h:max")}>
+//     <Box />
+//     <div style={stylex.parse("w:16")} />
+//     <RedBox />
+//     <div style={stylex.parse("w:16")} />
+//     <RedBox style={stylex.parse("br:max")} />
+//   </div>
+// )
+// ```
 
 ## Reference guide
 

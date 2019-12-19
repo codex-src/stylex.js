@@ -43,21 +43,21 @@ One of the defining features of stylex, when coupled with a frontend library lik
 
 ```jsx
 const Box = stylex.Styleable(props => (
-	<div style={stylex.parse("wh:160 b:gray-200 br:8")} {...props} />
+  <div style={stylex.parse("wh:160 b:gray-200 br:8")} {...props} />
 ))
 
 const RedBox = stylex.Styleable(props => (
-	<Box style={stylex.parse("b:red")} {...props} />
+  <Box style={stylex.parse("b:red")} {...props} />
 ))
 
 const App = props => (
-	<div style={stylex.parse("flex -r :center h:max")}>
-		<Box />
-		<div style={stylex.parse("w:16")} />
-		<RedBox />
-		<div style={stylex.parse("w:16")} />
-		<RedBox style={stylex.parse("br:max")} />
-	</div>
+  <div style={stylex.parse("flex -r :center h:max")}>
+    <Box />
+    <div style={stylex.parse("w:16")} />
+    <RedBox />
+    <div style={stylex.parse("w:16")} />
+    <RedBox style={stylex.parse("br:max")} />
+  </div>
 )
 ```
 
@@ -78,7 +78,7 @@ inline-flex (-(r|c)) -opts    (self-descriptive)
 grid                          (self-descriptive)
 inline-grid                   (self-descriptive)
 no-flex-shrink                flex-shrink: 0
-wh:(0...∞|auto|max)             width-height                      *max: 100%
+wh:(0–∞|auto|max)             width-height                      *max: 100%
 w:(0–∞|auto|max)              width                             *max: 100%
 h:(0–∞|auto|max)              height                            *max: 100%
 no-min-w                      width: 0
@@ -91,13 +91,13 @@ square                        stroke-linecap: square            *meant to be use
 sw:(0–∞)                      stroke-width                      *meant to be used with feathericons/react-feather
 fw:(100–900)                  font-weight
 fs:(0–∞)                      font-size
-ls:(0...∞%)                     letter-spacing
+ls:(0...∞%)                   letter-spacing
 lh:(0–∞%)                     line-height
 c:<css-var>                   color: hsl(var(--<css-var>))      *meant to be used with codex-src/material.css
 b:<css-var>                   background: hsl(var(--<css-var>)) *meant to be used with codex-src/material.css
 br(-(l|r|t|b|max))?:(0–∞)     border-radius                     *max: 50%
 overflow -opts                (self-descriptive)
-text-overflow (-(x|y)?) -opts (...)
+text-overflow (-(x|y)?) -opts (meta property)
 z:(-∞–∞|min|max)              z-index                           *min: -9999, max: 9999
 pointer-events                pointer-events: auto
 no-pointer-events             pointer-events: none
@@ -106,6 +106,5 @@ no-pointer                    cursor: auto
 translate-z                   transform: translateZ(0px)
 no-translate-z                transform: none
 ```
-
 
 #### If you feel something is missing or could be improved, don’t hesitate to file an issue or submit a pull request. We are community friendly. ☺️

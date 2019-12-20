@@ -5,7 +5,7 @@
     stylex ✨
     <br>
     <br>
-    <p>
+    <sup>
       <br>
       <br>
       atomic CSS-in-JS library for frontend frameworks
@@ -14,7 +14,7 @@
       <br>
       <br>
     </p>
-  </h1>
+  </sup>
 </div>
 
 <br>

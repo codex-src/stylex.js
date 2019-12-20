@@ -12,7 +12,6 @@
 </div>
 
 <br>
-<br>
 
 stylex is a CSS-in-JS library that is:
 

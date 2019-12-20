@@ -27,13 +27,13 @@ stylex is under active development and is not yet considered stable. Even so, we
 
 ⚠️ stylex uses inline styles behind the scenes, as supposed to classes. This simply has to do with building a functional library and getting the API and abstractions right, rather than prematurely optimizing for browser paint times. This may very well change in the future.
 
-For what it’s worth, the popular note-taking web app [notion.so](https://notion.so) also uses inline styles to power their frontend. Of course, that doesn’t mean _this is the way thing should be done_, but simply that it works.
+For what it’s worth, the popular note-taking web app [notion.so](https://notion.so) also uses inline styles to power their frontend. Of course, that doesn’t mean this is the way thing should be done, but simply that it works.
 
 #### You can improve stylex; don’t hesitate to [file an issue](https://github.com/codex-src/stylex.js/issues) or [submit a pull request](https://github.com/codex-src/stylex.js/pulls). We are community friendly. ☺️
 
 ## Atomic
 
-An _atom_ conceptually describe the smallest indivisible unit by which something can be measured. The way most atomic CSS libraries work is by following this principle with CSS classes that share a 1:1 to mapping with CSS’s capabilities.
+An atom conceptually describes the smallest indivisible unit by which something can be measured. The way most atomic CSS libraries work is by following this principle with CSS classes that share a 1:1 to mapping with CSS’s capabilities.
 
 For example:
 
@@ -46,63 +46,84 @@ For example:
 
 _([Technically](https://mothereff.in/css-escapes), if you wanted to write the above in CSS you would need to use `.p-x\:16 ...`)_
 
-Where `p-x` is shorthand for `padding-x-axis`. Technically `padding-x-axis` isn’t a CSS property, but why not? stylex emphasizes atomic patterns that map closely to CSS’s capabilities without being overly restrictive. All shorthands are documented in the [shorthand reference guide](#shorthand-reference-guide)).
+Where `p-x` is shorthand for `padding-x-axis`. Technically `padding-x-axis` isn’t a CSS property, but why not? stylex emphasizes atomic patterns that map closely to CSS’s capabilities without being overly restrictive. All shorthands are documented in the [shorthand reference guide](#shorthand-reference-guide).
 
-Note that stylex doesn’t map a shorthand to every CSS property. Instead, stylex focuses on solving for the 90% use case, that is, about 50+ properties. But before your eyes glaze over, there’s only about 15 _kinds of classes_ to remember, and the rest is added syntax to describe the axis, size, etc.
+Note that stylex doesn’t map a shorthand to every CSS property. Instead, stylex focuses on solving for the 90% use case, that is, about 35 properties. But before your eyes glaze over, there’s only about 15 classes of properties to remember.
 
-The pattern used for shorthands reliably follows the following pattern: the first letter of a property name (if a property name is `kebab-case`, then the first letter of every word is used). This is known as the `key`, like `p-x` in the previous example. The `token` is the property’s value, like `16` in the previous example. If a token exists, the key and token are delimited with a colon.
+The pattern used for shorthands reliably follows this pattern: use the first letter of a property name, and if a property name is `kebab-case`, then use each first letter of every word. From this, we derive `p-x` from `padding-x-axis`, `b` from `background`, and `br` for `border-radius`.
 
-Not all keys can be easily discerned from their first letters. In this case, the actual property name is substituted. Some examples of this are `relative`, `absolute`, `flex`, `grid`, etc. After you understand which properties stylex solves for, it’s very easy to remember going forward. We say this having hesitated with this ourselves.
+We colloquially refer to `p-x` as the key, and `16` as the token, from `p-x:16` in the previous example. And if a token exists, the key and token are delimited with a colon.
+
+Because not all keys are easily discernible from their first letters, sometimes the actual CSS property name is substituted. For example, `relative`, `absolute`, etc. It may seem like a lot to remember — we say this having hesitated with these concepts ourselves — but we find working with stylex to be much more comfortable and easier to work with than CSS alone.
+
+Because stylex uses JavaScript under the hood, we also warn, using `invariant`, when a key or token doesn’t map to stylex’s resolver. All strings passed to stylex are linted for typos before emitting a style object.
 
 ## Teaches CSS
 
-Initially, stylex was more developed to teach us CSS rather than use it in any kind of production setting. It just so turned out that a simple-to-use and easy-to-understand conceptual framework also lends itself well to be used in a production setting because the last thing you want is to make the developer’s job harder. And we found building and working with stylex (and its predecessor protoypes) to be liberating to say the least.
+Initially, stylex was more developed to teach us CSS rather than use it in any kind of production environment. It just so turns out that a simple to use and easy to understand conceptual framework also lends itself well to be a framework.
 
-Me personally speaking, [Zaydek](https://github.com/codex-zaydek), I’d taught myself full stack development and found that if I really wanted to be a full stack developer, I’d better style my websites too. This felt daunting to say the least. What did make sense was thinking about CSS as lower-level primitives meant to be built on top of, very much like how booleans, numbers, and strings are useless in their own right, but powerful when coupled with logic.
+Me personally speaking, [Zaydek](https://github.com/codex-zaydek), I’d taught myself full stack development and found that if I really wanted to be a full stack developer, I’d better style my websites, too. And at the time, this felt daunting to say the least. However, what did make sense to me was thinking about CSS properties as primitives, very much like how booleans, numbers, and strings are useless in their own right but powerful when coupled with logic.
 
 ## Extensible
 
-One of the defining features of stylex, when coupled with a frontend library like React, is its ability to extend component styling. This is big. When working with the class-based predecessor, we quickly discovered that the greatest limiting factor was the inability to refactor existing components without needing to copy many class names.
+To be clear, stylex is designed to be used in conjunction with a frontend framework or library like Angular, React, or Vue. stylex is generally framework agnostic and only has two dependencies for the time being: `react` for opt-in higher order components and `invariant` for emitting warnings. Note that stylex does not rely on `autoprefixer` as we’re relying on the host environment.
 
-It turns out the solution is quite subtle. In React, a component can extend another component with `{...props}`, meaning _inherit the parent component’s `props`_. This works great except for when the parent component _also_ defines style props, thereby overwriting the original component’s `props`.
+One of the differentiating features of stylex is that when coupled with a library like React, is its ability to extend a component’s style object. This feature is what convinced us we better share stylex with the world. When working with the class-based predecessor of stylex, we quickly discovered that the greatest limiting factor was the inability to reuse existing components without needing to copy dozens of class names.
+
+So how do we do this?
+
+It turns out the solution is quite subtle. In React, a component can extend another component with `{...props}`. This works except for when `style={...}` is declared on both components, thereby overwriting the original component’s `props`.
 
 To solve for this without the need for higher-order components, you can write:
 
 ```jsx
 const Component = ({ style, ...props }) => (
-  <p style={{ stylex.parse("..."), ...style }} {...props}>
+  <div style={{ stylex.parse("..."), ...style }} {...props}>
     {props.children}
-  </p>
+  </div>
 )
 ```
 
-This in effect destructures `styles` from `props`, disallowing `{...props}` from overwrting the underlying component’s `style`, which is an unintended consequence of using `{...props}`. This is important for extending the existing styles defined on a component.
+This destructures `styles` from `props`, disallowing `{...props}` from overwriting the underlying component’s `style`, which is an unintended consequence of using `{...props}`. This is the difference between extending an existing component’s styles.
 
-And we did, until it became untenable. So we wrote two simple HOCs to self-document the following question: _should a component allow or prevent its styles from being extended?_
+This is exactly what we did until it grew to become untenable. So we wrote two simple higher-order components to self-document the answer to the following question: _does this component allow or prevent its styles from being extended?_
 
-In answering this, we created `stylex.Styleable` and `stylex.Unstyleable` (that’s styleable _with_ an e — don’t worry, you’ll be gently warned if you misspelled them). These two higher-order components allow or prevent a component from being restyled, leading to easier to reason about code and self-documenting components.
+In answering this, we created `stylex.Styleable` and `stylex.Unstyleable` (that’s styleable _with_ an e — don’t worry, you’ll be gently warned if you misspelled either of them). These two higher-order components allow or prevent a component from being restyled without overwriting style, leading to self-documenting components that are much easier to reason about.
 
 These are of course opt-in, but are preferred for brevity:
 
 ```jsx
-const C1 = Unstyleable(props => (
-  <div style={stylex("...")} {...props}>
+const Component = stylex.Styleable(props => (
+  <div style={stylex.parse("...")} {...props}>
     {props.children}
   </div>
 ))
 
 ...
 
-const C2 = Styleable(props => (
-  <div style={stylex("...")} {...props}>
+const Component = stylex.Unstyleable(props => (
+  <div style={stylex.parse("...")} {...props}>
     {props.children}
   </div>
 ))
 ```
 
-These components now describe their underlying styling behavior with less moving parts. Note that the use of `{...props}` is up to the discretion of the component author and no longer affects how styles are interpolated. Generally, lower-level components should use `Stylable`, thus making them more reusable. And higher-level components should use `Unstyleable`, thus making them more predictable. One good argument for when to make a higher-level component styleable is when it’s expected to interpolate `margin`.
+These components now document and describe their styles are resolved if reused. Note that the use of `{...props}` is up to the discretion of the component author and no longer affects how styles are resolved.
+
+
+We find that generally, lower-level components should use `Styleable`, thus making them more reusable, and higher-level components should use `Unstyleable`, thus making them more predictable. There is one exception to this case, and that is for when a higher-level component is expected to be extended with `margin`, e.g. `<Component style={stylex("m-y:16")}>`.
 
 ## MVP examples
+
+### Hello, world!
+
+const App = props => (
+  <h1 style={stylex.parse("fw:700 fs:32 lh:150%")}>
+    Hello, world!
+  </h1>
+)
+
+#### TODO
 
 ```jsx
 const Box = stylex.Styleable(props => (
@@ -125,8 +146,6 @@ const App = props => (
 ```
 
 ## Shorthand reference guide
-
-If you just need a high-level overview, you can use the following:
 
 ```
 +-------------------------------------------------------------------+
@@ -155,8 +174,6 @@ If you just need a high-level overview, you can use the following:
 ```
 
 ## Reference guide
-
-If you need the complete reference guide, you can use the following:
 
 ```
 +--------------------------------------------------------------------------------------------------+

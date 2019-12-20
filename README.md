@@ -9,8 +9,6 @@
       atomic CSS-in-JS library for frontend frameworks
       <br>
       <br>
-      <br>
-      <br>
     </p>
   </sup>
 </div>

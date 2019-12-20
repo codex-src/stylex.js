@@ -8,10 +8,10 @@
         <br>
         <br>
         atomic CSS-in-JS library for frontend frameworks
-        <br>
-        <br>
       </sup>
     </sup>
+    <br>
+    <br>
   </h1>
 </div>
 

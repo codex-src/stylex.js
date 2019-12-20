@@ -67,7 +67,7 @@ And because stylex uses JavaScript under the hood, we also emit a warning whenev
 
 ## Teaches CSS
 
-Me personally speaking, [Zaydek](https://github.com/codex-zaydek), I’d taught myself full stack development and found that if I really wanted to be a full stack developer, I’d better style my websites, too. And at the time, this felt daunting to say the least. However, what did make sense to me was thinking about CSS properties as primitives, very much like how booleans, numbers, and strings in programming languages are primitives.
+Me personally speaking, [Zaydek](https://github.com/codex-zaydek), I taught myself full stack development and found that if I really wanted to be a full stack developer, I’d better style my websites, too. And at the time, this felt daunting to say the least. However, what did make sense to me was thinking about CSS properties as primitives, very much like how booleans, numbers, and strings in programming languages are primitives.
 
 With this, I learned how to teach myself CSS and CSS patterns _as a programmer_ which seriously tipped my balance in favor of atomic CSS patterns over semantic CSS patterns. That’s not to say one or the other is better, because I don’t think they are comparable, but what I will say is that stylex and its numerous predecessors have taught me how to think about design programmatically.
 
@@ -133,7 +133,7 @@ We find that generally, lower-level components should use `Styleable`, thus maki
 
 ### Hello, world!
 
-```
+```jsx
 const App = props => (
   <h1 style={stylex.parse("fw:700 fs:32 lh:150%")}>
     Hello, world!

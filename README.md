@@ -2,6 +2,8 @@
 
 stylex is a CSS-in-JS library that is:
 
+## Here’s a table of contents for this readme:
+
 - [Atomic](#atomic)
 - [Teaches CSS in the process](#teaches-css)
 - [Extensible](#extensible)
@@ -13,7 +15,7 @@ stylex is under active development and should not yet be considered stable. Desp
 
 In practice, stylex uses inline styles as supposed to classes, but this simply has to do with building a functional prototype that works, rather than optimizing for browser performance, etc. In the future, this could very well change, but for now, the priority is building a powerful tool for both rapid development and shipping to production.
 
-## Atomic
+### Atomic
 
 An _atom_ conceptually describe the smallest indivisible unit by which something can be measured. The way most atomic CSS libraries work is by following this principle with CSS classes that share a 1:1 to mapping with CSS’s capabilities.
 

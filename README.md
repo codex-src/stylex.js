@@ -48,7 +48,7 @@ How stylex actually works is by parsing a string using of otherwise atomic class
 
 Note that stylex doesn’t solve for every CSS property. Instead, we focus on the 90% use case. That turns out to be about 35 properties total. And before your eyes glaze over, know that there’s only about 15 classes of properties to remember. And because about half of those use shorthands, we find that stylex feels incredibly lightweight and easy to remember.
 
-As far as naming shorthand keys, we reliably follows this pattern: use the first letter of a property name, and if a property name is `kebab-case`, then use each first letter of every word. From this, we derive `p-x` from `padding-x-axis`, `b` from `background`, and `br` for `border-radius`. All shorthands are documented in the [shorthand reference guide](#shorthand-reference-guide).
+As far as naming shorthand keys, we reliably follows this pattern: use the first letter of a property name, and if a property name is `kebab-case`, then use each first letter of every word. The only exception to this rule is `z-index`, which succinctly uses `z`. From this, we derive `p-x` from `padding-x-axis`, `b` from `background`, and `br` for `border-radius`. All shorthands are documented in the [shorthand reference guide](#shorthand-reference-guide).
 
 If parsing `p-x:16 ...`, we colloquially refer to:
 
@@ -190,16 +190,16 @@ Property       | Key               | Token
 margin         | m-(l|r|x|t|b|y)   | -Inf-Inf
 padding        | p-(l|r|x|t|b|y)   | 0-Inf
 position       | relative          | -(l|r|x|t|b|y)
-position       | absolute          | -(l|r|x|t|b|y)
-position       | fixed             | -(l|r|x|t|b|y)
-position       | sticky            | -(l|r|x|t|b|y)
+""             | absolute          | -(l|r|x|t|b|y)
+""             | fixed             | -(l|r|x|t|b|y)
+""             | sticky            | -(l|r|x|t|b|y)
 display        | block             |
-display        | inline-block      |
-display        | inline            |
-display        | flex              | -(r|c) -(x|y):opt
-display        | inline-flex       | -(r|c) -(x|y):opt
-display        | grid              |
-display        | inline-grid       |
+""             | inline-block      |
+""             | inline            |
+""             | flex              | -(r|c) -(x|y):opt
+""             | inline-flex       | -(r|c) -(x|y):opt
+""             | grid              |
+""             | inline-grid       |
 flex-shrink    | no-flex-shrink    |
 width-height   | wh                | 0-Inf|auto|max
 width          | w                 | 0-Inf|auto|max
@@ -217,11 +217,11 @@ z-index        | z                 | -Inf-Inf|min|max
 overflow       | overflow          | -(x|y):opt
 text-overflow  | text-overflow     | -(x|y):opt
 pointer-events | pointer-events    |
-pointer-events | no-pointer-events |
+""             | no-pointer-events |
 cursor         | pointer           |
-cursor         | no-pointer        |
+""             | no-pointer        |
 transform      | translate-z       |
-transform      | no-translate-z    |
+""             | no-translate-z    |
 ```
 
 Note that `center middle pre per-wrap tnum square` are not documented as they are likely to be removed from the core library due to being too narrow in scope. See [#6](https://github.com/codex-src/stylex.js/issues/6) for reference. These keys are likely to be moved to a plugin system in the future, thereby enabling users to opt-in to extended library features and or integrate their own.

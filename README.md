@@ -166,83 +166,64 @@ const App = props => (
 ## Shorthand reference guide
 
 ```
-+-------------------------------------------------------------------+
-| KEY | KEY ALTERNATE  | TOKEN            | PROPERTY       | VALUE  |
-|-----+----------------+------------------+----------------+--------|
-| m   | -(l|r|x|t|b|y) | -Inf-Inf         | margin         | Npx    |
-| p   | -(l|r|x|t|b|y) | 0-Inf            | padding        | Npx    |
-|-----+----------------+------------------+----------------+--------|
-| wh  |                | 0-Inf|auto|max   | width-height   | Npx    |
-| w   |                | 0-Inf|auto|max   | width          | Npx    |
-| h   |                | 0-Inf|auto|max   | height         | Npx    |
-+-----+----------------+------------------+----------------+--------+
-| sw  |                | 100-900          | stroke-width   |        |
-| fw  |                | 100-900          | font-weight    |        |
-| fs  |                | 0-Inf            | font-size      | Npx    |
-| ls  |                | -Inf-Inf%        | letter-spacing | 0.0Nem |
-| lh  |                | 0-Inf%           | line-height    | 0.0N   |
-|-----+----------------+------------------+----------------+--------|
-| c   |                | <css-var>        | color          | hsl    |
-| b   |                | <css-var>        | background     | hsl    |
-|-----+----------------+------------------+----------------+--------|
-| br  | -(l|r|t|b)     | 0-Inf|max        | border-radius  | Npx    |
-|-----+----------------+------------------+----------------+--------|
-| z   |                | -Inf-Inf|min|max | z-index        |        |
-+-------------------------------------------------------------------+
+Property       | Key               | Token
+-------------- | ----------------- | ----------------
+margin         | m-(l|r|x|t|b|y)   | -Inf-Inf
+padding        | p-(l|r|x|t|b|y)   | 0-Inf
+width-height   | wh                | 0-Inf|auto|max
+width          | w                 | 0-Inf|auto|max
+height         | h                 | 0-Inf|auto|max
+stroke-width   | sw                | 100-900
+font-weight    | fw                | 100-900
+font-size      | fs                | 0-Inf
+letter-spacing | ls                | -Inf-Inf%
+line-height    | lh                | 0-Inf%
+color          | c                 | <css-var>
+background     | b                 | <css-var>
+border-radius  | br-(l|r|t|b)      | 0-Inf|max
+z-index        | z                 | -Inf-Inf|min|max
 ```
 
 ## Reference guide
 
 ```
-+--------------------------------------------------------------------------------------------------+
-| KEY               | KEY ALTERNATE  | TOKEN             | PROPERTY              | VALUE           |
-|-------------------+----------------+-------------------+-----------------------+-----------------|
-| m                 | -(l|r|x|t|b|y) | -Inf-Inf          | margin                | Npx             |
-| p                 | -(l|r|x|t|b|y) | 0-Inf             | padding               | Npx             |
-|-------------------+----------------+-------------------+-----------------------+-----------------|
-| relative          |                | -(...l|r|x|t|b|y) | position              |                 |
-| absolute          |                | -(...l|r|x|t|b|y) | position              |                 |
-| fixed             |                | -(...l|r|x|t|b|y) | position              |                 |
-| sticky            |                | -(...l|r|x|t|b|y) | position              |                 |
-|-------------------+----------------+-------------------+-----------------------+-----------------|
-| block             |                |                   | display               |                 |
-| inline-block      |                |                   | display               |                 |
-| inline            |                |                   | display               |                 |
-| flex              |                | -(r|c) -(x|y):opt | display               |                 |
-| inline-flex       |                | -(r|c) -(x|y):opt | display               |                 |
-| grid              |                |                   | display               |                 |
-| inline-grid       |                |                   | display               |                 |
-| no-flex-shrink    |                |                   | flex-shrink           | 0px             |
-|-------------------+----------------+-------------------+-----------------------+-----------------|
-| wh                |                | 0-Inf|auto|max    | width-height          | Npx             |
-| w                 |                | 0-Inf|auto|max    | width                 | Npx             |
-| h                 |                | 0-Inf|auto|max    | height                | Npx             |
-| no-min-w          |                |                   | width                 | 0px             |
-+-------------------+----------------+-------------------+-----------------------+-----------------+
-| sw                |                | 100-900           | stroke-width          |                 |
-| fw                |                | 100-900           | font-weight           |                 |
-| fs                |                | 0-Inf             | font-size             | Npx             |
-| ls                |                | -Inf-Inf%         | letter-spacing        | 0.0Nem          |
-| lh                |                | 0-Inf%            | line-height           | 0.0N            |
-|-------------------+----------------+-------------------+-----------------------+-----------------|
-| c                 |                | <css-var>         | color                 | hsl             |
-| b                 |                | <css-var>         | background            | hsl             |
-|-------------------+----------------+-------------------+-----------------------+-----------------|
-| br                | -(l|r|t|b)     | 0-Inf|max         | border-radius         | Npx             |
-|-------------------+----------------+-------------------+-----------------------+-----------------|
-| z                 |                | -Inf-Inf|min|max  | z-index               |                 |
-|-------------------+----------------+-------------------+-----------------------+-----------------|
-| overflow          |                | -(x|y):opt        | overflow              |                 |
-| text-overflow     |                | -(x|y):opt        | text-overflow         |                 |
-|-------------------+----------------+-------------------+-----------------------+-----------------|
-| pointer-events    |                |                   | pointer-events        | auto            |
-| no-pointer-events |                |                   | pointer-events        | none            |
-| pointer           |                |                   | cursor                | pointer         |
-| no-pointer        |                |                   | cursor                | auto            |
-|-------------------+----------------+-------------------+-----------------------+-----------------|
-| translate-z       |                |                   | transform             | translateZ(0px) |
-| no-translate-z    |                |                   | transform             | none            |
-+--------------------------------------------------------------------------------------------------+
+Property       | Key               | Token
+-------------- | ----------------- | -----------------
+margin         | m-(l|r|x|t|b|y)   | -Inf-Inf
+padding        | p-(l|r|x|t|b|y)   | 0-Inf
+position       | relative          | -(l|r|x|t|b|y)
+position       | absolute          | -(l|r|x|t|b|y)
+position       | fixed             | -(l|r|x|t|b|y)
+position       | sticky            | -(l|r|x|t|b|y)
+display        | block             |
+display        | inline-block      |
+display        | inline            |
+display        | flex              | -(r|c) -(x|y):opt
+display        | inline-flex       | -(r|c) -(x|y):opt
+display        | grid              |
+display        | inline-grid       |
+flex-shrink    | no-flex-shrink    |
+width-height   | wh                | 0-Inf|auto|max
+width          | w                 | 0-Inf|auto|max
+height         | h                 | 0-Inf|auto|max
+width          | no-min-w          |
+stroke-width   | sw                | 100-900
+font-weight    | fw                | 100-900
+font-size      | fs                | 0-Inf
+letter-spacing | ls                | -Inf-Inf%
+line-height    | lh                | 0-Inf%
+color          | c                 | <css-var>
+background     | b                 | <css-var>
+border-radius  | br-(l|r|t|b)      | 0-Inf|max
+z-index        | z                 | -Inf-Inf|min|max
+overflow       | overflow          | -(x|y):opt
+text-overflow  | text-overflow     | -(x|y):opt
+pointer-events | pointer-events    |
+pointer-events | no-pointer-events |
+cursor         | pointer           |
+cursor         | no-pointer        |
+transform      | translate-z       |
+transform      | no-translate-z    |
 ```
 
 Note that `center middle pre per-wrap tnum square` are not documented as they are likely to be removed from the core library due to being too narrow in scope. See [#6](https://github.com/codex-src/stylex.js/issues/6) for reference. These keys are likely to be moved to a plugin system in the future, thereby enabling users to opt-in to extended library features and or integrate their own.

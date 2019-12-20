@@ -146,7 +146,7 @@ const App = props => (
 | wh  |                | 0-Inf|auto|max   | width-height   | px   | *where max: 100%
 | w   |                | 0-Inf|auto|max   | width          | px   | *where max: 100%
 | h   |                | 0-Inf|auto|max   | height         | px   | *where max: 100%
-+-----------------------------------------------------------------+
++-----|----------------|------------------|----------------|------+
 | sw  |                | 100-900          | strike-width   | -    |
 | fw  |                | 100-900          | font-weight    | -    |
 | fs  |                | 0-Inf            | font-size      | px   |

@@ -212,5 +212,5 @@ no-translate-z                transform: none
 
 ## Talks that inspired stylex
 
-- [Adam Wathan’s Utility-First CSS with Tailwind CSS](https://www.youtube.com/watch?v=BeZbMx9y1FE)
-- [Frank Yan’s Building the New Facebook with React and Relay](https://www.youtube.com/watch?v=9JZHodNR184)
+- [Adam Wathan - Utility-First CSS with Tailwind CSS](https://www.youtube.com/watch?v=BeZbMx9y1FE)
+- [Frank Yan - Building the New Facebook with React and Relay](https://www.youtube.com/watch?v=9JZHodNR184)

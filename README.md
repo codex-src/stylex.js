@@ -6,10 +6,10 @@
     <br>
     <sup>
       <sup>
+        <br>
         atomic CSS-in-JS library for frontend frameworks
         <br>
         <br>
-        </p>
       </sup>
     </sup>
 </div>

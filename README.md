@@ -29,11 +29,6 @@ stylex is under active development and is not yet considered stable. Even so, we
 
 For what it’s worth, the popular note-taking web app [notion.so](https://notion.so) also uses inline styles to power their frontend. Of course, that doesn’t mean _this is the way thing should be done_, but simply that it works.
 
-### Talks that inspired stylex
-
-- [Adam Wathan’s Utility-First CSS with Tailwind CSS](https://www.youtube.com/watch?v=BeZbMx9y1FE)
-- [Frank Yan’s Building the New Facebook with React and Relay](https://www.youtube.com/watch?v=9JZHodNR184)
-
 <br>
 
 ## Atomic
@@ -184,5 +179,10 @@ no-translate-z                transform: none
 ```
 
 <br>
+
+### Talks that inspired stylex
+
+- [Adam Wathan’s Utility-First CSS with Tailwind CSS](https://www.youtube.com/watch?v=BeZbMx9y1FE)
+- [Frank Yan’s Building the New Facebook with React and Relay](https://www.youtube.com/watch?v=9JZHodNR184)
 
 #### If you feel something is missing or could be improved, don’t hesitate to file an issue or submit a pull request. We are community friendly. ☺️

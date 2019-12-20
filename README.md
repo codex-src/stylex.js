@@ -3,7 +3,9 @@
     <br>
     <br>
     stylex ✨
-    atomic CSS-in-JS library for frontend frameworks
+    <p>
+      atomic CSS-in-JS library for frontend frameworks
+    </p>
     <br>
     <br>
     <br>

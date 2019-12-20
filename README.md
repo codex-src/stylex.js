@@ -1,10 +1,10 @@
 <div align="center">
   <h1>
-    <br />
-    <br />
     stylex ✨
-    <br />
-    <br />
+    <br>
+    <br>
+    <br>
+    <br>
   </h1>
 </div>
 

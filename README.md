@@ -143,22 +143,22 @@ const App = props => (
 | m   | -(l|r|x|t|b|y) | -Inf-Inf         | margin         | px   |
 | p   | -(l|r|x|t|b|y) | 0-Inf            | padding        | px   |
 |-----|----------------|------------------|----------------|------|
-| wh  |                | 0-Inf|auto|max   | width-height   | px   | *max: 100%
-| w   |                | 0-Inf|auto|max   | width          | px   | *max: 100%
-| h   |                | 0-Inf|auto|max   | height         | px   | *max: 100%
+| wh  |                | 0-Inf|auto|max   | width-height   | px   | *where max: 100%
+| w   |                | 0-Inf|auto|max   | width          | px   | *where max: 100%
+| h   |                | 0-Inf|auto|max   | height         | px   | *where max: 100%
 +-----------------------------------------------------------------+
 | sw  |                | 100-900          | strike-width   | -    |
 | fw  |                | 100-900          | font-weight    | -    |
 | fs  |                | 0-Inf            | font-size      | px   |
-| ls  |                | -Inf-Inf%        | letter-spacing | em   |
-| lh  |                | 0-Inf%           | line-height    | -    |
+| ls  |                | -Inf-Inf%        | letter-spacing | em   | *% required
+| lh  |                | 0-Inf%           | line-height    | -    | *% required
 |-----|----------------|------------------|----------------|------|
-| c   |                | <hsl-css-var>    | color          | hsl  |
-| b   |                | <hsl-css-var>    | background     | hsl  |
+| c   |                | <hsl-css-var>    | color          | hsl  | *e.g. ---css-var: 0 100%, 50%
+| b   |                | <hsl-css-var>    | background     | hsl  | *e.g. ---css-var: 0 100%, 50%
 |-----|----------------|------------------|----------------|------|
-| br  | -(l|r|t|b)     | 0-Inf|max        | border-radius  | px   | *max: 50%
+| br  | -(l|r|t|b)     | 0-Inf|max        | border-radius  | px   | *where max: 50%
 |-----|----------------|------------------|----------------|------|
-| z   |                | -Inf-Inf|min|max | z-index        | -    | *min: -9999, max: 9999
+| z   |                | -Inf-Inf|min|max | z-index        | -    | *where min: -9999 and max: 9999
 +-----------------------------------------------------------------+
 ```
 

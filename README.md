@@ -134,7 +134,7 @@ const App = props => (
 
 <br />
 
-#### Shorthand reference guide
+## Shorthand reference guide
 
 ```
 +-----------------------------------------------------------------+

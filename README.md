@@ -21,7 +21,7 @@ stylex is a CSS-in-JS library that is:
 
 This readme also documents several [MVP examples](#mvp-examples) to get you started.
 
-#### stylex is used almost exclusively at [Codex](https://github.com/codex-src) for styling our frontend. Contributions are welcome, both to our [frontend](https://github.com/codex-src/codex-app.js) and to stylex.
+#### stylex is used almost exclusively at [Codex](https://github.com/codex-src) for styling our [frontend](https://github.com/codex-src/codex-app.js). Contributions welcome!
 
 stylex is under active development and is not yet considered stable. Even so, we’ve found stylex to be _extremely useful_ for prototyping and shipping highly maintainble code bases.
 

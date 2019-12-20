@@ -117,11 +117,13 @@ We find that generally, lower-level components should use `Styleable`, thus maki
 
 ### Hello, world!
 
+```
 const App = props => (
   <h1 style={stylex.parse("fw:700 fs:32 lh:150%")}>
     Hello, world!
   </h1>
 )
+```
 
 #### TODO
 

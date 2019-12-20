@@ -25,7 +25,7 @@ This readme also documents several [MVP examples](#mvp-examples) and [talks that
 
 stylex is under active development and is not yet considered stable. Even so, we’ve found stylex to be _extremely useful_ for prototyping and shipping highly maintainble code bases.
 
-⚠️ stylex uses inline styles behind the scenes, as supposed to classes. This simply has to do with building a functional library and getting the API and abstractions right, rather than prematurely optimizing for browser paint times. This may very well change.
+⚠️ stylex uses inline styles behind the scenes, as supposed to classes. This simply has to do with building a functional library and getting the API and abstractions right, rather than prematurely optimizing for browser paint times. This may very well change in the future.
 
 For what it’s worth, the popular note-taking web app [notion.so](https://notion.so) also uses inline styles to power their frontend. Of course, that doesn’t mean _this is the way thing should be done_, but simply that it works.
 

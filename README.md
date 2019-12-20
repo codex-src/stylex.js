@@ -3,14 +3,16 @@
     <br>
     <br>
     stylex ✨
-    <sup>
-      atomic CSS-in-JS library for frontend frameworks
-    </sup>
-    <br>
-    <br>
     <br>
     <br>
   </h1>
+  <p>
+    <br>
+    <br>
+    atomic CSS-in-JS library for frontend frameworks
+    <br>
+    <br>
+  </p>
 </div>
 
 <br>

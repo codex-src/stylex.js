@@ -36,9 +36,9 @@ Conceptually, an atom describes the smallest indivisible unit by which something
 For example:
 
 ```css
-.p-x:16 { padding-left: 16px; padding-right: 16px; }
-.p-x:18 { padding-left: 18px; padding-right: 18px; }
-.p-x:20 { padding-left: 20px; padding-right: 20px; }
+.p-x\:16 { padding-left: 16px; padding-right: 16px; }
+.p-x\:18 { padding-left: 18px; padding-right: 18px; }
+.p-x\:20 { padding-left: 20px; padding-right: 20px; }
 /* ... */
 ```
 

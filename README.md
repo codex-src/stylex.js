@@ -134,35 +134,9 @@ const App = props => (
 
 <br />
 
-#### Reference guide
+## Shorthand reference guide
 
-If you just need a high-level overview, you can use the following shorthand reference guide that omits tokens, properties, and units:
-
-```
-+---------------------------------------+
-| m   | -(l|r|x|t|b|y) | margin         |
-| p   | -(l|r|x|t|b|y) | padding        |
-|-----+----------------+----------------+
-| wh  |                | width-height   |
-| w   |                | width          |
-| h   |                | height         |
-+-----+----------------+----------------+
-| sw  |                | strike-width   |
-| fw  |                | font-weight    |
-| fs  |                | font-size      |
-| ls  |                | letter-spacing |
-| lh  |                | line-height    |
-|-----+----------------+----------------+
-| c   |                | color          |
-| b   |                | background     |
-|-----+----------------+----------------+
-| br  | -(l|r|t|b)     | border-radius  |
-|-----+----------------+----------------+
-| z   |                | z-index        |
-+---------------------------------------+
-```
-
-If you need something more granular, you can use the following shorthand reference guide:
+If you just need a high-level overview, you can use the following:
 
 ```
 +-----------------------------------------------------------------+
@@ -175,7 +149,7 @@ If you need something more granular, you can use the following shorthand referen
 | w   |                | 0-Inf|auto|max   | width          | px   | *where max: 100%
 | h   |                | 0-Inf|auto|max   | height         | px   | *where max: 100%
 +-----+----------------+------------------+----------------+------+
-| sw  |                | 100-900          | strike-width   | -    |
+| sw  |                | 100-900          | stroke-width   | -    |
 | fw  |                | 100-900          | font-weight    | -    |
 | fs  |                | 0-Inf            | font-size      | px   |
 | ls  |                | -Inf-Inf%        | letter-spacing | em   | *% required
@@ -190,7 +164,35 @@ If you need something more granular, you can use the following shorthand referen
 +-----------------------------------------------------------------+
 ```
 
-And finally, if you need the complete reference guide, you can use the following:
+## Reference guide
+
+If you need the complete reference guide, you can use the following:
+
+```
++-----------------------------------------------------------------+
+| key | key-alternate  | token            | property       | unit |
+|-----+----------------+------------------+----------------+------|
+| m   | -(l|r|x|t|b|y) | -Inf-Inf         | margin         | px   |
+| p   | -(l|r|x|t|b|y) | 0-Inf            | padding        | px   |
+|-----+----------------+------------------+----------------+------|
+| wh  |                | 0-Inf|auto|max   | width-height   | px   | *where max: 100%
+| w   |                | 0-Inf|auto|max   | width          | px   | *where max: 100%
+| h   |                | 0-Inf|auto|max   | height         | px   | *where max: 100%
++-----+----------------+------------------+----------------+------+
+| sw  |                | 100-900          | stroke-width   | -    |
+| fw  |                | 100-900          | font-weight    | -    |
+| fs  |                | 0-Inf            | font-size      | px   |
+| ls  |                | -Inf-Inf%        | letter-spacing | em   | *% required
+| lh  |                | 0-Inf%           | line-height    | -    | *% required
+|-----+----------------+------------------+----------------+------|
+| c   |                | <hsl-css-var>    | color          | hsl  | *e.g. --css-var: 0, 100%, 50%
+| b   |                | <hsl-css-var>    | background     | hsl  | *e.g. --css-var: 0, 100%, 50%
+|-----+----------------+------------------+----------------+------|
+| br  | -(l|r|t|b)     | 0-Inf|max        | border-radius  | px   | *where max: 50%
+|-----+----------------+------------------+----------------+------|
+| z   |                | -Inf-Inf|min|max | z-index        | -    | *where min: -9999 and max: 9999
++-----------------------------------------------------------------+
+```
 
 ```
 m(-(l|r|x|t|b|y))?:(-∞–∞)     margin

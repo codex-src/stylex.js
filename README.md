@@ -42,8 +42,6 @@ For example:
 /* ... */
 ```
 
-_([Technically](https://mothereff.in/css-escapes), if you wanted to write the above in CSS you would need to use `.p-x\:16 ...`)_
-
 Where `p-x` is shorthand for `padding-x-axis`. Technically, `padding-x-axis` isn’t a CSS property … but why not? stylex emphasizes the atomic pattern without being overly restrictive.
 
 How stylex actually works is by parsing a string using of otherwise atomic class names and generating a style object. In practice, this looks like `stylex.parse("p-x:16 ...")`. The reason why we generate a style object is that we can have a lot more degrees of freedom with a lot less code. For example, we don’t need to specify what number literals are allowed; we just specify number ranges, like `0-Inf`, and parse your input as output.

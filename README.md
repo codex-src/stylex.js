@@ -48,7 +48,7 @@ How stylex actually works is by parsing a string using of otherwise atomic class
 
 Note that stylex doesn’t solve for every CSS property. Instead, we focus on the 90% use case. That turns out to be about 35 properties total. And before your eyes glaze over, know that there’s only about 15 classes of properties to remember. And because about half of those use shorthands, we find that stylex feels incredibly lightweight and easy to remember.
 
-As far as naming shorthand keys, we reliably follows this pattern: use the first letter of a property name, and if a property name is `kebab-case`, then use each first letter of every word. The only exception to this rule is `z-index`, which succinctly uses `z`. From this, we derive `p-x` from `padding-x-axis`, `b` from `background`, and `br` for `border-radius`. All shorthands are documented in the [shorthand reference guide](#shorthand-reference-guide).
+As far as naming shorthand keys, we reliably follow this pattern: use the first letter of a property name, and if a property name is `kebab-case`, then use each first letter of every word. The only exception to this rule is `z-index`, which succinctly uses `z`. From this, we derive `p-x` from `padding-x-axis`, `b` from `background`, and `br` for `border-radius`. All shorthands are documented in the [shorthand reference guide](#shorthand-reference-guide).
 
 If parsing `p-x:16 ...`, we colloquially refer to:
 
@@ -123,7 +123,6 @@ const Component = stylex.Unstyleable(props => (
 ```
 
 These components now document and describe their styles are resolved if reused. Note that the use of `{...props}` is up to the discretion of the component author and no longer affects how styles are resolved.
-
 
 We find that generally, lower-level components should use `Styleable`, thus making them more reusable, and higher-level components should use `Unstyleable`, thus making them more predictable. There is one exception to this case, and that is for when a higher-level component is expected to be extended with `margin`, e.g. `<Component style={stylex("m-y:16")}>`.
 

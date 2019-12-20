@@ -12,6 +12,7 @@
 </div>
 
 <br>
+<br>
 
 stylex is a CSS-in-JS library that is:
 
@@ -30,8 +31,6 @@ stylex is under active development and is not yet considered stable. Even so, we
 For what it’s worth, the popular note-taking web app [notion.so](https://notion.so) also uses inline styles to power their frontend. Of course, that doesn’t mean _this is the way thing should be done_, but simply that it works.
 
 #### You can improve stylex; don’t hesitate to [file an issue](https://github.com/codex-src/stylex.js/issues) or [submit a pull request](https://github.com/codex-src/stylex.js/pulls). We are community friendly. ☺️
-
-<br>
 
 ## Atomic
 
@@ -56,15 +55,11 @@ The pattern used for shorthands reliably follows the following pattern: the firs
 
 Not all keys can be easily discerned from their first letters. In this case, the actual property name is substituted. Some examples of this are `relative`, `absolute`, … `flex`, `grid`, etc. After you understand which properties stylex solves for, it’s very easy to remember going forward. We say this having hesitated with this ourselves.
 
-<br>
-
 ## Teaches CSS
 
 Initially, stylex was more developed to teach us CSS rather than use it in any kind of production setting. It just so turned out that a simple-to-use and easy-to-understand conceptual framework also lends itself well to be used in a production setting because the last thing you want is to make the developer’s job harder. And we found building and working with stylex (and its predecessor protoypes) to be liberating to say the least.
 
 Me personally speaking, [Zaydek](https://github.com/codex-zaydek), I’d taught myself full stack development and found that if I really wanted to be a full stack developer, I’d better style my websites too. This felt daunting to say the least. What did make sense was thinking about CSS as lower-level primitives meant to be built on top of, very much like how booleans, numbers, and strings are useless in their own right, but powerful when coupled with logic.
-
-<br>
 
 ## Extensible
 
@@ -108,8 +103,6 @@ const C2 = Styleable(props => (
 
 These components now describe their underlying styling behavior with less moving parts. Note that the use of `{...props}` is up to the discretion of the component author and no longer affects how styles are interpolated. Generally, lower-level components should use `Stylable`, thus making them more reusable. And higher-level components should use `Unstyleable`, thus making them more predictable. One good argument for when to make a higher-level component styleable is when it’s expected to interpolate `margin`.
 
-<br>
-
 ## MVP examples
 
 ```jsx
@@ -131,8 +124,6 @@ const App = props => (
   </div>
 )
 ```
-
-<br>
 
 ## Shorthand reference guide
 
@@ -163,8 +154,6 @@ If you just need a high-level overview, you can use the following:
 | z   |                | -Inf-Inf|min|max | z-index        | -      |
 +-------------------------------------------------------------------+
 ```
-
-<br>
 
 ## Reference guide
 
@@ -223,8 +212,6 @@ If you need the complete reference guide, you can use the following:
 ```
 
 Note that `center middle pre per-wrap tnum square` are not documented as they are likely to be removed from the core library due to being too narrow in scope. See [#6](https://github.com/codex-src/stylex.js/issues/6) for reference. These keys are likely to be moved to a plugin system in the future, thereby enabling users to opt-in to extended library features and or integrate their own.
-
-<br>
 
 ## Talks that inspired stylex
 

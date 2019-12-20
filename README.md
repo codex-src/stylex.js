@@ -1,5 +1,9 @@
 <div align="center">
   <h1>
+    <br>
+    <br>
+    <br>
+    <br>
     stylex ✨
     <br>
     <br>
@@ -29,7 +33,7 @@ For what it’s worth, the popular note-taking web app [notion.so](https://notio
 - [Adam Wathan’s Utility-First CSS with Tailwind CSS](https://www.youtube.com/watch?v=BeZbMx9y1FE)
 - [Frank Yan’s Building the New Facebook with React and Relay](https://www.youtube.com/watch?v=9JZHodNR184)
 
-<br />
+<br>
 
 ## Atomic
 
@@ -54,7 +58,7 @@ The pattern used for shorthands reliably follows the following pattern: the firs
 
 Not all keys can be easily discerned from their first letters. In this case, the actual property name is substituted. Some examples of this are `relative`, `absolute`, … `flex`, `grid`, etc. After you understand which properties stylex solves for, it’s very easy to remember going forward. We say this having hesitated with this ourselves.
 
-<br />
+<br>
 
 ## Teaches CSS
 
@@ -62,7 +66,7 @@ Initially, stylex was more developed to teach us CSS rather than use it in any k
 
 Me personally speaking, [Zaydek](https://github.com/codex-zaydek), I’d taught myself full stack development and found that if I really wanted to be a full stack developer, I’d better style my websites too. This felt daunting to say the least. What did make sense was thinking about CSS as lower-level primitives meant to be built on top of, very much like how booleans, numbers, and strings are useless in their own right, but powerful when coupled with logic.
 
-<br />
+<br>
 
 ## Extensible
 
@@ -106,7 +110,7 @@ const C2 = Styleable(props => (
 
 These components now describe their underlying styling behavior with less moving parts. Note that the use of `{...props}` is up to the discretion of the component author and no longer affects how styles are interpolated. Generally, lower-level components should use `Stylable`, thus making them more reusable. And higher-level components should use `Unstyleable`, thus making them more predictable. One good argument for when to make a higher-level component styleable is when it’s expected to interpolate `margin`.
 
-<br />
+<br>
 
 ## MVP examples
 
@@ -178,6 +182,6 @@ translate-z                   transform: translateZ(0px)
 no-translate-z                transform: none
 ```
 
-<br />
+<br>
 
 #### If you feel something is missing or could be improved, don’t hesitate to file an issue or submit a pull request. We are community friendly. ☺️

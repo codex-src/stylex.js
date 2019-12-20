@@ -10,6 +10,8 @@
   </h1>
 </div>
 
+<br>
+
 stylex is a CSS-in-JS library that is:
 
 - [Atomic](#atomic)

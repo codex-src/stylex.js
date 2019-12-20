@@ -3,13 +3,6 @@
     <br>
     <br>
     stylex ✨
-    <sup>
-      <sup>
-        <br>
-        <br>
-        atomic CSS-in-JS library for frontend frameworks
-      </sup>
-    </sup>
     <br>
     <br>
     <br>

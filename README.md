@@ -8,6 +8,9 @@ stylex is a CSS-in-JS library that is:
 
 This readme also documents several [MVP examples](#mvp-examples) to get you started.
 
+<br>
+<br>
+
 #### stylex is used almost exclusively at [Codex](https://github.com/codex-src) for styling our frontend. Contributions are welcome, both to our [frontend](https://github.com/codex-src/codex-app.js) and to stylex.
 
 stylex is under active development and is not yet considered stable. Despite that, we’ve found stylex to be _extremely useful_ for prototyping and shipping highly maintainble code bases.
@@ -16,6 +19,9 @@ stylex is under active development and is not yet considered stable. Despite tha
 
 For what it’s worth, the popular note-taking web app [notion.so](https://notion.so) also uses inline styles to power their frontend. Of course, that doesn’t mean _this is the way thing should be done_, but simply that it works.
 
+<br>
+<br>
+
 ### Talks that inspired stylex
 
 - [Adam Wathan’s Utility-First CSS with Tailwind CSS](https://www.youtube.com/watch?v=BeZbMx9y1FE)
@@ -23,7 +29,6 @@ For what it’s worth, the popular note-taking web app [notion.so](https://notio
 
 <br>
 <br>
----
 <br>
 <br>
 

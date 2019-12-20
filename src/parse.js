@@ -178,9 +178,7 @@ function position(iter) {
 		positionB: iter.nextClassName("-b"),
 		positionY: iter.nextClassName("-y"), // Order matters.
 	}
-	let style = {
-		position,
-	}
+	let style = { position }
 	if (opts.positionX) {
 		style = {
 			...style,
@@ -576,7 +574,6 @@ function fontWeight(iter) {
 	return { fontWeight: value }
 }
 
-// TODO: Convert `px` to `rem`.
 function fontSize(iter) {
 	invariant(
 		iter.classNameMatches(/^fs:\d+(\.\d+)?$/),

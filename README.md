@@ -25,7 +25,7 @@ This readme also documents several [MVP examples](#mvp-examples) and [talks that
 
 stylex is under active development and is not yet considered stable. Even so, we’ve found stylex to be _extremely useful_ for prototyping and shipping highly maintainble code bases.
 
-⚠️ stylex uses inline styles behind the scenes, as supposed to classes. This simply has to do with building a functional library and getting the API and abstractions right, rather than prematurely optimizing for browser paint times. This may very well change in the future.
+⚠️ stylex generates style objects (think inline styles) as supposed to classes. This simply has to do with building a functional library and getting the API and abstractions right, rather than prematurely optimizing for browser paint times. This may very well change in the future.
 
 For what it’s worth, the popular note-taking web app [notion.so](https://notion.so) also uses inline styles to power their frontend. Of course, that doesn’t mean this is the way thing should be done, but simply that it works.
 
@@ -109,7 +109,6 @@ const Component = stylex.Unstyleable(props => (
 ```
 
 These components now document and describe their styles are resolved if reused. Note that the use of `{...props}` is up to the discretion of the component author and no longer affects how styles are resolved.
-
 
 We find that generally, lower-level components should use `Styleable`, thus making them more reusable, and higher-level components should use `Unstyleable`, thus making them more predictable. There is one exception to this case, and that is for when a higher-level component is expected to be extended with `margin`, e.g. `<Component style={stylex("m-y:16")}>`.
 

@@ -153,8 +153,8 @@ const App = props => (
 | ls  |                | -Inf-Inf%        | letter-spacing | em   | *% required
 | lh  |                | 0-Inf%           | line-height    | -    | *% required
 |-----|----------------|------------------|----------------|------|
-| c   |                | <hsl-css-var>    | color          | hsl  | *e.g. --css-var: 0 100%, 50%
-| b   |                | <hsl-css-var>    | background     | hsl  | *e.g. --css-var: 0 100%, 50%
+| c   |                | <hsl-css-var>    | color          | hsl  | *e.g. --css-var: 0, 100%, 50%
+| b   |                | <hsl-css-var>    | background     | hsl  | *e.g. --css-var: 0, 100%, 50%
 |-----|----------------|------------------|----------------|------|
 | br  | -(l|r|t|b)     | 0-Inf|max        | border-radius  | px   | *where max: 50%
 |-----|----------------|------------------|----------------|------|

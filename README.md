@@ -39,7 +39,7 @@ For example:
 .p-x:16 { padding-left: 16px; padding-right: 16px; }
 .p-x:18 { padding-left: 18px; padding-right: 18px; }
 .p-x:20 { padding-left: 20px; padding-right: 20px; }
-...
+/* ... */
 ```
 
 _([Technically](https://mothereff.in/css-escapes), if you wanted to write the above in CSS you would need to use `.p-x\:16 ...`)_
@@ -115,7 +115,7 @@ const Component = stylex.Styleable(props => (
   </div>
 ))
 
-...
+// ...
 
 const Component = stylex.Unstyleable(props => (
   <div style={stylex.parse("...")} {...props}>

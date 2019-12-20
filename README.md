@@ -21,9 +21,11 @@ For what it’s worth, the popular note-taking web app [notion.so](https://notio
 - [Adam Wathan’s Utility-First CSS with Tailwind CSS](https://www.youtube.com/watch?v=BeZbMx9y1FE)
 - [Frank Yan’s Building the New Facebook with React and Relay](https://www.youtube.com/watch?v=9JZHodNR184)
 
-
+<br />
+<br />
 ---
-
+<br />
+<br />
 
 ## Atomic
 

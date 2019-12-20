@@ -164,9 +164,9 @@ If you just need a high-level overview, you can use the following:
 +-----------------------------------------------------------------+
 ```
 
-## Reference guide
+## Shorthand reference guide
 
-If you need the complete reference guide, you can use the following:
+If you just need a high-level overview, you can use the following:
 
 ```
 +-----------------------------------------------------------------+
@@ -185,8 +185,8 @@ If you need the complete reference guide, you can use the following:
 | ls  |                | -Inf-Inf%        | letter-spacing | em   | *% required
 | lh  |                | 0-Inf%           | line-height    | -    | *% required
 |-----+----------------+------------------+----------------+------|
-| c   |                | <hsl-css-var>    | color          | hsl  | *e.g. --css-var: 0, 100%, 50%
-| b   |                | <hsl-css-var>    | background     | hsl  | *e.g. --css-var: 0, 100%, 50%
+| c   |                | <css-var>        | color          | hsl  | *e.g. --css-var: 0, 100%, 50%
+| b   |                | <css-var>        | background     | hsl  | *e.g. --css-var: 0, 100%, 50%
 |-----+----------------+------------------+----------------+------|
 | br  | -(l|r|t|b)     | 0-Inf|max        | border-radius  | px   | *where max: 50%
 |-----+----------------+------------------+----------------+------|
@@ -194,48 +194,47 @@ If you need the complete reference guide, you can use the following:
 +-----------------------------------------------------------------+
 ```
 
+## Reference guide
+
+If you need the complete reference guide, you can use the following:
+
 ```
-m(-(l|r|x|t|b|y))?:(-∞–∞)     margin
-p(-(l|r|x|t|b|y))?:(0–∞)      padding
-relative -opts                (self-descriptive)
-absolute -opts                (self-descriptive)
-fixed -opts                   (self-descriptive)
-sticky -opts                  (self-descriptive)
-block                         (self-descriptive)
-inline-block                  (self-descriptive)
-inline                        (self-descriptive)
-flex (-(r|c)) -opts           (self-descriptive)
-inline-flex (-(r|c)) -opts    (self-descriptive)
-grid                          (self-descriptive)
-inline-grid                   (self-descriptive)
-no-flex-shrink                flex-shrink: 0
-wh:(0–∞|auto|max)             width-height                      *max: 100%
-w:(0–∞|auto|max)              width                             *max: 100%
-h:(0–∞|auto|max)              height                            *max: 100%
-no-min-w                      width: 0
-center                        text-align: center
-middle                        vertical-algin: middle
-pre                           white-space: pre
-pre-wrap                      white-space: pre-wrap
-tnum                          font-feature-settings: 'tnum'
-square                        stroke-linecap: square            *meant to be used with feathericons/react-feather
-sw:(0–∞)                      stroke-width                      *meant to be used with feathericons/react-feather
-fw:(100–900)                  font-weight
-fs:(0–∞)                      font-size
-ls:(0–∞%)                     letter-spacing
-lh:(0–∞%)                     line-height
-c:<css-var>                   color: hsl(var(--<css-var>))      *meant to be used with codex-src/material.css
-b:<css-var>                   background: hsl(var(--<css-var>)) *meant to be used with codex-src/material.css
-br(-(l|r|t|b|max))?:(0–∞)     border-radius                     *max: 50%
-overflow -opts                (self-descriptive)
-text-overflow (-(x|y)?) -opts (meta property)
-z:(-∞–∞|min|max)              z-index                           *min: -9999, max: 9999
-pointer-events                pointer-events: auto
-no-pointer-events             pointer-events: none
-pointer                       cursor: pointer
-no-pointer                    cursor: auto
-translate-z                   transform: translateZ(0px)
-no-translate-z                transform: none
++--------------------------------------------------------------------------------+
+| key          | key-alternate  | token               | property       | value   |
+|--------------+----------------+---------------------+----------------+---------|
+| m            | -(l|r|x|t|b|y) | -Inf-Inf            | margin         | Npx     |
+| p            | -(l|r|x|t|b|y) | 0-Inf               | padding        | Npx     |
+|--------------+----------------+---------------------+----------------+---------|
+| relative     |                | -(...(l|r|x|t|b|y)) | position       | -       |
+| absolute     |                | -(...(l|r|x|t|b|y)) | position       | -       |
+| fixed        |                | -(...(l|r|x|t|b|y)) | position       | -       |
+| sticky       |                | -(...(l|r|x|t|b|y)) | position       | -       |
+|--------------+----------------+---------------------+----------------+---------|
+| block        |                |                     | display        | -       |
+| inline-block |                |                     | display        | -       |
+| inline       |                |                     | display        | -       |
+| flex         |                | -(r|c) -(...opts)   | display        | -       |
+| inline-flex  |                | -(r|c) -(...opts)   | display        | -       |
+| grid         |                |                     | display        | -       |
+| inline-grid  |                |                     | display        | -       |
+|--------------+----------------+---------------------+----------------+---------|
+| wh           |                | 0-Inf|auto|max      | width-height   | Npx     | *where max: 100%
+| w            |                | 0-Inf|auto|max      | width          | Npx     | *where max: 100%
+| h            |                | 0-Inf|auto|max      | height         | Npx     | *where max: 100%
++--------------+----------------+---------------------+----------------+---------+
+| sw           |                | 100-900             | stroke-width   | -       |
+| fw           |                | 100-900             | font-weight    | -       |
+| fs           |                | 0-Inf               | font-size      | Npx     |
+| ls           |                | -Inf-Inf%           | letter-spacing | 0.0Nem  | *% required
+| lh           |                | 0-Inf%              | line-height    | 0.0N    | *% required
+|--------------+----------------+---------------------+----------------+---------|
+| c            |                | <hsl-css-var>       | color          | hsl     | *e.g. --css-var: 0, 100%, 50%
+| b            |                | <hsl-css-var>       | background     | hsl     | *e.g. --css-var: 0, 100%, 50%
+|--------------+----------------+---------------------+----------------+---------|
+| br           | -(l|r|t|b)     | 0-Inf|max           | border-radius  | Npx     | *where max: 50%
+|--------------+----------------+---------------------+----------------+---------|
+| z            |                | -Inf-Inf|min|max    | z-index        | -       | *where min: -9999 and max: 9999
++--------------------------------------------------------------------------------+
 ```
 
 <br>

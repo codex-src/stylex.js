@@ -19,7 +19,7 @@ stylex is a CSS-in-JS library that is:
 - [Teaches CSS in the process](#teaches-css)
 - [Extensible](#extensible)
 
-This readme also documents several [MVP examples](#mvp-examples) to get you started.
+This readme also documents several [MVP examples](#mvp-examples) and [talks that inspired stylex](#talks-that-inspired-stylex).
 
 #### stylex is used almost exclusively at [Codex](https://github.com/codex-src) for styling our [frontend](https://github.com/codex-src/codex-app.js). Contributions welcome!
 
@@ -180,7 +180,7 @@ no-translate-z                transform: none
 
 <br>
 
-### Talks that inspired stylex
+## Talks that inspired stylex
 
 - [Adam Wathan’s Utility-First CSS with Tailwind CSS](https://www.youtube.com/watch?v=BeZbMx9y1FE)
 - [Frank Yan’s Building the New Facebook with React and Relay](https://www.youtube.com/watch?v=9JZHodNR184)

@@ -1,15 +1,17 @@
-<h1 align="center">
-  <br>
-  <br>
-  stylex ✨
-  <sup>
+<div align="center">
+  <h1>
     <br>
     <br>
-    atomic CSS-in-JS library for frontend frameworks
-    <br>
-    <br>
-  </sup>
-<h1>
+    stylex ✨
+    <sup>
+      <br>
+      <br>
+      atomic CSS-in-JS library for frontend frameworks
+      <br>
+      <br>
+    </sup>
+  </h1>
+</div>
 
 <br>
 

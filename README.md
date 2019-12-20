@@ -21,19 +21,17 @@ stylex is a CSS-in-JS library that is:
 
 This readme also documents several [MVP examples](#mvp-examples) and [talks that inspired stylex](#talks-that-inspired-stylex).
 
-#### stylex is used almost exclusively at [Codex](https://github.com/codex-src) for styling our [frontend](https://github.com/codex-src/codex-app.js). Contributions are welcome!
+#### We use stylex almost exclusively at [Codex](https://github.com/codex-src) for styling our [frontend](https://github.com/codex-src/codex-app.js). Contributions are welcome!
 
 stylex is under active development and is not yet considered stable. Even so, we’ve found stylex to be _extremely useful_ for prototyping and shipping highly maintainble code bases.
 
-⚠️ stylex generates style objects (think inline styles) as supposed to classes. This simply has to do with building a functional library and getting the API and abstractions right, rather than prematurely optimizing for browser paint times. This may very well change in the future.
-
-For what it’s worth, the popular note-taking web app [notion.so](https://notion.so) also uses inline styles to power their frontend. Of course, that doesn’t mean this is the way thing should be done, but simply that it works.
+⚠️ stylex uses inline styles behind the scenes, as supposed to classes. The reasoning for this simply has to do with building getting the API and abstractions right, rather than prematurely optimizing for browser paint times. Note that this may very well change in the future.
 
 #### You can improve stylex; don’t hesitate to [file an issue](https://github.com/codex-src/stylex.js/issues) or [submit a pull request](https://github.com/codex-src/stylex.js/pulls). We are community friendly. ☺️
 
 ## Atomic
 
-An atom conceptually describes the smallest indivisible unit by which something can be measured. The way most atomic CSS libraries work is by following this principle with CSS classes that share a 1:1 to mapping with CSS’s capabilities.
+Conceptually, an atom describes the smallest indivisible unit by which something can be measured. The way most atomic CSS libraries work is by following this principle with an army CSS classes. The idea is that each class shares a 1:1 to mapping with a CSS property and value.
 
 For example:
 
@@ -46,31 +44,49 @@ For example:
 
 _([Technically](https://mothereff.in/css-escapes), if you wanted to write the above in CSS you would need to use `.p-x\:16 ...`)_
 
-Where `p-x` is shorthand for `padding-x-axis`. Technically `padding-x-axis` isn’t a CSS property, but why not? stylex emphasizes atomic patterns that map closely to CSS’s capabilities without being overly restrictive. All shorthands are documented in the [shorthand reference guide](#shorthand-reference-guide).
+Where `p-x` is shorthand for `padding-x-axis`. Technically, `padding-x-axis` isn’t a CSS property, but why not? stylex emphasizes the atomic pattern without being overly restrictive.
 
-Note that stylex doesn’t map a shorthand to every CSS property. Instead, stylex focuses on solving for the 90% use case, that is, about 35 properties. But before your eyes glaze over, there’s only about 15 classes of properties to remember.
+How stylex actually works is by parsing a string using of otherwise atomic class names and generating a style object. The reason why we generate a style object is that we can have a lot more degrees of freedom with a lot less code. For example, we don’t need to specify what number literals are allowed; we just specify number ranges, like `0-Inf`, and parse your input as output.
 
-The pattern used for shorthands reliably follows this pattern: use the first letter of a property name, and if a property name is `kebab-case`, then use each first letter of every word. From this, we derive `p-x` from `padding-x-axis`, `b` from `background`, and `br` for `border-radius`.
+Note that stylex doesn’t solve for every CSS property. Instead, we focus on the 90% use case. That turns out to be about 35 properties total. And before your eyes glaze over, know that there’s only about 15 classes of properties to remember. And because about half of those use shorthands, we find that stylex feels incredibly lightweight and easy to remember.
 
-We colloquially refer to `p-x` as the key, and `16` as the token, from `p-x:16` in the previous example. And if a token exists, the key and token are delimited with a colon.
+As far as naming shorthand keys, we reliably follows this pattern: use the first letter of a property name, and if a property name is `kebab-case`, then use each first letter of every word. From this, we derive `p-x` from `padding-x-axis`, `b` from `background`, and `br` for `border-radius`. All shorthands are documented in the [shorthand reference guide](#shorthand-reference-guide).
 
-Because not all keys are easily discernible from their first letters, sometimes the actual CSS property name is substituted. For example, `relative`, `absolute`, etc. It may seem like a lot to remember — we say this having hesitated with these concepts ourselves — but we find working with stylex to be much more comfortable and easier to work with than CSS alone.
+If parsing `p-x:16 ...`, we colloquially refer to:
 
-Because stylex uses JavaScript under the hood, we also warn, using `invariant`, when a key or token doesn’t map to stylex’s resolver. All strings passed to stylex are linted for typos before emitting a style object.
+- `p-x:16 ...` as the class string
+- `p-x:16` as the class name
+- `p-x` as the key
+- and `16` as the token
+
+If a token exists (sometimes it doesn’t), the key and token are delimited with a colon.
+
+Because not all shorthands are easily discernible from their first letters, the actual CSS property name is substituted. For example, `relative`, `absolute`, etc. It may seem like a lot to remember — we say this having hesitated with these concepts ourselves — but we find working with stylex to be much more comfortable and easier to work with than CSS alone.
+
+And because stylex uses JavaScript under the hood, we also emit a warning whenever a key or token doesn’t map to stylex’s resolver. All class strings, class names, and keys and tokens are linted for typos and number ranges before emitting a style object.
 
 ## Teaches CSS
 
-Initially, stylex was more developed to teach us CSS rather than use it in any kind of production environment. It just so turns out that a simple to use and easy to understand conceptual framework also lends itself well to be a framework.
+Me personally speaking, [Zaydek](https://github.com/codex-zaydek), I’d taught myself full stack development and found that if I really wanted to be a full stack developer, I’d better style my websites, too. And at the time, this felt daunting to say the least. However, what did make sense to me was thinking about CSS properties as primitives, very much like how booleans, numbers, and strings in programming languages are primitives.
 
-Me personally speaking, [Zaydek](https://github.com/codex-zaydek), I’d taught myself full stack development and found that if I really wanted to be a full stack developer, I’d better style my websites, too. And at the time, this felt daunting to say the least. However, what did make sense to me was thinking about CSS properties as primitives, very much like how booleans, numbers, and strings are useless in their own right but powerful when coupled with logic.
+With this, I learned how to teach myself CSS and CSS patterns _as a programmer_ which seriously tipped my balance in favor of atomic CSS patterns over semantic CSS patterns. That’s not to say one or the other is better, because I don’t think they are comparable, but what I will say is that stylex and its numerous predecessors have taught me how to think about design programmatically.
+
+When you write stylex alongside your components, you find that you have a lot less files to worry about (you don’t need a monolithic CSS file or even N+1 files for every file you write), and you find that because stylex uses shorthands as much as possible, components that use stylex aren’t dramatically harder to grok. And not having to worry about semantic class names means that your components aren’t married to any predetermined cognitive structure, which is extremely important if you are constantly shuffling things about.
+
+Whether you’re interested in stylex or not, if you’re curious about atomic CSS learning to read and write CSS programmatically, I encourage you to review the following talks that inspired aspects of stylex:
+
+#### Talks that inspired stylex
+
+- [Adam Wathan - Utility-First CSS with Tailwind CSS](https://www.youtube.com/watch?v=BeZbMx9y1FE)
+- [Frank Yan - Building the New Facebook with React and Relay](https://www.youtube.com/watch?v=9JZHodNR184)
 
 ## Extensible
 
-To be clear, stylex is designed to be used in conjunction with a frontend framework or library like Angular, React, or Vue. stylex is generally framework agnostic and only has two dependencies for the time being: `react` for opt-in higher order components and `invariant` for emitting warnings. Note that stylex does not rely on `autoprefixer` as we’re relying on the host environment.
+To be clear, stylex is designed to be used in conjunction with a frontend framework or library like [Angular](https://angular.io), [React](https://reactjs.org), or [Vue](https://vuejs.org). stylex is generally framework agnostic and only has two dependencies for the time being: `react` for opt-in higher order components and `invariant` for emitting warnings. Note that stylex does not rely on `autoprefixer` as we’re relying on the host environment to do so.
 
 One of the differentiating features of stylex is that when coupled with a library like React, is its ability to extend a component’s style object. This feature is what convinced us we better share stylex with the world. When working with the class-based predecessor of stylex, we quickly discovered that the greatest limiting factor was the inability to reuse existing components without needing to copy dozens of class names.
 
-So how do we do this?
+How do we do this?
 
 It turns out the solution is quite subtle. In React, a component can extend another component with `{...props}`. This works except for when `style={...}` is declared on both components, thereby overwriting the original component’s `props`.
 
@@ -110,19 +126,18 @@ const Component = stylex.Unstyleable(props => (
 
 These components now document and describe their styles are resolved if reused. Note that the use of `{...props}` is up to the discretion of the component author and no longer affects how styles are resolved.
 
+
 We find that generally, lower-level components should use `Styleable`, thus making them more reusable, and higher-level components should use `Unstyleable`, thus making them more predictable. There is one exception to this case, and that is for when a higher-level component is expected to be extended with `margin`, e.g. `<Component style={stylex("m-y:16")}>`.
 
 ## MVP examples
 
 ### Hello, world!
 
-```jsx
 const App = props => (
   <h1 style={stylex.parse("fw:700 fs:32 lh:150%")}>
     Hello, world!
   </h1>
 )
-```
 
 #### TODO
 

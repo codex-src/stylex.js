@@ -134,6 +134,34 @@ const App = props => (
 
 <br />
 
+```
+#### Shorthand reference guide
+
++-----------------------------------------------------------------+
+| key | key-alternate  | token            | property       | unit |
+|-----|----------------|------------------|----------------|------|
+| m   | -(l|r|x|t|b|y) | -Inf-Inf         | margin         | px   |
+| p   | -(l|r|x|t|b|y) | 0-Inf            | padding        | px   |
+|-----|----------------|------------------|----------------|------|
+| wh  |                | 0-Inf|auto|max   | width-height   | px   | *max: 100%
+| w   |                | 0-Inf|auto|max   | width          | px   | *max: 100%
+| h   |                | 0-Inf|auto|max   | height         | px   | *max: 100%
++-----------------------------------------------------------------+
+| sw  |                | 100-900          | strike-width   | -    |
+| fw  |                | 100-900          | font-weight    | -    |
+| fs  |                | 0-Inf            | font-size      | px   |
+| ls  |                | -Inf-Inf%        | letter-spacing | em   |
+| lh  |                | 0-Inf%           | line-height    | -    |
+|-----|----------------|------------------|----------------|------|
+| c   |                | <hsl-css-var>    | color          | hsl  |
+| b   |                | <hsl-css-var>    | background     | hsl  |
+|-----|----------------|------------------|----------------|------|
+| br  | -(l|r|t|b)     | 0-Inf|max        | border-radius  | px   | *max: 50%
+|-----|----------------|------------------|----------------|------|
+| z   |                | -Inf-Inf|min|max | z-index        | -    | *min: -9999, max: 9999
++-----------------------------------------------------------------+
+```
+
 ## Reference guide
 
 ```

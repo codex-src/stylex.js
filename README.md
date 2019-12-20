@@ -5,11 +5,13 @@
     stylex ✨
     <br>
     <sup>
-      atomic CSS-in-JS library for frontend frameworks
-      <br>
-      <br>
-    </p>
-  </sup>
+      <sup>
+        atomic CSS-in-JS library for frontend frameworks
+        <br>
+        <br>
+        </p>
+      </sup>
+    </sup>
 </div>
 
 <br>

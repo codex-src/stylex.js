@@ -29,7 +29,7 @@ stylex is under active development and is not yet considered stable. Even so, we
 
 For what it’s worth, the popular note-taking web app [notion.so](https://notion.so) also uses inline styles to power their frontend. Of course, that doesn’t mean _this is the way thing should be done_, but simply that it works.
 
-#### If you feel something is missing or could be improved, don’t hesitate to file an issue or submit a pull request. We are community friendly. ☺️
+#### You can improve stylex; don’t hesitate to [file an issue]() or [submit a pull request](). We are community friendly. ☺️
 
 <br>
 

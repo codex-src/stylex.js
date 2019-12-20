@@ -146,7 +146,9 @@ var Styleable = function Styleable(render) {
     var element = render(props);
     var newRender = React.cloneElement(element, _objectSpread2({
       style: _objectSpread2({}, element.props.style, {}, style)
-    }, props), props.children // Not needed but easier to read.
+    }, props) // NOTE: Do not explicitly set `children` due to
+    // warning: input is a void element tag and must neither
+    // have `children` nor use `dangerouslySetInnerHTML`.
     );
     return newRender;
   };
@@ -191,7 +193,9 @@ var Unstyleable = function Unstyleable(render) {
     var element = render(props);
     var newRender = React.cloneElement(element, _objectSpread2({
       style: element.props.style
-    }, props), props.children // Not needed but easier to read.
+    }, props) // NOTE: Do not explicitly set `children` due to
+    // warning: input is a void element tag and must neither
+    // have `children` nor use `dangerouslySetInnerHTML`.
     );
     return newRender;
   };

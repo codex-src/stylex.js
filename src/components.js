@@ -43,7 +43,9 @@ export const Styleable = render => ({ style, ...props }) => {
 			},
 			...props,
 		},
-		props.children, // Not needed but easier to read.
+		// NOTE: Do not explicitly set `children` due to
+		// warning: input is a void element tag and must neither
+		// have `children` nor use `dangerouslySetInnerHTML`.
 	)
 	return newRender
 }
@@ -96,7 +98,9 @@ export const Unstyleable = render => ({ style, ...props }) => {
 			style: element.props.style,
 			...props,
 		},
-		props.children, // Not needed but easier to read.
+		// NOTE: Do not explicitly set `children` due to
+		// warning: input is a void element tag and must neither
+		// have `children` nor use `dangerouslySetInnerHTML`.
 	)
 	return newRender
 }

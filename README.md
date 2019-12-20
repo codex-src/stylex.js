@@ -2,8 +2,6 @@
   <h1>
     <br>
     <br>
-    <br>
-    <br>
     stylex ✨
     <br>
     <br>

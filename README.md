@@ -1,11 +1,11 @@
 <div align="center">
-  <br />
-  <br />
   <h1>
+    <br />
+    <br />
     stylex ✨
+    <br />
+    <br />
   </h1>
-  <br />
-  <br />
 </div>
 
 stylex is a CSS-in-JS library that is:

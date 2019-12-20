@@ -184,5 +184,3 @@ no-translate-z                transform: none
 
 - [Adam Wathan’s Utility-First CSS with Tailwind CSS](https://www.youtube.com/watch?v=BeZbMx9y1FE)
 - [Frank Yan’s Building the New Facebook with React and Relay](https://www.youtube.com/watch?v=9JZHodNR184)
-
-#### If you feel something is missing or could be improved, don’t hesitate to file an issue or submit a pull request. We are community friendly. ☺️

@@ -86,7 +86,7 @@ This in effect destructures `styles` from `props`, disallowing `{...props}` from
 
 And we did, until it became untenable. So we wrote two simple HOCs to self-document the following question: _should a component allow or prevent its styles from being extended?_
 
-In answering this, we created `stylex.Styleable` and `stylex.Unstyleable` (that’s styleable _with an e_ — don’t worry, you’ll be gently warned if you misspelled them). These two higher-order components allow or prevent a component from being restyled, leading to easier to reason about code and self-documenting components.
+In answering this, we created `stylex.Styleable` and `stylex.Unstyleable` (that’s styleable _with_ an e — don’t worry, you’ll be gently warned if you misspelled them). These two higher-order components allow or prevent a component from being restyled, leading to easier to reason about code and self-documenting components.
 
 These are of course opt-in, but are preferred for brevity:
 
@@ -132,7 +132,7 @@ const App = props => (
 )
 ```
 
-<br />
+<br>
 
 ## Shorthand reference guide
 
@@ -145,22 +145,22 @@ If you just need a high-level overview, you can use the following:
 | m   | -(l|r|x|t|b|y) | -Inf-Inf         | margin         | Npx    |
 | p   | -(l|r|x|t|b|y) | 0-Inf            | padding        | Npx    |
 |-----+----------------+------------------+----------------+--------|
-| wh  |                | 0-Inf|auto|max   | width-height   | Npx    | *where max: 100%
-| w   |                | 0-Inf|auto|max   | width          | Npx    | *where max: 100%
-| h   |                | 0-Inf|auto|max   | height         | Npx    | *where max: 100%
+| wh  |                | 0-Inf|auto|max   | width-height   | Npx    |
+| w   |                | 0-Inf|auto|max   | width          | Npx    |
+| h   |                | 0-Inf|auto|max   | height         | Npx    |
 +-----+----------------+------------------+----------------+--------+
 | sw  |                | 100-900          | stroke-width   | -      |
 | fw  |                | 100-900          | font-weight    | -      |
 | fs  |                | 0-Inf            | font-size      | Npx    |
-| ls  |                | -Inf-Inf%        | letter-spacing | 0.0Nem | *% required
-| lh  |                | 0-Inf%           | line-height    | 0.0N   | *% required
+| ls  |                | -Inf-Inf%        | letter-spacing | 0.0Nem |
+| lh  |                | 0-Inf%           | line-height    | 0.0N   |
 |-----+----------------+------------------+----------------+--------|
-| c   |                | <css-var>        | color          | hsl    | *e.g. --css-var: 0, 100%, 50%
-| b   |                | <css-var>        | background     | hsl    | *e.g. --css-var: 0, 100%, 50%
+| c   |                | <css-var>        | color          | hsl    |
+| b   |                | <css-var>        | background     | hsl    |
 |-----+----------------+------------------+----------------+--------|
-| br  | -(l|r|t|b)     | 0-Inf|max        | border-radius  | Npx    | *where max: 50%
+| br  | -(l|r|t|b)     | 0-Inf|max        | border-radius  | Npx    |
 |-----+----------------+------------------+----------------+--------|
-| z   |                | -Inf-Inf|min|max | z-index        | -      | *where min: -9999 and max: 9999
+| z   |                | -Inf-Inf|min|max | z-index        | -      |
 +-------------------------------------------------------------------+
 ```
 
@@ -171,55 +171,55 @@ If you just need a high-level overview, you can use the following:
 If you need the complete reference guide, you can use the following:
 
 ```
-+------------------------------------------------------------------------------------------+
-| KEY               | KEY ALTERNATE  | TOKEN             | PROPERTY              | VALUE   |
-|-------------------+----------------+-------------------+-----------------------+---------|
-| m                 | -(l|r|x|t|b|y) | -Inf-Inf          | margin                | Npx     |
-| p                 | -(l|r|x|t|b|y) | 0-Inf             | padding               | Npx     |
-|-------------------+----------------+-------------------+-----------------------+---------|
-| relative          |                | -(...l|r|x|t|b|y) | position              | -       |
-| absolute          |                | -(...l|r|x|t|b|y) | position              | -       |
-| fixed             |                | -(...l|r|x|t|b|y) | position              | -       |
-| sticky            |                | -(...l|r|x|t|b|y) | position              | -       |
-|-------------------+----------------+-------------------+-----------------------+---------|
-| block             |                |                   | display               | -       |
-| inline-block      |                |                   | display               | -       |
-| inline            |                |                   | display               | -       |
-| flex              |                | -(r|c) -(x|y):opt | display               | -       |
-| inline-flex       |                | -(r|c) -(x|y):opt | display               | -       |
-| grid              |                |                   | display               | -       |
-| inline-grid       |                |                   | display               | -       |
-| no-flex-shrink    |                |                   | flex-shrink           | 0px     |
-|-------------------+----------------+-------------------+-----------------------+---------|
-| wh                |                | 0-Inf|auto|max    | width-height          | Npx     | *where max: 100%
-| w                 |                | 0-Inf|auto|max    | width                 | Npx     | *where max: 100%
-| h                 |                | 0-Inf|auto|max    | height                | Npx     | *where max: 100%
-| no-min-w          |                |                   | width                 | 0px     |
-+-------------------+----------------+-------------------+-----------------------+---------+
-| sw                |                | 100-900           | stroke-width          | -       |
-| fw                |                | 100-900           | font-weight           | -       |
-| fs                |                | 0-Inf             | font-size             | Npx     |
-| ls                |                | -Inf-Inf%         | letter-spacing        | 0.0Nem  | *% required
-| lh                |                | 0-Inf%            | line-height           | 0.0N    | *% required
-|-------------------+----------------+-------------------+-----------------------+---------|
-| c                 |                | <css-var>         | color                 | hsl     | *e.g. --css-var: 0, 100%, 50%
-| b                 |                | <css-var>         | background            | hsl     | *e.g. --css-var: 0, 100%, 50%
-|-------------------+----------------+-------------------+-----------------------+---------|
-| br                | -(l|r|t|b)     | 0-Inf|max         | border-radius         | Npx     | *where max: 50%
-|-------------------+----------------+-------------------+-----------------------+---------|
-| z                 |                | -Inf-Inf|min|max  | z-index               | -       | *where min: -9999 and max: 9999
-|-------------------+----------------+-------------------+-----------------------+---------|
-| overflow          |                | -(x|y):opt        | overflow              | -       |
-| text-overflow     |                | -(x|y):opt        | text-overflow         | -       |
-|-------------------+----------------+-------------------+-----------------------+---------|
-| pointer-events    |                |                   | pointer-events        | auto    |
-| no-pointer-events |                |                   | pointer-events        | none    |
-| pointer           |                |                   | cursor                | pointer |
-| no-pointer        |                |                   | cursor                | auto    |
-|-------------------+----------------+-------------------+-----------------------+---------|
++--------------------------------------------------------------------------------------------------+
+| KEY               | KEY ALTERNATE  | TOKEN             | PROPERTY              | VALUE           |
+|-------------------+----------------+-------------------+-----------------------+-----------------|
+| m                 | -(l|r|x|t|b|y) | -Inf-Inf          | margin                | Npx             |
+| p                 | -(l|r|x|t|b|y) | 0-Inf             | padding               | Npx             |
+|-------------------+----------------+-------------------+-----------------------+-----------------|
+| relative          |                | -(...l|r|x|t|b|y) | position              | -               |
+| absolute          |                | -(...l|r|x|t|b|y) | position              | -               |
+| fixed             |                | -(...l|r|x|t|b|y) | position              | -               |
+| sticky            |                | -(...l|r|x|t|b|y) | position              | -               |
+|-------------------+----------------+-------------------+-----------------------+-----------------|
+| block             |                |                   | display               | -               |
+| inline-block      |                |                   | display               | -               |
+| inline            |                |                   | display               | -               |
+| flex              |                | -(r|c) -(x|y):opt | display               | -               |
+| inline-flex       |                | -(r|c) -(x|y):opt | display               | -               |
+| grid              |                |                   | display               | -               |
+| inline-grid       |                |                   | display               | -               |
+| no-flex-shrink    |                |                   | flex-shrink           | 0px             |
+|-------------------+----------------+-------------------+-----------------------+-----------------|
+| wh                |                | 0-Inf|auto|max    | width-height          | Npx             |
+| w                 |                | 0-Inf|auto|max    | width                 | Npx             |
+| h                 |                | 0-Inf|auto|max    | height                | Npx             |
+| no-min-w          |                |                   | width                 | 0px             |
++-------------------+----------------+-------------------+-----------------------+-----------------+
+| sw                |                | 100-900           | stroke-width          | -               |
+| fw                |                | 100-900           | font-weight           | -               |
+| fs                |                | 0-Inf             | font-size             | Npx             |
+| ls                |                | -Inf-Inf%         | letter-spacing        | 0.0Nem          |
+| lh                |                | 0-Inf%            | line-height           | 0.0N            |
+|-------------------+----------------+-------------------+-----------------------+-----------------|
+| c                 |                | <css-var>         | color                 | hsl             |
+| b                 |                | <css-var>         | background            | hsl             |
+|-------------------+----------------+-------------------+-----------------------+-----------------|
+| br                | -(l|r|t|b)     | 0-Inf|max         | border-radius         | Npx             |
+|-------------------+----------------+-------------------+-----------------------+-----------------|
+| z                 |                | -Inf-Inf|min|max  | z-index               | -               |
+|-------------------+----------------+-------------------+-----------------------+-----------------|
+| overflow          |                | -(x|y):opt        | overflow              | -               |
+| text-overflow     |                | -(x|y):opt        | text-overflow         | -               |
+|-------------------+----------------+-------------------+-----------------------+-----------------|
+| pointer-events    |                |                   | pointer-events        | auto            |
+| no-pointer-events |                |                   | pointer-events        | none            |
+| pointer           |                |                   | cursor                | pointer         |
+| no-pointer        |                |                   | cursor                | auto            |
+|-------------------+----------------+-------------------+-----------------------+-----------------|
 | translate-z       |                |                   | transform             | translateZ(0px) |
-| no-translate-z    |                |                   | transform             | none    |
-+------------------------------------------------------------------------------------------+
+| no-translate-z    |                |                   | transform             | none            |
++--------------------------------------------------------------------------------------------------+
 ```
 
 Note that `center middle pre per-wrap tnum square` are not documented as they are likely to be removed from the core library due to being too narrow in scope. See [#6](https://github.com/codex-src/stylex.js/issues/6) for reference. These keys are likely to be moved to a plugin system in the future, thereby enabling users to opt-in to extended library features and or integrate their own.

@@ -46,7 +46,7 @@ _([Technically](https://mothereff.in/css-escapes), if you wanted to write the ab
 
 Where `p-x` is shorthand for `padding-x-axis`. Technically, `padding-x-axis` isn’t a CSS property … but why not? stylex emphasizes the atomic pattern without being overly restrictive.
 
-How stylex actually works is by parsing a string using of otherwise atomic class names and generating a style object. The reason why we generate a style object is that we can have a lot more degrees of freedom with a lot less code. For example, we don’t need to specify what number literals are allowed; we just specify number ranges, like `0-Inf`, and parse your input as output.
+How stylex actually works is by parsing a string using of otherwise atomic class names and generating a style object. In practice, this looks like `stylex.parse("p-x:16 ...")`. The reason why we generate a style object is that we can have a lot more degrees of freedom with a lot less code. For example, we don’t need to specify what number literals are allowed; we just specify number ranges, like `0-Inf`, and parse your input as output.
 
 Note that stylex doesn’t solve for every CSS property. Instead, we focus on the 90% use case. That turns out to be about 35 properties total. And before your eyes glaze over, know that there’s only about 15 classes of properties to remember. And because about half of those use shorthands, we find that stylex feels incredibly lightweight and easy to remember.
 

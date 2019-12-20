@@ -134,9 +134,34 @@ const App = props => (
 
 <br />
 
-## Shorthand reference guide
+#### Reference guide
 
-```
+If you just need a high-level overview, you can use the following shorthand reference guide that omits tokens, properties, and units:
+
++---------------------------------------+
+| m   | -(l|r|x|t|b|y) | margin         |
+| p   | -(l|r|x|t|b|y) | padding        |
+|-----+----------------+----------------+
+| wh  |                | width-height   |
+| w   |                | width          |
+| h   |                | height         |
++-----+----------------+----------------+
+| sw  |                | strike-width   |
+| fw  |                | font-weight    |
+| fs  |                | font-size      |
+| ls  |                | letter-spacing |
+| lh  |                | line-height    |
+|-----+----------------+----------------+
+| c   |                | color          |
+| b   |                | background     |
+|-----+----------------+----------------+
+| br  | -(l|r|t|b)     | border-radius  |
+|-----+----------------+----------------+
+| z   |                | z-index        |
++---------------------------------------+
+
+If you need something more granular, you can use the following shorthand reference guide:
+
 +-----------------------------------------------------------------+
 | key | key-alternate  | token            | property       | unit |
 |-----+----------------+------------------+----------------+------|
@@ -160,9 +185,8 @@ const App = props => (
 |-----+----------------+------------------+----------------+------|
 | z   |                | -Inf-Inf|min|max | z-index        | -    | *where min: -9999 and max: 9999
 +-----------------------------------------------------------------+
-```
 
-## Reference guide
+And finally, if you need the complete reference guide, you can use the following:
 
 ```
 m(-(l|r|x|t|b|y))?:(-∞–∞)     margin

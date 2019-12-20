@@ -4,7 +4,6 @@
     <br>
     stylex ✨
     <br>
-    <br>
     <sup>
       atomic CSS-in-JS library for frontend frameworks
       <br>

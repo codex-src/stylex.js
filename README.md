@@ -138,6 +138,7 @@ const App = props => (
 
 If you just need a high-level overview, you can use the following shorthand reference guide that omits tokens, properties, and units:
 
+```
 +---------------------------------------+
 | m   | -(l|r|x|t|b|y) | margin         |
 | p   | -(l|r|x|t|b|y) | padding        |
@@ -159,9 +160,11 @@ If you just need a high-level overview, you can use the following shorthand refe
 |-----+----------------+----------------+
 | z   |                | z-index        |
 +---------------------------------------+
+```
 
 If you need something more granular, you can use the following shorthand reference guide:
 
+```
 +-----------------------------------------------------------------+
 | key | key-alternate  | token            | property       | unit |
 |-----+----------------+------------------+----------------+------|
@@ -185,6 +188,7 @@ If you need something more granular, you can use the following shorthand referen
 |-----+----------------+------------------+----------------+------|
 | z   |                | -Inf-Inf|min|max | z-index        | -    | *where min: -9999 and max: 9999
 +-----------------------------------------------------------------+
+```
 
 And finally, if you need the complete reference guide, you can use the following:
 

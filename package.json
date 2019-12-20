@@ -1,6 +1,10 @@
 {
   "name": "stylex",
   "version": "0.1.0",
+  "main": "build/stylex.js",
+  "repository": "https://github.com/codex-src/stylex.js",
+  "author": "Zaydek Michels-Gualtieri <zaydekdotcom+codex-zaydek@gmail.com>",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",

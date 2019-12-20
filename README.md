@@ -176,8 +176,8 @@ const App = props => (
 | w   |                | 0-Inf|auto|max   | width          | Npx    |
 | h   |                | 0-Inf|auto|max   | height         | Npx    |
 +-----+----------------+------------------+----------------+--------+
-| sw  |                | 100-900          | stroke-width   | -      |
-| fw  |                | 100-900          | font-weight    | -      |
+| sw  |                | 100-900          | stroke-width   |        |
+| fw  |                | 100-900          | font-weight    |        |
 | fs  |                | 0-Inf            | font-size      | Npx    |
 | ls  |                | -Inf-Inf%        | letter-spacing | 0.0Nem |
 | lh  |                | 0-Inf%           | line-height    | 0.0N   |
@@ -187,7 +187,7 @@ const App = props => (
 |-----+----------------+------------------+----------------+--------|
 | br  | -(l|r|t|b)     | 0-Inf|max        | border-radius  | Npx    |
 |-----+----------------+------------------+----------------+--------|
-| z   |                | -Inf-Inf|min|max | z-index        | -      |
+| z   |                | -Inf-Inf|min|max | z-index        |        |
 +-------------------------------------------------------------------+
 ```
 
@@ -200,18 +200,18 @@ const App = props => (
 | m                 | -(l|r|x|t|b|y) | -Inf-Inf          | margin                | Npx             |
 | p                 | -(l|r|x|t|b|y) | 0-Inf             | padding               | Npx             |
 |-------------------+----------------+-------------------+-----------------------+-----------------|
-| relative          |                | -(...l|r|x|t|b|y) | position              | -               |
-| absolute          |                | -(...l|r|x|t|b|y) | position              | -               |
-| fixed             |                | -(...l|r|x|t|b|y) | position              | -               |
-| sticky            |                | -(...l|r|x|t|b|y) | position              | -               |
+| relative          |                | -(...l|r|x|t|b|y) | position              |                 |
+| absolute          |                | -(...l|r|x|t|b|y) | position              |                 |
+| fixed             |                | -(...l|r|x|t|b|y) | position              |                 |
+| sticky            |                | -(...l|r|x|t|b|y) | position              |                 |
 |-------------------+----------------+-------------------+-----------------------+-----------------|
-| block             |                |                   | display               | -               |
-| inline-block      |                |                   | display               | -               |
-| inline            |                |                   | display               | -               |
-| flex              |                | -(r|c) -(x|y):opt | display               | -               |
-| inline-flex       |                | -(r|c) -(x|y):opt | display               | -               |
-| grid              |                |                   | display               | -               |
-| inline-grid       |                |                   | display               | -               |
+| block             |                |                   | display               |                 |
+| inline-block      |                |                   | display               |                 |
+| inline            |                |                   | display               |                 |
+| flex              |                | -(r|c) -(x|y):opt | display               |                 |
+| inline-flex       |                | -(r|c) -(x|y):opt | display               |                 |
+| grid              |                |                   | display               |                 |
+| inline-grid       |                |                   | display               |                 |
 | no-flex-shrink    |                |                   | flex-shrink           | 0px             |
 |-------------------+----------------+-------------------+-----------------------+-----------------|
 | wh                |                | 0-Inf|auto|max    | width-height          | Npx             |
@@ -219,8 +219,8 @@ const App = props => (
 | h                 |                | 0-Inf|auto|max    | height                | Npx             |
 | no-min-w          |                |                   | width                 | 0px             |
 +-------------------+----------------+-------------------+-----------------------+-----------------+
-| sw                |                | 100-900           | stroke-width          | -               |
-| fw                |                | 100-900           | font-weight           | -               |
+| sw                |                | 100-900           | stroke-width          |                 |
+| fw                |                | 100-900           | font-weight           |                 |
 | fs                |                | 0-Inf             | font-size             | Npx             |
 | ls                |                | -Inf-Inf%         | letter-spacing        | 0.0Nem          |
 | lh                |                | 0-Inf%            | line-height           | 0.0N            |
@@ -230,10 +230,10 @@ const App = props => (
 |-------------------+----------------+-------------------+-----------------------+-----------------|
 | br                | -(l|r|t|b)     | 0-Inf|max         | border-radius         | Npx             |
 |-------------------+----------------+-------------------+-----------------------+-----------------|
-| z                 |                | -Inf-Inf|min|max  | z-index               | -               |
+| z                 |                | -Inf-Inf|min|max  | z-index               |                 |
 |-------------------+----------------+-------------------+-----------------------+-----------------|
-| overflow          |                | -(x|y):opt        | overflow              | -               |
-| text-overflow     |                | -(x|y):opt        | text-overflow         | -               |
+| overflow          |                | -(x|y):opt        | overflow              |                 |
+| text-overflow     |                | -(x|y):opt        | text-overflow         |                 |
 |-------------------+----------------+-------------------+-----------------------+-----------------|
 | pointer-events    |                |                   | pointer-events        | auto            |
 | no-pointer-events |                |                   | pointer-events        | none            |

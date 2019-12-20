@@ -2,20 +2,28 @@
 
 stylex is a CSS-in-JS library that is:
 
-## Here’s a table of contents for this readme:
-
 - [Atomic](#atomic)
 - [Teaches CSS in the process](#teaches-css)
 - [Extensible](#extensible)
-- [MVP examples](#mvp-examples)
 
-stylex is used almost exclusively at [Codex](https://github.com/codex-src) to build out the frontend.
+This readme also documents several [MVP examples](#mvp-examples) to get you started.
 
-stylex is under active development and should not yet be considered stable. Despite that, we’ve found stylex to be extremely useful in both thinking about design in general and authoring highly maintainble code bases.
+#### stylex is used almost exclusively at [Codex](https://github.com/codex-src) for styling our frontend. Contributions are welcome, both to our [frontend](https://github.com/codex-src/codex-app.js) and to stylex.
 
-In practice, stylex uses inline styles as supposed to classes, but this simply has to do with building a functional prototype that works, rather than optimizing for browser performance, etc. In the future, this could very well change, but for now, the priority is building a powerful tool for both rapid development and shipping to production.
+stylex is under active development and is not yet considered stable. Despite that, we’ve found stylex to be _extremely useful_ for prototyping and shipping highly maintainble code bases.
 
-### Atomic
+**Note ⚠️** stylex uses inline styles behind the scenes, as supposed to classes. This simply has to do with building a functional library and getting the API and abstractions right, rather than prematurely optimizing for browser paint times. This may very well change.
+
+For what it’s worth, the popular note-taking web app [notion.so](https://notion.so) also uses inline styles to power their frontend. Of course, that doesn’t mean _this is the way thing should be done_, but simply that it works.
+
+### Talks that inspired stylex
+
+[Adam Wathan’s Utility-First CSS with Tailwind CSS](https://www.youtube.com/watch?v=BeZbMx9y1FE)
+[Frank Yan’s Building the New Facebook with React and Relay](https://www.youtube.com/watch?v=9JZHodNR184)
+
+---
+
+## Atomic
 
 An _atom_ conceptually describe the smallest indivisible unit by which something can be measured. The way most atomic CSS libraries work is by following this principle with CSS classes that share a 1:1 to mapping with CSS’s capabilities.
 

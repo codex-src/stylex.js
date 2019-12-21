@@ -11,7 +11,9 @@
   </h1>
 </div>
 
-![](https://img.shields.io/badge/eslint-passing-brightgreen) ![](https://img.shields.io/badge/jest-passing-brightgreen)
+<div align="center">
+  ![](https://img.shields.io/badge/eslint-passing-brightgreen) ![](https://img.shields.io/badge/jest-passing-brightgreen)
+</div>
 
 <br>
 

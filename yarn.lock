@@ -6968,6 +6968,10 @@ nth-check@^1.0.2, nth-check@~1.0.1:
   dependencies:
     boolbase "~1.0.0"
 
+nullable@codex-src/nullable.js:
+  version "0.1.0"
+  resolved "https://codeload.github.com/codex-src/nullable.js/tar.gz/e0454d3cbc804d02adc591c04b57c68aa103c95c"
+
 num2fraction@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/num2fraction/-/num2fraction-1.2.2.tgz#6f682b6a027a4e9ddfa4564cd2589d1d4e669ede"

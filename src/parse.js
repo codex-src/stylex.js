@@ -166,33 +166,17 @@ function padding(iter) {
 	return style
 }
 
-// NOTE: Use `if`s instead of a `switch`; multiple
-// subclasses are allowed.
 function position(iter) {
 	const position = iter.key()
 	const opts = {
 		positionL: iter.nextClassName("-l"),
 		positionR: iter.nextClassName("-r"),
-		positionX: iter.nextClassName("-x"), // Order matters.
+		positionX: iter.nextClassName("-x"),
 		positionT: iter.nextClassName("-t"),
 		positionB: iter.nextClassName("-b"),
-		positionY: iter.nextClassName("-y"), // Order matters.
+		positionY: iter.nextClassName("-y"),
 	}
 	let style = { position }
-	if (opts.positionX) {
-		style = {
-			...style,
-			left: 0,
-			right: 0,
-		}
-	}
-	if (opts.positionY) {
-		style = {
-			...style,
-			top: 0,
-			bottom: 0,
-		}
-	}
 	if (opts.positionL) {
 		style = {
 			...style,
@@ -202,6 +186,13 @@ function position(iter) {
 	if (opts.positionR) {
 		style = {
 			...style,
+			right: 0,
+		}
+	}
+	if (opts.positionX) {
+		style = {
+			...style,
+			left: 0,
 			right: 0,
 		}
 	}
@@ -217,11 +208,16 @@ function position(iter) {
 			bottom: 0,
 		}
 	}
+	if (opts.positionY) {
+		style = {
+			...style,
+			top: 0,
+			bottom: 0,
+		}
+	}
 	return style
 }
 
-// NOTE: Use `if`s instead of a `switch`; multiple
-// subclasses are allowed.
 function flex(iter) {
 	const flex = iter.key()
 	const opts = {
@@ -657,8 +653,6 @@ function borderRadius(iter) {
 	return style
 }
 
-// NOTE: Use `if`s instead of a `switch`; multiple
-// subclasses are allowed.
 function overflow(iter) {
 	const opts = {
 		overflowScroll:  iter.nextClassName(":scroll"),
@@ -670,7 +664,7 @@ function overflow(iter) {
 	}
 	invariant(
 		opts.overflowScroll || opts.overflowHidden || opts.overflowXScroll || opts.overflowYScroll || opts.overflowXHidden || opts.overflowYHidden,
-		`stylex: \`${iter.className()}\` expects \`(-(x|y))?:scroll\` or \`(-(x|y))?:hidden\`.`,
+		`stylex: \`${iter.className()}\` expects \`-(x|y)?:scroll\` or \`-(x|y)?:hidden\`.`,
 	)
 	let style = {}
 	if (opts.overflowScroll) {
@@ -709,13 +703,8 @@ function overflow(iter) {
 	return style
 }
 
-// https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
-// https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp
-//
-// NOTE: Use `if`s instead of a `switch`; multiple
-// subclasses are allowed.
 function textOverflow(iter) {
-	/*eslint-disable no-useless-escape*/
+	/* eslint-disable no-useless-escape */
 	const opts = {
 		textOverflowX: iter.nextClassName("-x"),
 		textOverflowY: iter.nextClassNameRegex(/^-y\:\d+$/),
@@ -726,6 +715,7 @@ function textOverflow(iter) {
 	)
 	const yValue = Number(iter.token())
 	let style = {}
+	// https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
 	if (opts.textOverflowX) {
 		style = {
 			whiteSpace: "nowrap",
@@ -733,6 +723,7 @@ function textOverflow(iter) {
 			textOverflow: "ellipsis",
 		}
 	}
+	// https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp
 	if (opts.textOverflowY) {
 		style = {
 			display: "-webkit-box",
@@ -762,10 +753,10 @@ function zIndex(iter) {
 class Iterator {
 	state = {
 		classString: "",
-		classes: [],
-		started: false,
-		index: 0,
-		keyToken: [], // Cache of the current key-token.
+		classes:     [],
+		started:     false,
+		index:       0,
+		keyToken:    [], // Cache of the current key-token.
 	}
 	constructor(classString) {
 		this.state.classString = classString

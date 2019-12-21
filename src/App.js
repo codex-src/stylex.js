@@ -1,6 +1,41 @@
 import React from "react"
 import stylex from "./index-stylex"
 
+// /*
+//  * Submit
+//  */
+//
+// // https://stripe.com/docs/payments/checkout
+// export const boxShadow = {
+// 	boxShadow: "0 0 0 1px #E0E0E0, 0 2px 4px rgba(0, 0, 0, 0.07), 0 1px 1.5px rgba(0, 0, 0, 0.05)",
+// }
+//
+// const Input = stylex.Styleable(props => (
+// 	<input style={stylex.parse("block w:max")} {...props} />
+// ))
+//
+// const StyledInput = stylex.Styleable(props => (
+// 	<Input style={{ ...stylex.parse("p-x:16 p-y:12 br:6"), ...boxShadow }} {...props} />
+// ))
+//
+// const Submit = stylex.Unstyleable(({ children, ...props }) => (
+// 	<StyledInput style={stylex.parse("center fw:600 fs:17 ls:1.25% c:white b:blue-a400 pointer")} type="submit" value={children} {...props} />
+// ))
+//
+// const App = props => (
+// 	<div style={stylex.parse("flex -r :center h:max")}>
+// 		<form style={stylex.parse("w:320")}>
+// 			<Submit style={stylex.parse("m-y:16")}>
+// 				Submit
+// 			</Submit>
+// 		</form>
+// 	</div>
+// )
+
+/*
+ * Box
+ */
+
 const Box = stylex.Styleable(props => (
 	<div style={stylex.parse("wh:160 b:gray-200 br:8")} {...props} />
 ))
@@ -19,47 +54,21 @@ const App = props => (
 	</div>
 )
 
-// const Text = ({ style, ...props }) => (
-// 	<p style={{ ...stylex("m-x:4 p-x:12 p-y:8 fw:600 fs:18 ls:-1% b:gray-200 br:6"), ...style }}>
-// 		Hello, world!
-// 	</p>
-// )
+// /*
+//  * Shape
+//  */
 //
 // const App = props => (
-// 	<div style={stylex("m-x:-4 p:16 flex -r -y:end")}>
-// 		<div style={stylex("no-flex-shrink flex -r -y:end")}>
-// 			<Text style={stylex("lh:100%")} />
-// 			<Text style={stylex("lh:125%")} />
-// 			<Text style={stylex("lh:150%")} />
-// 			<Text style={stylex("lh:175%")} />
-// 			<Text style={stylex("lh:200%")} />
-// 		</div>
-// 	</div>
-// )
-//
-// const App = props => (
-// 	<div>
-// 		{[...Array(29).keys()].map(index => (
-// 			<p key={index} className="Inter" style={stylex(`fs:${8 + 2 * index}`)}>
-// 				Hello, world!
-// 			</p>
-// 		))}
-// 	</div>
-// )
-//
-// const App = props => (
-// 	<div style={stylex("p:64 flex -r -x:center")}>
-// 		<div style={stylex("flex -r -y:center")}>
-// 			<div style={stylex("wh:20  b:gray-200 br:8")} />
-// 			<div style={stylex("wh:16")} />
-// 			<div style={stylex("wh:40  b:gray-200 br:8")} />
-// 			<div style={stylex("wh:16")} />
-// 			<div style={stylex("wh:60  b:gray-200 br:8")} />
-// 			<div style={stylex("wh:16")} />
-// 			<div style={stylex("wh:80  b:gray-200 br:8")} />
-// 			<div style={stylex("wh:16")} />
-// 			<div style={stylex("wh:100 b:gray-200 br:8")} />
-// 		</div>
+// 	<div style={stylex.parse("flex -r :center h:max")}>
+// 		<div style={stylex.parse("wh:20  b:gray-200 br:10")} />
+// 		<div style={stylex.parse("wh:16")} />
+// 		<div style={stylex.parse("wh:40  b:gray-200 br:10")} />
+// 		<div style={stylex.parse("wh:16")} />
+// 		<div style={stylex.parse("wh:60  b:gray-200 br:10")} />
+// 		<div style={stylex.parse("wh:16")} />
+// 		<div style={stylex.parse("wh:80  b:gray-200 br:10")} />
+// 		<div style={stylex.parse("wh:16")} />
+// 		<div style={stylex.parse("wh:100 b:gray-200 br:10")} />
 // 	</div>
 // )
 

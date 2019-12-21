@@ -3,6 +3,7 @@
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var invariant = _interopDefault(require('invariant'));
+var nullable = _interopDefault(require('nullable'));
 var React = _interopDefault(require('react'));
 
 function _classCallCheck(instance, Constructor) {
@@ -112,96 +113,124 @@ function _objectWithoutProperties(source, excluded) {
   return target;
 }
 
-// styles.
-//
-// The following are roughly equivalent:
-//
-// const Component = ({ style, ...props }) => (
-//   <div style={{ ...stylex("x y z"), ...style }} {...props}>
-//     {props.children}
-//   </div>
-// )
-//
-// const Component = Styleable(props => (
-//   <div style={stylex("x y z")} {...props}>
-//     {props.children}
-//   </div>
-// ))
-//
-// *Note that the use of `{...props}` is up to the
-// discretion of the component author.
-//
-// Generally, lower-level components should use `Stylable`,
-// thus making them more reusable.
-//
-
 var Styleable = function Styleable(render) {
+  return function (props) {
+    invariant(typeof render === "function" && nullable.isNonNullableObject(props), "stylex: Sstylable` expected a JSX component.");
+    return _Styleable(render)(props);
+  };
+}; // `Styleable` is a higher-order component that extends a
+// component’s styles.
+
+var _Styleable = function _Styleable(render) {
   return function (_ref) {
-    var style = _ref.style,
-        props = _objectWithoutProperties(_ref, ["style"]);
+    var extendedStyles = _ref.style,
+        extendedProps = _objectWithoutProperties(_ref, ["style"]);
 
-    invariant(typeof render === "function", "stylex: `Styleable` is meant to be used with a component. " + "Did you mean `const Component = Styleable(props => ( ... ))`?"); // Render the original component; `element` is an object
-    // with `props`, `props.style`, `props.children`, etc.
+    var element = render(extendedProps);
+    invariant(nullable.isNonNullableObject(element) && element.$$typeof === Symbol.for("react.element"), "stylex: `Styleable` expected a JSX component.");
 
-    var element = render(props);
+    var _element$props = element.props,
+        style = _element$props.style,
+        props = _objectWithoutProperties(_element$props, ["style"]);
+
     var newRender = React.cloneElement(element, _objectSpread2({
-      style: _objectSpread2({}, element.props.style, {}, style)
-    }, props) // NOTE: Do not explicitly set `children` due to
-    // warning: input is a void element tag and must neither
-    // have `children` nor use `dangerouslySetInnerHTML`.
-    );
+      style: _objectSpread2({}, style, {}, extendedStyles)
+    }, props));
     return newRender;
   };
-}; // FIXME: Consider using `throw new Error("...")` instead of
-// better developer experience.
+};
+
+var Unstyleable = function Unstyleable(render) {
+  return function (props) {
+    invariant(typeof render === "function" && nullable.isNonNullableObject(props), "stylex: `Unstylable` expected a JSX component.");
+    return _Unstyleable(render)(props);
+  };
+}; // `Unstyleable` is a higher-order component that prevents a
+// component’s styles from being extended.
+
+var _Unstyleable = function _Unstyleable(render) {
+  return function (_ref2) {
+    var extendedStyles = _ref2.style,
+        extendedProps = _objectWithoutProperties(_ref2, ["style"]);
+
+    var element = render(extendedProps);
+    invariant(nullable.isNonNullableObject(element) && element.$$typeof === Symbol.for("react.element"), "stylex: `Unstylable` expected a JSX component."); // The following `if` statements are longhand for:
+    //
+    // const margins = {
+    //   ...(margin       || {}),
+    //   ...(marginLeft   || {}),
+    //   ...(marginRight  || {}),
+    //   ...(marginTop    || {}),
+    //   ...(marginBottom || {}),
+    // }
+    //
+    // This pattern is used throughout `parse.js`. The reason
+    // we need to do this is because spreading `undefined`
+    // leads to unexpected behavior.
+
+    var marginStyles = {};
+
+    if (extendedStyles !== undefined) {
+      var margin = extendedStyles.margin,
+          marginLeft = extendedStyles.marginLeft,
+          marginRight = extendedStyles.marginRight,
+          marginTop = extendedStyles.marginTop,
+          marginBottom = extendedStyles.marginBottom;
+
+      if (margin !== undefined) {
+        marginStyles = _objectSpread2({}, marginStyles, {
+          margin: margin
+        });
+      }
+
+      if (marginLeft !== undefined) {
+        marginStyles = _objectSpread2({}, marginStyles, {
+          marginLeft: marginLeft
+        });
+      }
+
+      if (marginRight !== undefined) {
+        marginStyles = _objectSpread2({}, marginStyles, {
+          marginRight: marginRight
+        });
+      }
+
+      if (marginTop !== undefined) {
+        marginStyles = _objectSpread2({}, marginStyles, {
+          marginTop: marginTop
+        });
+      }
+
+      if (marginBottom !== undefined) {
+        marginStyles = _objectSpread2({}, marginStyles, {
+          marginBottom: marginBottom
+        });
+      }
+    }
+
+    var _element$props2 = element.props,
+        style = _element$props2.style,
+        props = _objectWithoutProperties(_element$props2, ["style"]);
+
+    var newRender = React.cloneElement(element, _objectSpread2({
+      style: _objectSpread2({}, style, {}, marginStyles)
+    }, props));
+    return newRender;
+  };
+};
+
+var components = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  Styleable: Styleable,
+  Unstyleable: Unstyleable
+});
 
 var Stylable = function Stylable(render) {
   return function (props) {
     invariant(false, "stylex: `Stylable` is not exported. " + "Did you mean `Styleable`?");
     return render(props);
   };
-}; // `Unstyleable` is a HOC that prevents a rendered
-// component’s styles from being extended or overwritten.
-//
-// The following are roughly equivalent:
-//
-// const Component = ({ style, ...props }) => (
-//   <div style={stylex("x y z")} {...props}>
-//     {props.children}
-//   </div>
-// )
-//
-// const Component = Unstyleable(props => (
-//   <div style={stylex("x y z")} {...props}>
-//     {props.children}
-//   </div>
-// ))
-//
-// *Note that the use of `{...props}` is up to the
-// discretion of the component author.
-//
-// Generally, higher-level components should use
-// `Unstyleable`, thus making them more predictable.
-//
-
-var Unstyleable = function Unstyleable(render) {
-  return function (_ref2) {
-    var style = _ref2.style,
-        props = _objectWithoutProperties(_ref2, ["style"]);
-
-    invariant(typeof render === "function", "stylex: `Unstyleable` is meant to be used with a component. " + "Did you mean `const Component = Unstyleable(props => ( ... ))`?");
-    var element = render(props);
-    var newRender = React.cloneElement(element, _objectSpread2({
-      style: element.props.style
-    }, props) // NOTE: Do not explicitly set `children` due to
-    // warning: input is a void element tag and must neither
-    // have `children` nor use `dangerouslySetInnerHTML`.
-    );
-    return newRender;
-  };
-}; // FIXME: Consider using `throw new Error("...")` instead of
-// better developer experience.
-
+};
 var Unstylable = function Unstylable(render) {
   return function (props) {
     invariant(false, "stylex: `Unstylable` is not exported. " + "Did you mean `Unstyleable`?");
@@ -209,11 +238,9 @@ var Unstylable = function Unstylable(render) {
   };
 };
 
-var components = /*#__PURE__*/Object.freeze({
+var componentsTypos = /*#__PURE__*/Object.freeze({
   __proto__: null,
-  Styleable: Styleable,
   Stylable: Stylable,
-  Unstyleable: Unstyleable,
   Unstylable: Unstylable
 });
 
@@ -467,9 +494,7 @@ function padding(iter) {
   }
 
   return style;
-} // NOTE: Use `if`s instead of a `switch`; multiple
-// subclasses are allowed.
-
+}
 
 function position(iter) {
   var position = iter.key();
@@ -477,29 +502,13 @@ function position(iter) {
     positionL: iter.nextClassName("-l"),
     positionR: iter.nextClassName("-r"),
     positionX: iter.nextClassName("-x"),
-    // Order matters.
     positionT: iter.nextClassName("-t"),
     positionB: iter.nextClassName("-b"),
-    positionY: iter.nextClassName("-y") // Order matters.
-
+    positionY: iter.nextClassName("-y")
   };
   var style = {
     position: position
   };
-
-  if (opts.positionX) {
-    style = _objectSpread2({}, style, {
-      left: 0,
-      right: 0
-    });
-  }
-
-  if (opts.positionY) {
-    style = _objectSpread2({}, style, {
-      top: 0,
-      bottom: 0
-    });
-  }
 
   if (opts.positionL) {
     style = _objectSpread2({}, style, {
@@ -509,6 +518,13 @@ function position(iter) {
 
   if (opts.positionR) {
     style = _objectSpread2({}, style, {
+      right: 0
+    });
+  }
+
+  if (opts.positionX) {
+    style = _objectSpread2({}, style, {
+      left: 0,
       right: 0
     });
   }
@@ -525,10 +541,15 @@ function position(iter) {
     });
   }
 
-  return style;
-} // NOTE: Use `if`s instead of a `switch`; multiple
-// subclasses are allowed.
+  if (opts.positionY) {
+    style = _objectSpread2({}, style, {
+      top: 0,
+      bottom: 0
+    });
+  }
 
+  return style;
+}
 
 function flex(iter) {
   var flex = iter.key();
@@ -947,9 +968,7 @@ function borderRadius(iter) {
   }
 
   return style;
-} // NOTE: Use `if`s instead of a `switch`; multiple
-// subclasses are allowed.
-
+}
 
 function overflow(iter) {
   var opts = {
@@ -960,7 +979,7 @@ function overflow(iter) {
     overflowXHidden: iter.nextClassName("-x:hidden"),
     overflowYHidden: iter.nextClassName("-y:hidden")
   };
-  invariant(opts.overflowScroll || opts.overflowHidden || opts.overflowXScroll || opts.overflowYScroll || opts.overflowXHidden || opts.overflowYHidden, "stylex: `".concat(iter.className(), "` expects `(-(x|y))?:scroll` or `(-(x|y))?:hidden`."));
+  invariant(opts.overflowScroll || opts.overflowHidden || opts.overflowXScroll || opts.overflowYScroll || opts.overflowXHidden || opts.overflowYHidden, "stylex: `".concat(iter.className(), "` expects `-(x|y)?:scroll` or `-(x|y)?:hidden`."));
   var style = {};
 
   if (opts.overflowScroll) {
@@ -1003,22 +1022,17 @@ function overflow(iter) {
   }
 
   return style;
-} // https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
-// https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp
-//
-// NOTE: Use `if`s instead of a `switch`; multiple
-// subclasses are allowed.
-
+}
 
 function textOverflow(iter) {
-  /*eslint-disable no-useless-escape*/
+  /* eslint-disable no-useless-escape */
   var opts = {
     textOverflowX: iter.nextClassName("-x"),
     textOverflowY: iter.nextClassNameRegex(/^-y\:\d+$/)
   };
   invariant(opts.textOverflowX || opts.textOverflowY, "stylex: `".concat(iter.className(), "` expects `-x` or `-y:\\d+`."));
   var yValue = Number(iter.token());
-  var style = {};
+  var style = {}; // https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow
 
   if (opts.textOverflowX) {
     style = {
@@ -1026,7 +1040,8 @@ function textOverflow(iter) {
       overflowX: "hidden",
       textOverflow: "ellipsis"
     };
-  }
+  } // https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp
+
 
   if (opts.textOverflowY) {
     style = {
@@ -1199,7 +1214,7 @@ function parse(classString) {
   return styles;
 }
 
-var exports$1 = _objectSpread2({}, components, {
+var exports$1 = _objectSpread2({}, components, {}, componentsTypos, {
   parse: parse
 });
 

@@ -223,6 +223,6 @@ transform      | translate-z       |
 ""             | no-translate-z    |
 ```
 
-Note that `center`, `middle`, `pre`, `per-wrap`, `tnum`, `square` are not documented as they are likely to be removed from the core library due to being too narrow in scope. See [#6](https://github.com/codex-src/stylex.js/issues/6) for reference. These keys are likely to be moved to a plugin system in the future, thereby enabling users to opt-in to extended library features and or integrate their own.
+Note that `center`, `middle`, `pre`, `per-wrap`, `tnum`, and `square` are not documented as they are likely to be removed from the core library due to being too narrow in scope. See [#6](https://github.com/codex-src/stylex.js/issues/6) for reference. These keys are likely to be moved to a plugin system in the future, thereby enabling users to opt-in to extended library features and or integrate their own.
 
 Token options `opts` are currently not documented either. If you’re curious, you’re welcome to explore the [source code](https://github.com/codex-src/stylex.js/blob/master/src/parse.js) to better understand what options are available for several properties: `flex`, `inline-flex`, `overflow`, `text-overflow`.

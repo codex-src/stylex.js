@@ -11,6 +11,8 @@
   </h1>
 </div>
 
+![](https://img.shields.io/badge/eslint-passing-brightgreen) ![](https://img.shields.io/badge/jest-passing-brightgreen)
+
 <br>
 
 stylex is a CSS-in-JS library that is:

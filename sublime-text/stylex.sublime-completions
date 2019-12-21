@@ -8,6 +8,6 @@
     { "trigger": "sxf", "contents": "function ${1:Component}(${2:props}) {\n\treturn ${3:(\n\t\t<${4:div} ${5:style=\\{${6:stylex.parse(${7:\"$8\"})}\\}}>\n\t\t\t${9:\\{${10:props.children}\\}}\n\t\t</${4}>\n\t)}\n}\n" },
     { "trigger": "sxs", "contents": "const ${1:Component} = stylex.Styleable(${2:props} => (\n\t<${3:div} ${4:style=\\{${5:stylex.parse(${6:\"$7\"})}\\}}>\n\t\t${8:\\{${9:props.children}\\}}\n\t</${3}>\n))\n" },
     { "trigger": "sxu", "contents": "const ${1:Component} = stylex.Unstyleable(${2:props} => (\n\t<${3:div} ${4:style=\\{${5:stylex.parse(${6:\"$7\"})}\\}}>\n\t\t${8:\\{${9:props.children}\\}}\n\t</${3}>\n))\n" },
-    { "trigger": "sxi", "contents": "import stylex from \"stylex\"\n" }
+    { "trigger": "sxi", "contents": "import stylex from \"stylex\"" }
   ]
 }

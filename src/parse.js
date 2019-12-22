@@ -754,7 +754,7 @@ class Iterator {
 	state = {
 		classString: "",
 		classes:     [],
-		started:     false,
+		didStart:    false,
 		index:       0,
 		keyToken:    [], // Cache of the current key-token.
 	}
@@ -831,8 +831,8 @@ class Iterator {
 	}
 	// `next` iterates the iterator.
 	next() {
-		if (!this.state.started) {
-			this.state.started = true
+		if (!this.state.didStart) {
+			this.state.didStart = true
 			return true
 		} else if (this.state.index + 1 === this.state.classes.length) {
 			return false

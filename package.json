@@ -45,7 +45,7 @@
     "@babel/preset-env": "^7.7.6",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
-    "material-colors.css": "codex-src/material-colors.css",
+    "material-colors.css": "https://github.com/codex-src/material-colors.css",
     "minireset.css": "^0.0.6",
     "rollup": "^1.27.13",
     "rollup-plugin-babel": "^4.3.3"

@@ -23,7 +23,7 @@ test("stress test", () => {
 		block
 		inline-block
 		inline
-		flex -r -c :stretch :start :center :end :between :around :evenly -x:stretch -x:start -x:center -x:end -x:between -x:around -x:evenly -y:stretch -y:start -y:center -y:end -y:between -y:around -y:evenly
+		flex        -r -c :stretch :start :center :end :between :around :evenly -x:stretch -x:start -x:center -x:end -x:between -x:around -x:evenly -y:stretch -y:start -y:center -y:end -y:between -y:around -y:evenly
 		inline-flex -r -c :stretch :start :center :end :between :around :evenly -x:stretch -x:start -x:center -x:end -x:between -x:around -x:evenly -y:stretch -y:start -y:center -y:end -y:between -y:around -y:evenly
 		grid
 		inline-grid
@@ -43,8 +43,8 @@ test("stress test", () => {
 		fs:0
 		ls:0%
 		lh:100%
-		c:red
-		b:red
+		c:red -a:100%
+		b:red -a:100%
 		br:0
 		br-l:0
 		br-r:0
@@ -93,8 +93,8 @@ test("stress test", () => {
 		fontSize: 0,
 		letterSpacing: "0em",
 		lineHeight: 1,
-		color: "hsl(var(--red))",
-		background: "hsl(var(--red))",
+		color: "hsla(var(--red), 1)",
+		background: "hsla(var(--red), 1)",
 		borderRadius: 0,
 		borderTopLeftRadius: 0,
 		borderBottomLeftRadius: 0,

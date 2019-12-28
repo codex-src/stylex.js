@@ -6408,9 +6408,9 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-material-colors.css@codex-src/material-colors.css:
+"material-colors.css@https://github.com/codex-src/material-colors.css":
   version "0.1.0"
-  resolved "https://codeload.github.com/codex-src/material-colors.css/tar.gz/4661b46e52e2757ed3932903f67a3cb054126fad"
+  resolved "https://github.com/codex-src/material-colors.css#9953862e56bf7c635c6257685e408b4d9d8d2a07"
 
 md5.js@^1.3.4:
   version "1.3.5"

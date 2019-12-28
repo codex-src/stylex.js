@@ -338,16 +338,8 @@ var styleParsers = {
   "fs": fontSize,
   "ls": letterSpacing,
   "lh": lineHeight,
-  "c": function c(iter) {
-    return {
-      color: "hsl(var(--".concat(iter.token(), "))")
-    };
-  },
-  "b": function b(iter) {
-    return {
-      background: "hsl(var(--".concat(iter.token(), "))")
-    };
-  },
+  "c": color,
+  "b": background,
   "br": borderRadius,
   "br-l": borderRadius,
   "br-r": borderRadius,
@@ -581,7 +573,8 @@ function flex(iter) {
   invariant(opts.flexRow || opts.flexColumn, "stylex: `".concat(iter.className(), "` expects `-r` or `-c`."));
   var style = {
     display: flex,
-    flexDirection: opts.flexRow && "row" || opts.flexColumn && "column"
+    flexDirection: opts.flexRow ? "row" : "column" // Assumes `-r` or `-c`.
+
   }; // .flex.-r.\:stretch, .flex.-c.\:stretch { ... }
   // .flex.-r.\:start,   .flex.-c.\:start   { ... }
   // .flex.-r.\:center,  .flex.-c.\:center  { ... }
@@ -901,21 +894,52 @@ function fontSize(iter) {
 }
 
 function letterSpacing(iter) {
-  invariant(iter.classNameMatches(/^ls:-?\d+(\.\d+)?%$/), "stylex: Cannot parse class `".concat(iter.className(), "` from class string `").concat(iter.classString(), "`. ") + "Please refer to https://git.io/JeQtB for documentation."); // Convert percent to decimal:
-
+  invariant(iter.classNameMatches(/^ls:-?\d+(\.\d+)?%$/), "stylex: Cannot parse class `".concat(iter.className(), "` from class string `").concat(iter.classString(), "`. ") + "Please refer to https://git.io/JeQtB for documentation.");
   var value = Number(iter.token().slice(0, -1));
   return {
     letterSpacing: "".concat(value * 0.01, "em")
   };
-} // FIXME: `^(1\d{2}(\.\d+)?|200)$`?
-
+}
 
 function lineHeight(iter) {
-  invariant(iter.classNameMatches(/^lh:\d+(\.\d+)?%$/), "stylex: Cannot parse class `".concat(iter.className(), "` from class string `").concat(iter.classString(), "`. ") + "Please refer to https://git.io/JeQtB for documentation."); // Convert percent to decimal:
-
+  invariant(iter.classNameMatches(/^lh:-?\d+(\.\d+)?%$/), "stylex: Cannot parse class `".concat(iter.className(), "` from class string `").concat(iter.classString(), "`. ") + "Please refer to https://git.io/JeQtB for documentation.");
   var value = Number(iter.token().slice(0, -1));
   return {
     lineHeight: value * 0.01
+  };
+}
+
+function color(iter) {
+  var color = iter.token();
+  var opts = {
+    alpha: iter.nextClassNameRegex(/^-a:(\d{1,2}(\.\d+)?|100)%$/) // Optional.
+
+  };
+  var alpha = 1;
+
+  if (opts.alpha) {
+    alpha = Number(iter.token().slice(0, -1) * 0.01);
+  }
+
+  return {
+    color: "hsla(var(--".concat(color, "), ").concat(alpha, ")")
+  };
+}
+
+function background(iter) {
+  var background = iter.token();
+  var opts = {
+    alpha: iter.nextClassNameRegex(/^-a:(\d{1,2}(\.\d+)?|100)%$/) // Optional.
+
+  };
+  var alpha = 1;
+
+  if (opts.alpha) {
+    alpha = Number(iter.token().slice(0, -1) * 0.01);
+  }
+
+  return {
+    background: "hsla(var(--".concat(background, "), ").concat(alpha, ")")
   };
 }
 
@@ -1025,10 +1049,9 @@ function overflow(iter) {
 }
 
 function textOverflow(iter) {
-  /* eslint-disable no-useless-escape */
   var opts = {
     textOverflowX: iter.nextClassName("-x"),
-    textOverflowY: iter.nextClassNameRegex(/^-y\:\d+$/)
+    textOverflowY: iter.nextClassNameRegex(/^-y:\d+$/)
   };
   invariant(opts.textOverflowX || opts.textOverflowY, "stylex: `".concat(iter.className(), "` expects `-x` or `-y:\\d+`."));
   var yValue = Number(iter.token());
@@ -1158,26 +1181,26 @@ function () {
   }, {
     key: "nextClassName",
     value: function nextClassName(className) {
-      var matches = this.state.index + 1 < this.state.classes.length && this.state.classes[this.state.index + 1] === className;
+      var ok = this.state.index + 1 < this.state.classes.length && this.state.classes[this.state.index + 1] === className;
 
-      if (matches) {
+      if (ok) {
         this.next();
       }
 
-      return matches;
+      return ok;
     } // `nextClassNameRegex` returns whether the next class
     // matches a regex (calls `next` if true).
 
   }, {
     key: "nextClassNameRegex",
     value: function nextClassNameRegex(regex) {
-      var matches = this.state.index + 1 < this.state.classes.length && regex.test(this.state.classes[this.state.index + 1]);
+      var ok = this.state.index + 1 < this.state.classes.length && regex.test(this.state.classes[this.state.index + 1]);
 
-      if (matches) {
+      if (ok) {
         this.next();
       }
 
-      return matches;
+      return ok;
     } // `next` iterates the iterator.
 
   }, {
